@@ -1,6 +1,8 @@
 ﻿
 
 using AsisPas.Helpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AsisPas.Entitys
@@ -10,6 +12,7 @@ namespace AsisPas.Entitys
     /// </summary>
     public class Empresa : Iid,IAct
     {
+        #region propiedades
         /// <summary>
         /// key
         /// </summary>
@@ -40,5 +43,40 @@ namespace AsisPas.Entitys
         /// si la empresa se encuentra activa o no
         /// </summary>
         public bool act { get; set; }
+        #endregion
+
+
+        #region aux para vistas
+
+        /// <summary>
+        /// para retornar 1 elemento como select
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="select"></param>
+        /// <returns></returns>
+        public static SelectListItem toSelect(Empresa emp, bool select)
+        {
+            return new SelectListItem()
+            {
+                Text = emp.Nombre,
+                Value = emp.id.ToString(),
+                Selected = select
+            };
+        }
+
+        /// <summary>
+        /// para el retorno en lista
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="idSelect"></param>
+        /// <returns></returns>
+        public static List<SelectListItem> toSelect(List<Empresa> emp, int idSelect = 0)
+        {
+            List<SelectListItem> ret = new();
+            foreach (var item in emp)
+                ret.Add(toSelect(item, item.id == idSelect));
+            return ret;
+        }
+        #endregion
     }
 }

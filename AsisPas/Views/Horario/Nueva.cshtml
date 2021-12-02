@@ -1,0 +1,139 @@
+﻿
+@using AsisPas.DTO;
+@model HorarioDTO_in
+
+@{
+   ViewBag.Encabezado = ViewData["Title"] = "Nuevo Horario";
+    ViewBag.HorariaListActive = "active";
+    ViewBag.HorarioMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Guardar" method="post">
+            <div class="card">
+            
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h4 class="card-subtitle mt-1 mb-1"> Datos Generales</h4>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="Empresaid" class="control-label"></label>
+                             <select asp-for="Empresaid" class="form-control" asp-items="@ViewBag.Empresas"></select>
+                            <span asp-validation-for="Empresaid" class="text-danger"></span>
+                        </div>
+                    </div>
+                      <div class="row">
+                         <div class="form-group col-md-6 col-xs-12 text-center">
+                                  
+
+                        <h4 class="card-subtitle  mt-1 mb-1"> Seleciones dias Laborales</h4>
+
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Lunes" /> @Html.DisplayNameFor(model => model.Lunes)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Martes" /> @Html.DisplayNameFor(model => model.Martes)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Miercoles" /> @Html.DisplayNameFor(model => model.Miercoles)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Jueves" /> @Html.DisplayNameFor(model => model.Jueves)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Viernes" /> @Html.DisplayNameFor(model => model.Viernes)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Sabado" /> @Html.DisplayNameFor(model => model.Sabado)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Domingo" /> @Html.DisplayNameFor(model => model.Domingo)
+                            </label>
+                       
+                        </div>
+                        </div>
+                        <div class="form-group col-md-6 col-xs-12">
+                         <h4 class="card-subtitle  mt-1 mb-1"> ingrese Horas </h4>
+
+
+                        <div class="form-group">
+                            <label asp-for="hi" class="control-label"></label>
+                            <input type="time" asp-for="hi" class="form-control" />
+                            <span asp-validation-for="hi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                           
+                            <label asp-for="hf" class="control-label"></label>
+                            <input type="time" asp-for="hf" class="form-control" />
+                            <span asp-validation-for="hf" class="text-danger"></span>
+                             
+                        </div>
+                      
+                        <div class="form-group">
+                            <label asp-for="hbi" class="control-label"></label>
+                            <input type="time" asp-for="hbi" class="form-control" />
+                            <span asp-validation-for="hbi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="hbf" class="control-label"></label>
+                            <input type="time" asp-for="hbf" class="form-control" />
+                            <span asp-validation-for="hbf" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="sinDescanzo" /> @Html.DisplayNameFor(model => model.sinDescanzo)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="diaSiguiente" /> @Html.DisplayNameFor(model => model.diaSiguiente)
+                            </label>
+                        </div>
+                        </div>
+                      </div>
+
+                    
+                </div>
+
+                <div class="card-footer form-group text-center m-0">
+                    <a class="btn btn-warning rounded-pill" asp-action="Index">Volver</a>
+                    <input type="submit" value="Guardar" class="btn btn-danger rounded-pill" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

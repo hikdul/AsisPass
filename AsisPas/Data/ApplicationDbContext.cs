@@ -13,6 +13,10 @@ namespace AsisPas.Data
     public class ApplicationDbContext : IdentityDbContext
     {
     #region constructor
+        /// <summary>
+        /// contexto de datos
+        /// </summary>
+        /// <param name="options"></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -24,6 +28,14 @@ namespace AsisPas.Data
         /// empresas
         /// </summary>
         public DbSet<Empresa> Empresas { get; set; }
+        /// <summary>
+        /// sedes que contiene una empresa
+        /// </summary>
+        public DbSet<Sedes> Sedes { get; set; }
+        /// <summary>
+        /// Horarios
+        /// </summary>
+        public DbSet<Horario> Horarios { get; set; }
         #endregion
 
         #region on model creating

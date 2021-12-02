@@ -1,0 +1,60 @@
+﻿
+@using AsisPas.DTO;
+@model SedeDTO_in
+
+@{
+   ViewBag.Encabezado = ViewData["Title"] = "Nuevas Sede";
+    ViewBag.EmpresaListActive = "active";
+    ViewBag.EmpresaMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Guardar" method="post">
+            <div class="card">
+            
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="Empresaid" class="control-label"></label>
+                             <select asp-for="Empresaid" class="form-control" asp-items="@ViewBag.Empresas"></select>
+                            <span asp-validation-for="Empresaid" class="text-danger"></span>
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="form-group col-12 align-content-center">
+                            <label asp-for="Direccion" class="control-label"></label>
+                            <textarea asp-for="Direccion" class="form-control text-to-upper-alau"></textarea>
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
+                      </div>
+
+                    
+                </div>
+
+                <div class="card-footer form-group text-center m-0">
+                    <a class="btn btn-warning rounded-pill" asp-action="Index">Volver</a>
+                    <input type="submit" value="Guardar" class="btn btn-danger rounded-pill" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

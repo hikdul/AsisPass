@@ -4,14 +4,16 @@ using AsisPas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsisPas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211202210639_sedesInterfaces")]
+    partial class sedesInterfaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,76 +51,6 @@ namespace AsisPas.Data.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Empresas");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Horario", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Domingo")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Empresaid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Jueves")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Lunes")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Martes")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Miercoles")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<bool>("Sabado")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Viernes")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("diaSiguiente")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("hbf")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("hbi")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("hf")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("hi")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<bool>("sinDescanzo")
-                        .HasColumnType("bit");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Empresaid");
-
-                    b.ToTable("Horarios");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Sedes", b =>
@@ -355,17 +287,6 @@ namespace AsisPas.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Horario", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("Empresaid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Sedes", b =>

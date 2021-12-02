@@ -91,10 +91,16 @@
                      <span class="menu-title" data-i18n="">Empresas</span>
                  </a>
                  <ul class="menu-content">
-                     <li class="is-shown @ViewBag.PortonListActive">
+                     <li class="is-shown @ViewBag.EmpresaListActive">
                          <a class="menu-item" asp-area="" asp-controller="Empresa" asp-action="Index">
                              <i class="la la-building"></i>
-                             Listado
+                             Empresas
+                         </a>
+                     </li>
+                     <li class="is-shown @ViewBag.SedeListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Sedes" asp-action="Index">
+                             <i class="la la-object-group"></i>
+                             Sedes
                          </a>
                      </li>
                 </ul>
@@ -102,6 +108,29 @@
 
          
             
+          <!--Horarios-->
+                    <li class="nav-item has-sub @ViewBag.HorarioMenu">
+                 <a class="alert-dark" href="#">
+                     <i class="la la-calendar text-dark"></i>
+                     <span class="menu-title" data-i18n="">Horarios</span>
+                 </a>
+                 <ul class="menu-content">
+                     <li class="is-shown @ViewBag.HorarioListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Horario" asp-action="Index">
+                             <i class="la la-hourglass-half"></i>
+                             Horarios
+                         </a>
+                     </li>
+                     <li class="is-shown @ViewBag.SedeListActive">
+                         <a class="menu-item" asp-area="" asp-controller="AdmoH" asp-action="Index">
+                             <i class="la la-calendar-check-o"></i>
+                             Admo.
+                         </a>
+                     </li>
+                </ul>
+           </li>
+
+
           <!--otro-->
 
           

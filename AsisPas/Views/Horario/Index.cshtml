@@ -1,0 +1,78 @@
+﻿@using AsisPas.DTO;
+@model IEnumerable<HorarioDTO>
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Listado De Horarios";
+    ViewBag.HorarioListActive = "active";
+    ViewBag.HorarioMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                   
+                        <a asp-controller="Horario" asp-action="Nueva" alt="Crear Nuevo" class="btn btn-danger btn-add-alau ml-3 mr-2">
+                            <i class="ft-plus font-medium-5"></i>
+                        </a>
+                   
+                    <h4 class="card-title"> @ViewBag.Encabezado</h4>
+                </div>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
+                </div>
+                <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Empresa)
+                                </th>
+                                <th scope="col">
+                                    <i class="la la-gears"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Empresa)
+                                        </td>
+                                        <td>
+                                             <a asp-action="Editar" asp-route-id="@item.id" alt="Editar" class="la la-edit text-dark">  </a>
+                                             <a asp-action="Eliminar" asp-route-id="@item.id" alt="Eliminar" class="la la-remove text-danger">  </a>
+                                        </td>
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

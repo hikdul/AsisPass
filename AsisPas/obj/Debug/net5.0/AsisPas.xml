@@ -235,14 +235,130 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.HorarioController">
+            <summary>
+            controller for model Horario
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.Index">
+            <summary>
+            vista inicial para Horarios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.Nueva">
+            <summary>
+            vista para editar, crear una empresa
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.Guardar(AsisPas.DTO.HorarioDTO_in)">
+            <summary>
+            accion de almacenar los datos en la base de datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.Editar(System.Int32)">
+            <summary>
+            para editar un elemento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.save(AsisPas.DTO.SedeDTO_up)">
+            <summary>
+            accion de almacenar los datos en la base de datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HorarioController.Eliminar(System.Int32)">
+            <summary>
+            para eliminar un elemento
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.SedesController">
+            <summary>
+            controller para sedes
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.Index">
+            <summary>
+            index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.Nueva">
+            <summary>
+            vista para editar, crear una empresa
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.Guardar(AsisPas.DTO.SedeDTO_in)">
+            <summary>
+            accion de almacenar los datos en la base de datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.Editar(System.Int32)">
+            <summary>
+            para editar un elemento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.save(AsisPas.DTO.SedeDTO_up)">
+            <summary>
+            accion de almacenar los datos en la base de datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.SedesController.Eliminar(System.Int32)">
+            <summary>
+            para eliminar un elemento
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Data.ApplicationDbContext">
             <summary>
             contexto de datos
             </summary>
         </member>
+        <member name="M:AsisPas.Data.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{AsisPas.Data.ApplicationDbContext})">
+            <summary>
+            contexto de datos
+            </summary>
+            <param name="options"></param>
+        </member>
         <member name="P:AsisPas.Data.ApplicationDbContext.Empresas">
             <summary>
             empresas
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Sedes">
+            <summary>
+            sedes que contiene una empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Horarios">
+            <summary>
+            Horarios
             </summary>
         </member>
         <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -280,6 +396,57 @@
             <param name="migrationBuilder"></param>
         </member>
         <member name="M:AsisPas.Data.Migrations.empresas.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.Sedes">
+            <summary>
+            mapeo de sedes
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.Sedes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.Sedes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.sedesInterfaces">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.sedesInterfaces.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.sedesInterfaces.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.Horario">
+            <summary>
+            para agregar el horario
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.Horario.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.Horario.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <summary>
             down
             </summary>
@@ -345,6 +512,396 @@
             logo de la empresa
             </summary>
         </member>
+        <member name="T:AsisPas.DTO.HorarioDTO">
+            <summary>
+            para ver los datos del horaio
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO.Nombre">
+            <summary>
+            nombre del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO.Empresa">
+            <summary>
+            inicio jornada
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.HorarioDTO_Details">
+            <summary>
+            para ver todos los datos de un horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Nombre">
+            <summary>
+            nombre del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.hi">
+            <summary>
+            inicio jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.hf">
+            <summary>
+            fin de jordana
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.hbi">
+            <summary>
+            inicio break
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.hbf">
+            <summary>
+            fin break
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.diaSiguiente">
+            <summary>
+            indica si la jornada culmina el dia siguiente
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.sinDescanzo">
+            <summary>
+            indica si la jornada no tiene descazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.act">
+            <summary>
+            indica si el horario se encuentra activo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Empresaid">
+            <summary>
+            empresa a la que pertenece el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Empresa">
+            <summary>
+            prop de navegarion
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Domingo">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Lunes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Martes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Miercoles">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Jueves">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Viernes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_Details.Sabado">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.HorarioDTO_in">
+            <summary>
+            para agregar un nueva horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Nombre">
+            <summary>
+            nombre del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.hi">
+            <summary>
+            inicio jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.hf">
+            <summary>
+            fin de jordana
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.hbi">
+            <summary>
+            inicio break
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.hbf">
+            <summary>
+            fin break
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.diaSiguiente">
+            <summary>
+            indica si la jornada culmina el dia siguiente
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.sinDescanzo">
+            <summary>
+            indica si la jornada no tiene descazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Empresaid">
+            <summary>
+            empresa a la que pertenece el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Domingo">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Lunes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Martes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Miercoles">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Jueves">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Viernes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_in.Sabado">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.HorarioDTO_up">
+            <summary>
+            actualizo los datos del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Nombre">
+            <summary>
+            nombre del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.hi">
+            <summary>
+            inicio jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.hf">
+            <summary>
+            fin de jordana
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.hbi">
+            <summary>
+            inicio break
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.hbf">
+            <summary>
+            fin break
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.diaSiguiente">
+            <summary>
+            indica si la jornada culmina el dia siguiente
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.sinDescanzo">
+            <summary>
+            indica si la jornada no tiene descazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Empresaid">
+            <summary>
+            empresa a la que pertenece el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Domingo">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Lunes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Martes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Miercoles">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Jueves">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Viernes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.HorarioDTO_up.Sabado">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.SedeDTO">
+            <summary>
+            para enviar los datos de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO.Nombre">
+            <summary>
+            nombre de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO.Direccion">
+            <summary>
+            direccion de donde se ubica la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO.NombreEmpresa">
+            <summary>
+            empresa a la que pertenece la sede
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.SedeDTO_Details">
+            <summary>
+            para obtener todos los datos de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.Nombre">
+            <summary>
+            nombre de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.Direccion">
+            <summary>
+            direccion de donde se ubica la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.Empresaid">
+            <summary>
+            empresa a la que pertenece la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.Empresa">
+            <summary>
+            prop nav empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.lat">
+            <summary>
+            latitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_Details.lng">
+            <summary>
+            longitud
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.SedeDTO_in">
+            <summary>
+            para crear una nueva sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_in.Nombre">
+            <summary>
+            nombre de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_in.Direccion">
+            <summary>
+            direccion de donde se ubica la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_in.Empresaid">
+            <summary>
+            empresa a la que pertenece la sede
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.SedeDTO_up">
+            <summary>
+            para actualizar los datos de una sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_up.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_up.Nombre">
+            <summary>
+            nombre de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_up.Direccion">
+            <summary>
+            direccion de donde se ubica la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.SedeDTO_up.Empresaid">
+            <summary>
+            empresa a la que pertenece la sede
+            </summary>
+        </member>
         <member name="T:AsisPas.Entitys.Empresa">
             <summary>
             entidad para empresas
@@ -378,6 +935,169 @@
         <member name="P:AsisPas.Entitys.Empresa.act">
             <summary>
             si la empresa se encuentra activa o no
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Empresa.toSelect(AsisPas.Entitys.Empresa,System.Boolean)">
+            <summary>
+            para retornar 1 elemento como select
+            </summary>
+            <param name="emp"></param>
+            <param name="select"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Empresa.toSelect(System.Collections.Generic.List{AsisPas.Entitys.Empresa},System.Int32)">
+            <summary>
+            para el retorno en lista
+            </summary>
+            <param name="emp"></param>
+            <param name="idSelect"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Entitys.Horario">
+            <summary>
+            clase para la entidad de horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Nombre">
+            <summary>
+            nombre del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.hi">
+            <summary>
+            inicio jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.hf">
+            <summary>
+            fin de jordana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.hbi">
+            <summary>
+            inicio break
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.hbf">
+            <summary>
+            fin break
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.diaSiguiente">
+            <summary>
+            indica si la jornada culmina el dia siguiente
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.sinDescanzo">
+            <summary>
+            indica si la jornada no tiene descazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.act">
+            <summary>
+            indica si el horario se encuentra activo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Empresaid">
+            <summary>
+            empresa a la que pertenece el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Empresa">
+            <summary>
+            prop de navegarion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Domingo">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Lunes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Martes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Miercoles">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Jueves">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Viernes">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Horario.Sabado">
+            <summary>
+            indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.DiaLaboral(System.Int32)">
+            <summary>
+            verifica si este dia es laboral o na
+            </summary>
+            <param name="dia"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Entitys.Sedes">
+            <summary>
+            para implementar los lugares de trabajo de cada empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.Nombre">
+            <summary>
+            nombre de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.Direccion">
+            <summary>
+            direccion de donde se ubica la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.Empresaid">
+            <summary>
+            empresa a la que pertenece la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.Empresa">
+            <summary>
+            prop nav empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.lat">
+            <summary>
+            latitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.lng">
+            <summary>
+            longitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Sedes.act">
+            <summary>
+            si se encuentra activo o no
             </summary>
         </member>
         <member name="T:AsisPas.Helpers.AutomapperProfile">
