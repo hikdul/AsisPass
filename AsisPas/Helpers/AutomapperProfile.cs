@@ -29,6 +29,8 @@ namespace AsisPas.Helpers
             CreateMap<empresaDTO_in, Empresa>()
                 .ForMember(x => x.Logo, opt => opt.Ignore())
                 .ForMember(x => x.act, opt => opt.MapFrom(y => true));
+            CreateMap<Empresa, empresaDTO_in>()
+               .ForMember(x => x.Logo, opt => opt.Ignore());
         }
 
         #endregion

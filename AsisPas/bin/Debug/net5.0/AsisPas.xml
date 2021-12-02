@@ -173,6 +173,68 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.Editar">
+            <summary>
+            vista para editar, crear una empresa
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.Guardar(AsisPas.DTO.empresaDTO_in)">
+            <summary>
+            accion de almacenar los datos en la base de datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.Edit(System.Int32)">
+            <summary>
+            para editar un elemento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.save(AsisPas.DTO.EmpresaDTO)">
+            <summary>
+            accion de almacenar los datos en la base de datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.Eliminar(System.Int32)">
+            <summary>
+            para eliminar un elemento
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.HomeController">
+            <summary>
+            home controller
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{AsisPas.Controllers.HomeController})">
+            <summary>
+            logger
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.HomeController.Index">
+            <summary>
+            index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HomeController.Privacy">
+            <summary>
+            privacy
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.HomeController.Error">
+            <summary>
+            error pages
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Data.ApplicationDbContext">
             <summary>
             contexto de datos
