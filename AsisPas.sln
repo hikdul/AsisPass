@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsisPas", "AsisPas\AsisPas.csproj", "{E00DB48D-7E15-42B3-A537-EB2ED06F7A3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E00DB48D-7E15-42B3-A537-EB2ED06F7A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00DB48D-7E15-42B3-A537-EB2ED06F7A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00DB48D-7E15-42B3-A537-EB2ED06F7A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00DB48D-7E15-42B3-A537-EB2ED06F7A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7827B39-058B-4EFB-8902-362A91FD5FD9}
+	EndGlobalSection
+EndGlobal

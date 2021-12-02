@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AsisPas</name>
+    </assembly>
+    <members>
+        <member name="T:AsisPas.Controllers.API.CustomBaseController">
+            <summary>
+            clase para disminuir la escrituro de elementos en controller base 
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            contructor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.GetAll``2">
+            <summary>
+            obtiene todo lo existente en base de datos
+            </summary>
+            <typeparam name="TEntidad"></typeparam>
+            <typeparam name="TDTO"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Get``2">
+            <summary>
+            obtiene los datos activos en base de datos
+            </summary>
+            <typeparam name="TEntidad"></typeparam>
+            <typeparam name="TDTO"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Get``2(System.Int32)">
+            <summary>
+            obtiene un dato por medio de su id
+            </summary>
+            <typeparam name="TEntidad"></typeparam>
+            <typeparam name="TDTO"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Post``3(``0,System.String)">
+            <summary>
+            new
+            </summary>
+            <typeparam name="T_DTO_in"></typeparam>
+            <typeparam name="T_entidad"></typeparam>
+            <typeparam name="T_DTO"></typeparam>
+            <param name="_In"></param>
+            <param name="NombreRuta"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Post``3(``0)">
+            <summary>
+            new
+            </summary>
+            <typeparam name="T_DTO_in"></typeparam>
+            <typeparam name="T_entidad"></typeparam>
+            <typeparam name="T_DTO"></typeparam>
+            <param name="_In"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Post``2(``0)">
+            <summary>
+            cuando no tienen ninguna validacion o metodo
+            </summary>
+            <typeparam name="T_DTO_in"></typeparam>
+            <typeparam name="T_entidad"></typeparam>
+            <param name="_In"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Put``2(System.Int32,``0)">
+            <summary>
+            update
+            </summary>
+            <typeparam name="TDTO_in"></typeparam>
+            <typeparam name="TEntidad"></typeparam>
+            <param name="id"></param>
+            <param name="insert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Put``3(System.Int32,``0)">
+            <summary>
+            update
+            </summary>
+            <typeparam name="TDTO_in"></typeparam>
+            <typeparam name="TEntidad"></typeparam>
+            <typeparam name="TDTO"></typeparam>
+            <param name="id"></param>
+            <param name="insert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Delete``1(System.Int32)">
+            <summary>
+            delete
+            </summary>
+            <typeparam name="TEntidad"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.CustomBaseController.Remove``1(System.Int32)">
+            <summary>
+            Remove
+            </summary>
+            <typeparam name="TEntidad"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.API.EmpresaController">
+            <summary>
+            controlador api para los empresas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.API.EmpresaController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.API.EmpresaController.Post(AsisPas.DTO.empresaDTO_in)">
+            <summary>
+            para agregar una nueva empresa
+            </summary>
+            <param name="insert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.EmpresaController.Put(System.Int32,AsisPas.DTO.empresaDTO_in)">
+            <summary>
+            para actualizar los datos de una empresa
+            </summary>
+            <param name="id"></param>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.EmpresaController.Delete(System.Int32)">
+            <summary>
+            para eliminar un elemento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.EmpresaController.GetElement">
+            <summary>
+            para obtener una lista de elementos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.EmpresaController.Get(System.Int32)">
+            <summary>
+            para obtener una empresa mediante su id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.EmpresaController">
+            <summary>
+            vistas de empresas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.EmpresaController.Index">
+            <summary>
+            vista inicial
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Data.ApplicationDbContext">
+            <summary>
+            contexto de datos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Empresas">
+            <summary>
+            empresas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            para sobreescibir algunos valores en la base de datos
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.Initial">
+            <summary>
+            para la creacion de empresas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.empresas">
+            <summary>
+            agregando complementos a empresas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.empresas.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.empresas.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.DTO.EmpresaDTO">
+            <summary>
+            para ver los datos de la empresas
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.EmpresaDTO.id">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.EmpresaDTO.Nombre">
+            <summary>
+            nombre de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.EmpresaDTO.Rut">
+            <summary>
+            rut de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.EmpresaDTO.Rubro">
+            <summary>
+            rubro en el que participa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.EmpresaDTO.Logo">
+            <summary>
+            logo de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.EmpresaDTO.act">
+            <summary>
+            si se encuentra activa o no
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.empresaDTO_in">
+            <summary>
+            para agregar datos de lo empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.empresaDTO_in.Nombre">
+            <summary>
+            nombre de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.empresaDTO_in.Rut">
+            <summary>
+            rut de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.empresaDTO_in.Rubro">
+            <summary>
+            rubro en el que participa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.empresaDTO_in.Logo">
+            <summary>
+            logo de la empresa
+            </summary>
+        </member>
+        <member name="T:AsisPas.Entitys.Empresa">
+            <summary>
+            entidad para empresas
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empresa.id">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empresa.Nombre">
+            <summary>
+            nombre de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empresa.Rut">
+            <summary>
+            rut de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empresa.Rubro">
+            <summary>
+            rubro en el que participa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empresa.Logo">
+            <summary>
+            logo de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empresa.act">
+            <summary>
+            si la empresa se encuentra activa o no
+            </summary>
+        </member>
+        <member name="T:AsisPas.Helpers.AutomapperProfile">
+            <summary>
+            para encapsular mis mapeos
+            </summary>
+        </member>
+        <member name="M:AsisPas.Helpers.AutomapperProfile.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="T:AsisPas.Helpers.IAct">
+            <summary>
+            activo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Helpers.IAct.act">
+            <summary>
+            act
+            </summary>
+        </member>
+        <member name="T:AsisPas.Helpers.Iid">
+            <summary>
+            para todas mis clases que lleven el id entero
+            </summary>
+        </member>
+        <member name="P:AsisPas.Helpers.Iid.id">
+            <summary>
+            id:int
+            </summary>
+        </member>
+    </members>
+</doc>

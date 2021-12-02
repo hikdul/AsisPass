@@ -1,0 +1,15 @@
+./.vs/*
+./MyLoginWhitJWT/bin/*
+./MyLoginWhitJWT/obj/*
+./MyLoginWhitJWT/Properties/*
+.vs/
+./ScriptAsDatabase/conecctionStrigAWS.txt
+MyLoginWhitJWT/bin/
+MyLoginWhitJWT/obj/
+MyLoginWhitJWT/Properties/*
+MyLoginWhitJWT/wwwroot/documentos/descargables
+MyLoginWhitJWT/wwwroot/documentos/pdf
+MyLoginWhitJWT/wwwroot/fotos/*
+MyLoginWhitJWT/Migrations/*
+/MyLoginWhitJWT/Migrations/*
+ScriptAsDatabase/conecctionStrigAWS.txt
