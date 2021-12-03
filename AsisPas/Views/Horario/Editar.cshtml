@@ -1,22 +1,21 @@
-﻿
-@using AsisPas.Entitys;
+﻿@using AsisPas.Entitys;
 @model Horario
 
 @{
-   ViewBag.Encabezado = ViewData["Title"] = "Nuevo Horario";
-    ViewBag.HorariaListActive = "active";
+   ViewBag.Encabezado = ViewData["Title"] = $"Editar Horario || {Model.Nombre}";
+    ViewBag.HorarioListActive = "active";
     ViewBag.HorarioMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
 }
-
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="Guardar" method="post">
+        <form asp-action="Save" method="post">
             <div class="card">
             
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+                      <input type="hidden" asp-for="id" />
 
                     <div class="row">
                         <div class="col-12 text-center">

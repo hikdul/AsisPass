@@ -87,12 +87,18 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Guardar(HorarioDTO_in ins)
+        public async Task<IActionResult> Guardar(Horario ins)
         {
             try
             {
-                var ent = mapper.Map<Horarios>(ins);
-                context.Add(ent);
+                ins.act = true;
+                if(ins.sinDescanzo)
+                {
+                    ins.hbf = null;
+                    ins.hbi = null;
+                }
+
+                context.Add(ins);
                 await context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -100,7 +106,7 @@ namespace AsisPas.Controllers
             {
                 Console.WriteLine(ex.Message);
                 ViewBag.Err = "upss, parece que no tienes permisos para editar esta empresa";
-                return View("Nueva", ins);
+                return RedirectToAction("Nueva", ins);
             }
         }
 
@@ -118,7 +124,7 @@ namespace AsisPas.Controllers
             {
                 var model = await context.Horarios.FirstOrDefaultAsync(x => x.id == id);
                 ViewBag.Empresas = Empresa.toSelect(await context.Empresas.Where(x => x.act == true).ToListAsync(), model.Empresaid);
-                return View(mapper.Map<SedeDTO_up>(model));
+                return View(model);
             }
             catch (Exception ex)
             {
@@ -134,7 +140,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> save(SedeDTO_up ins)
+        public async Task<IActionResult> save(Horario ins)
         {
             try
             {

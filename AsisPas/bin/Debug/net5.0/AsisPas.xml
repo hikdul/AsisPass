@@ -259,7 +259,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AsisPas.Controllers.HorarioController.Guardar(AsisPas.DTO.HorarioDTO_in)">
+        <member name="M:AsisPas.Controllers.HorarioController.Guardar(AsisPas.Entitys.Horario)">
             <summary>
             accion de almacenar los datos en la base de datos
             </summary>
@@ -273,7 +273,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:AsisPas.Controllers.HorarioController.save(AsisPas.DTO.SedeDTO_up)">
+        <member name="M:AsisPas.Controllers.HorarioController.save(AsisPas.Entitys.Horario)">
             <summary>
             accion de almacenar los datos en la base de datos
             </summary>
@@ -623,171 +623,6 @@
             </summary>
         </member>
         <member name="P:AsisPas.DTO.HorarioDTO_Details.Sabado">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="T:AsisPas.DTO.HorarioDTO_in">
-            <summary>
-            para agregar un nueva horario
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Nombre">
-            <summary>
-            nombre del horario
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.hi">
-            <summary>
-            inicio jornada
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.hf">
-            <summary>
-            fin de jordana
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.hbi">
-            <summary>
-            inicio break
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.hbf">
-            <summary>
-            fin break
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.diaSiguiente">
-            <summary>
-            indica si la jornada culmina el dia siguiente
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.sinDescanzo">
-            <summary>
-            indica si la jornada no tiene descazo
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Empresaid">
-            <summary>
-            empresa a la que pertenece el horario
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Domingo">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Lunes">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Martes">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Miercoles">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Jueves">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Viernes">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_in.Sabado">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="T:AsisPas.DTO.HorarioDTO_up">
-            <summary>
-            actualizo los datos del horario
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.id">
-            <summary>
-            id
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Nombre">
-            <summary>
-            nombre del horario
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.hi">
-            <summary>
-            inicio jornada
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.hf">
-            <summary>
-            fin de jordana
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.hbi">
-            <summary>
-            inicio break
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.hbf">
-            <summary>
-            fin break
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.diaSiguiente">
-            <summary>
-            indica si la jornada culmina el dia siguiente
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.sinDescanzo">
-            <summary>
-            indica si la jornada no tiene descazo
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Empresaid">
-            <summary>
-            empresa a la que pertenece el horario
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Domingo">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Lunes">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Martes">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Miercoles">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Jueves">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Viernes">
-            <summary>
-            indica si aplica para el dia
-            </summary>
-        </member>
-        <member name="P:AsisPas.DTO.HorarioDTO_up.Sabado">
             <summary>
             indica si aplica para el dia
             </summary>

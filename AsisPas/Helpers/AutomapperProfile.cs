@@ -64,8 +64,8 @@ namespace AsisPas.Helpers
 
         private void HorariosMap()
         {
-            CreateMap<HorarioDTO_in, Horario>().ForMember(x => x.act, y => y.MapFrom(p => true)).ReverseMap();
-            CreateMap<HorarioDTO_up, Horario>().ForMember(x => x.act, y => y.MapFrom(p => true)).ReverseMap();
+
+            CreateMap<Horario, Horario>();
             CreateMap<Horario, HorarioDTO>()
                 .ForMember(x => x.Empresa, opt => opt.MapFrom(NameEmp));
             CreateMap<Horario, HorarioDTO_Details>();
@@ -78,6 +78,7 @@ namespace AsisPas.Helpers
             return dto.Empresa.Nombre;
         }
 
+     
 
         #endregion
     }
