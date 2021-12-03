@@ -45,6 +45,18 @@ namespace AsisPas.Data
         /// para almacenar los usuarios con el rol de administradores de empresas
         /// </summary>
         public DbSet<AdmoEmpresas> AdmoEmpresas { get; set; }
+        /// <summary>
+        /// fiscales
+        /// </summary>
+        public DbSet<Fiscal> Fiscales { get; set; }
+        /// <summary>
+        /// empleados
+        /// </summary>
+        public DbSet<Empleado> Empleados { get; set; }
+        /// <summary>
+        /// almacena el admo sistema
+        /// </summary>
+        public DbSet<AdmoSistema> AdmoSistema { get; set; }
         #endregion
 
         #region on model creating
@@ -69,7 +81,7 @@ namespace AsisPas.Data
         #region Asignacion de llaves
         private void AsignacionLlaves(ModelBuilder builder)
         {
-            builder.Entity<AdmoEmpresas>().HasKey(x => new { x.Empresaid, x.userid });
+           // builder.Entity<AdmoEmpresas>().HasKey(x => new { x.Empresaid, x.userid });
 
         }
 

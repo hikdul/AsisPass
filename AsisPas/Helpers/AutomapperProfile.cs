@@ -93,7 +93,71 @@ namespace AsisPas.Helpers
                 .ForMember(x => x.user, opt => opt.Ignore())
                 .ForMember(x => x.userid, opt => opt.Ignore())
                 .ForMember(x => x.id, opt => opt.Ignore());
+
+            CreateMap<AdmoEmpresas, AdmoEmpresasDTO>()
+                .ForMember(x => x.Empresa, opt => opt.MapFrom(NameEmp))
+                .ForMember(x => x.Email, opt => opt.MapFrom(EmailTo))
+                .ForMember(x => x.Nombre, opt => opt.MapFrom(NameTo))
+                .ForMember(x => x.numero, opt => opt.MapFrom(NumberTo));
+
+            CreateMap<UsuarioDTO_in,Usuario>()
+                 .ForMember(x => x.Hash, opt => opt.Ignore())
+                .ForMember(x => x.Salt, opt => opt.Ignore())
+                .ForMember(x => x.user, opt => opt.Ignore())
+                .ForMember(x => x.userid, opt => opt.Ignore())
+                .ForMember(x => x.id, opt => opt.Ignore());
+
+
+
         }
+        /// <summary>
+        /// email
+        /// </summary>
+        /// <param name="In"></param>
+        /// <param name="Out"></param>
+        /// <returns></returns>
+        private string EmailTo(AdmoEmpresas In, AdmoEmpresasDTO Out)
+        {
+            if (In.userid < 1)
+                return "--";
+            return In.user.Email;
+        }
+        /// <summary>
+        /// nombre
+        /// </summary>
+        /// <param name="In"></param>
+        /// <param name="Out"></param>
+        /// <returns></returns>
+        private string NameTo(AdmoEmpresas In, AdmoEmpresasDTO Out)
+        {
+            if (In.userid < 1)
+                return "--";
+            return In.user.Nombres;
+        }
+        /// <summary>
+        /// numero
+        /// </summary>
+        /// <param name="In"></param>
+        /// <param name="Out"></param>
+        /// <returns></returns>
+        private string NumberTo(AdmoEmpresas In, AdmoEmpresasDTO Out)
+        {
+            if (In.userid < 1)
+                return "--";
+            return In.user.telefono == null ? " -- " : In.user.telefono;
+        }
+        /// <summary>
+        /// para obtener el nobre de la empresa
+        /// </summary>
+        /// <param name="In"></param>
+        /// <param name="Out"></param>
+        /// <returns></returns>
+        private string NameEmp(AdmoEmpresas In, AdmoEmpresasDTO Out)
+            {
+                if (In.Empresaid < 1)
+                    return "--";
+                return In.Empresa.Nombre;
+            }
 
         #endregion
     }

@@ -1,10 +1,10 @@
 ﻿@using AsisPas.DTO;
-@model AdmoEmpresaDTO_in
+@model UsuarioDTO_in
 
 
 @{
-   ViewBag.Encabezado = ViewData["Title"] = "Crear Admo Empresa";
-    ViewBag.AdmoEListActive = "active";
+   ViewBag.Encabezado = ViewData["Title"] = "Nuevo Administrado Del Sistema";
+    ViewBag.SistListActive = "active";
     ViewBag.UsuarioMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="GuardarAdmoEmpresa" method="post">
+        <form asp-action="GuardarAdmoSistema" method="post">
             <div class="card">
             
                 <div class="card-body">
@@ -24,22 +24,7 @@
                             <strong>Mensaje: </strong> @mensaje
                         </div>
                     }
-                    
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
-
-                     <div class="row">
-                       <div class="form-group col-md-6">
-                            <label asp-for="Empresaid" class="control-label"></label>
-                             <select asp-for="Empresaid" class="form-control" asp-items="@ViewBag.Empresas"></select>
-                            <span asp-validation-for="Empresaid" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label asp-for="Password" class="control-label"></label>
-                            <input asp-for="Password" class="form-control text-to-upper-alau" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-
-                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label asp-for="Nombres" class="control-label"></label>
@@ -60,15 +45,20 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label asp-for="Email" class="control-label"></label>
                             <input asp-for="Email" class="form-control text-to-upper-alau" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label asp-for="telefono" class="control-label"></label>
                             <input type="number" asp-for="telefono" class="form-control"/>
                             <span asp-validation-for="telefono" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         

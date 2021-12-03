@@ -178,3 +178,10 @@ C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Horario\E
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\login.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\Index.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\AdmoEmpresa.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\IndexEmpresas.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\Fiscalizadores.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\CrearFiscalizador.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\Empleados.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\CrearEmpleado.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\AdmoSistema.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\CrearAdmoSistema.cshtml.g.cs

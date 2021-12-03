@@ -155,6 +155,11 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.CuentasController">
+            <summary>
+            controlador para la manipulacion de cuentas a nivel visual
+            </summary>
+        </member>
         <member name="M:AsisPas.Controllers.CuentasController.#ctor(Microsoft.AspNetCore.Identity.SignInManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.AspNetCore.Identity.UserManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.Extensions.Configuration.IConfiguration,AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
             <summary>
             constructor
@@ -190,10 +195,80 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.CuentasController.IndexEmpresas">
+            <summary>
+            para ver un listado de los administradores de empresas
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AsisPas.Controllers.CuentasController.AdmoEmpresa">
             <summary>
             para crear un nuevo usuario Administrador de empresas
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.GuardarAdmoEmpresa(AsisPas.DTO.AdmoEmpresaDTO_in)">
+            <summary>
+            para guarda al nuevo usuario administrador de empresa
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.Fiscalizadores">
+            <summary>
+            para ver un listado de los Fiscalizadores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.CrearFiscalizador">
+            <summary>
+            para crear un nuevo usuario Fiscalizadores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.GuardarFiscalizador(AsisPas.DTO.AdmoEmpresaDTO_in)">
+            <summary>
+            para guarda al nuevo usuario Fiscalizadores
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.Empleados">
+            <summary>
+            para ver un listado de los Fiscalizadores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.CrearEmpleado">
+            <summary>
+            para crear un nuevo usuario Fiscalizadores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.GuardarEmpleado(AsisPas.DTO.AdmoEmpresaDTO_in)">
+            <summary>
+            para guarda al nuevo usuario Fiscalizadores
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.AdmoSistema">
+            <summary>
+            para ver un listado de los Fiscalizadores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.CrearAdmoSistema">
+            <summary>
+            para crear un nuevo usuario Fiscalizadores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.GuardarAdmoSistema(AsisPas.DTO.UsuarioDTO_in)">
+            <summary>
+            para guarda al nuevo usuario Fiscalizadores
+            </summary>
+            <param name="ins"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Controllers.EmpresaController">
@@ -412,6 +487,21 @@
             para almacenar los usuarios con el rol de administradores de empresas
             </summary>
         </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Fiscales">
+            <summary>
+            fiscales
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Empleados">
+            <summary>
+            empleados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.AdmoSistema">
+            <summary>
+            almacena el admo sistema
+            </summary>
+        </member>
         <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             para sobreescibir algunos valores en la base de datos
@@ -560,6 +650,57 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:AsisPas.Data.Migrations.fiscales">
+            <summary>
+            fiscales
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.fiscales.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.fiscales.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.empleados">
+            <summary>
+            empleados
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.empleados.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.empleados.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.admosistema">
+            <summary>
+            admo sistema
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.admosistema.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.admosistema.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
             para agregar un nueva admo de empresas
@@ -570,29 +711,34 @@
             empresa a la que pertenece
             </summary>
         </member>
-        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Nombres">
+        <member name="T:AsisPas.DTO.AdmoEmpresasDTO">
             <summary>
-            nombre del usuario
+            datos para el listado de admo empresas
             </summary>
         </member>
-        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Apellidos">
+        <member name="P:AsisPas.DTO.AdmoEmpresasDTO.userid">
             <summary>
-            apellidos del usuario
+            user id
             </summary>
         </member>
-        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Rut">
+        <member name="P:AsisPas.DTO.AdmoEmpresasDTO.Nombre">
             <summary>
-            identificacion del usuario
+            nombre
             </summary>
         </member>
-        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Email">
+        <member name="P:AsisPas.DTO.AdmoEmpresasDTO.Email">
             <summary>
-            correo electronico del usuario
+            correo Electronico
             </summary>
         </member>
-        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.telefono">
+        <member name="P:AsisPas.DTO.AdmoEmpresasDTO.numero">
             <summary>
             numero telefonico
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresasDTO.Empresa">
+            <summary>
+            nombre de la empresa a la que pertenece
             </summary>
         </member>
         <member name="T:AsisPas.DTO.EmpresaDTO">
@@ -929,9 +1075,49 @@
             <param name="_configuration"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.DTO.UsuarioDTO_in">
+            <summary>
+            datos que se solicitaran para ingresar un nuevo usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UsuarioDTO_in.Password">
+            <summary>
+            contrasena para ingresar al sistema
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UsuarioDTO_in.Nombres">
+            <summary>
+            nombre del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UsuarioDTO_in.Apellidos">
+            <summary>
+            apellidos del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UsuarioDTO_in.Rut">
+            <summary>
+            identificacion del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UsuarioDTO_in.Email">
+            <summary>
+            correo electronico del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UsuarioDTO_in.telefono">
+            <summary>
+            numero telefonico
+            </summary>
+        </member>
         <member name="T:AsisPas.Entitys.AdmoEmpresas">
             <summary>
             Administradores de empresas
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoEmpresas.id">
+            <summary>
+            id
             </summary>
         </member>
         <member name="P:AsisPas.Entitys.AdmoEmpresas.userid">
@@ -958,6 +1144,82 @@
             <summary>
             si se encuentra activo o no
             </summary>
+        </member>
+        <member name="T:AsisPas.Entitys.AdmoSistema">
+            <summary>
+            para almacenar mis administradores de sistema
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoSistema.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoSistema.userid">
+            <summary>
+            usuario que tiene el ros
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoSistema.user">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoSistema.act">
+            <summary>
+            active
+            </summary>
+        </member>
+        <member name="T:AsisPas.Entitys.Empleado">
+            <summary>
+            mantiene los datos de empleados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.id">
+            <summary>
+            id del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.act">
+            <summary>
+            si se encuentra activo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.userid">
+            <summary>
+            usuario que tiene el ros
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.user">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.Empresaid">
+            <summary>
+            empresa en la que esta a cargo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.Empresa">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Empleado.EmpleadosXUsuarioLigth(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener una lista de empleados por empresa
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Empleado.EmpleadosXUsuario(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            obtiene todos los datos des empleados
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
         </member>
         <member name="T:AsisPas.Entitys.Empresa">
             <summary>
@@ -1009,6 +1271,49 @@
             <param name="emp"></param>
             <param name="idSelect"></param>
             <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Empresa.FiltrarEmpresas(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para generar todo el filtro en un solo punto
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Entitys.Fiscal">
+            <summary>
+            para contener los datos de los fiscales
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Fiscal.id">
+            <summary>
+            id del fiscal
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Fiscal.userid">
+            <summary>
+            usuario que tiene el ros
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Fiscal.user">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Fiscal.Empresaid">
+            <summary>
+            empresa en la que esta a cargo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Fiscal.Empresa">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Fiscal.act">
+            <summary>
+            si se encuentra activo o no
+            </summary>
         </member>
         <member name="T:AsisPas.Entitys.Horario">
             <summary>
@@ -1234,6 +1539,38 @@
             <summary>
             constructor
             </summary>
+        </member>
+        <member name="M:AsisPas.Helpers.AutomapperProfile.EmailTo(AsisPas.Entitys.AdmoEmpresas,AsisPas.DTO.AdmoEmpresasDTO)">
+            <summary>
+            email
+            </summary>
+            <param name="In"></param>
+            <param name="Out"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Helpers.AutomapperProfile.NameTo(AsisPas.Entitys.AdmoEmpresas,AsisPas.DTO.AdmoEmpresasDTO)">
+            <summary>
+            nombre
+            </summary>
+            <param name="In"></param>
+            <param name="Out"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Helpers.AutomapperProfile.NumberTo(AsisPas.Entitys.AdmoEmpresas,AsisPas.DTO.AdmoEmpresasDTO)">
+            <summary>
+            numero
+            </summary>
+            <param name="In"></param>
+            <param name="Out"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Helpers.AutomapperProfile.NameEmp(AsisPas.Entitys.AdmoEmpresas,AsisPas.DTO.AdmoEmpresasDTO)">
+            <summary>
+            para obtener el nobre de la empresa
+            </summary>
+            <param name="In"></param>
+            <param name="Out"></param>
+            <returns></returns>
         </member>
         <member name="T:AsisPas.Helpers.IAct">
             <summary>

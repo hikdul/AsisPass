@@ -3,9 +3,9 @@
 namespace AsisPas.Entitys
 {
     /// <summary>
-    /// Administradores de empresas
+    /// para almacenar mis administradores de sistema
     /// </summary>
-    public class AdmoEmpresas: Iid, IAct
+    public class AdmoSistema : Iid, IAct
     {
         #region propiedades
         /// <summary>
@@ -21,19 +21,9 @@ namespace AsisPas.Entitys
         /// </summary>
         public Usuario user { get; set; }
         /// <summary>
-        /// empresa en la que esta a cargo
-        /// </summary>
-        public int Empresaid { get; set; }
-        /// <summary>
-        /// prop de nav
-        /// </summary>
-        public Empresa Empresa { get; set; }
-        /// <summary>
-        /// si se encuentra activo o no
+        /// active
         /// </summary>
         public bool act { get; set; }
-
         #endregion
-
     }
 }

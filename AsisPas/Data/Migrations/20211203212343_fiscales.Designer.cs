@@ -4,14 +4,16 @@ using AsisPas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsisPas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211203212343_fiscales")]
+    partial class fiscales
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,72 +23,20 @@ namespace AsisPas.Data.Migrations
 
             modelBuilder.Entity("AsisPas.Entitys.AdmoEmpresas", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("Empresaid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userid")
                         .HasColumnType("int");
 
                     b.Property<bool>("act")
                         .HasColumnType("bit");
 
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Empresaid");
+                    b.HasKey("Empresaid", "userid");
 
                     b.HasIndex("userid");
 
                     b.ToTable("AdmoEmpresas");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.AdmoSistema", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("userid");
-
-                    b.ToTable("AdmoSistema");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Empleado", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Empresaid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Empresaid");
-
-                    b.HasIndex("userid");
-
-                    b.ToTable("Empleados");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Empresa", b =>
@@ -497,36 +447,6 @@ namespace AsisPas.Data.Migrations
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.AdmoEmpresas", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("Empresaid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AsisPas.Entitys.Usuario", "user")
-                        .WithMany()
-                        .HasForeignKey("userid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
-
-                    b.Navigation("user");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.AdmoSistema", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.Usuario", "user")
-                        .WithMany()
-                        .HasForeignKey("userid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("user");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Empleado", b =>
                 {
                     b.HasOne("AsisPas.Entitys.Empresa", "Empresa")
                         .WithMany()

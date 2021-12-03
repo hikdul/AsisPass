@@ -1,16 +1,14 @@
-﻿using AsisPas.Helpers;
-
-namespace AsisPas.Entitys
+﻿namespace AsisPas.Entitys
 {
     /// <summary>
-    /// Administradores de empresas
+    /// para contener los datos de los fiscales
     /// </summary>
-    public class AdmoEmpresas: Iid, IAct
+    public class Fiscal
     {
-        #region propiedades
         /// <summary>
-        /// id
+        /// id del fiscal
         /// </summary>
+        [key]
         public int id { get; set; }
         /// <summary>
         /// usuario que tiene el ros
@@ -32,8 +30,5 @@ namespace AsisPas.Entitys
         /// si se encuentra activo o no
         /// </summary>
         public bool act { get; set; }
-
-        #endregion
-
     }
 }

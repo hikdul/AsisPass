@@ -3,8 +3,8 @@
 
 
 @{
-   ViewBag.Encabezado = ViewData["Title"] = "Crear Admo Empresa";
-    ViewBag.AdmoEListActive = "active";
+   ViewBag.Encabezado = ViewData["Title"] = "Nuevo Empleado";
+    ViewBag.EmpListActive = "active";
     ViewBag.UsuarioMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="GuardarAdmoEmpresa" method="post">
+        <form asp-action="GuardarEmpleado" method="post">
             <div class="card">
             
                 <div class="card-body">

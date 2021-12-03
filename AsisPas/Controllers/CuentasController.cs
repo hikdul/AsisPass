@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace AsisPas.Controllers
 {
+    /// <summary>
+    /// controlador para la manipulacion de cuentas a nivel visual
+    /// </summary>
     public class CuentasController : Controller
     {
         private readonly SignInManager<IdentityUser> signInManager;
@@ -142,7 +145,31 @@ namespace AsisPas.Controllers
         #endregion
 
 
-        #region Crear usuarios
+        #region Crear usuarios Administradores de empresas
+
+        /// <summary>
+        /// para ver un listado de los administradores de empresas
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> IndexEmpresas()
+        {
+            try
+            {
+                var ent = await context.AdmoEmpresas
+                    .Include(x => x.Empresa)
+                    .Include(x => x.user)
+                    .Where(x => x.act == true).ToListAsync();
+
+                
+                return View(ent);  
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return View();
+            }
+        }
+
 
         /// <summary>
         /// para crear un nuevo usuario Administrador de empresas
@@ -153,7 +180,108 @@ namespace AsisPas.Controllers
 
             try
             {
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context,User));
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Err = "upss, parece que no tienes permisos para Crear Usuarios";
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context,User));
+                return View();
+            }
+
+        }
+        /// <summary>
+        /// para guarda al nuevo usuario administrador de empresa
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> GuardarAdmoEmpresa(AdmoEmpresaDTO_in ins)
+        {
+            try
+            {
+                var usuario = await userManager.FindByEmailAsync(ins.Email);
+                if (usuario == null)
+                {
+                    var UsEnt = mapper.Map<Usuario>(ins);
+                    UsEnt.Complete();
+                    var user = new IdentityUser { UserName = ins.Email, Email = ins.Email };
+                    var result = await userManager.CreateAsync(user, ins.Password);
+                    if (result.Succeeded)
+                    {
+                        usuario = await userManager.FindByEmailAsync(ins.Email);
+                        UsEnt.userid = usuario.Id;
+
+                        context.Add(UsEnt);
+                        await context.SaveChangesAsync();
+
+                        AdmoEmpresas last = new()
+                        {
+                            Empresaid = ins.Empresaid,
+                            act = true,
+                            userid = UsEnt.id,
+                        };
+
+                        context.Add(last);
+                        await context.SaveChangesAsync();
+
+                        return RedirectToAction("IndexEmpresas");
+                    }
+
+                }
                 ViewBag.Empresas = Empresa.toSelect(await context.Empresas.Where(x => x.act == true).ToListAsync());
+                ViewBag.Err = "Este Usuario Ya Existe";
+                return View("AdmoEmpresa", ins);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Empresas = Empresa.toSelect(await context.Empresas.Where(x => x.act == true).ToListAsync());
+                ViewBag.Err = "Parece que algo no esta bien.. intente mas tarde";
+                return View("AdmoEmpresa", ins);
+            }
+        }
+
+        #endregion
+
+
+        #region fiscalizador
+
+        /// <summary>
+        /// para ver un listado de los Fiscalizadores
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Fiscalizadores()
+        {
+            try
+            {
+                var ent = await context.Fiscales
+                    .Include(x => x.Empresa)
+                    .Include(x => x.user)
+                    .Where(x => x.act == true).ToListAsync();
+
+
+                return View(ent);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return View();
+            }
+        }
+
+
+        /// <summary>
+        /// para crear un nuevo usuario Fiscalizadores
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> CrearFiscalizador()
+        {
+
+            try
+            {
+                ViewBag.Empresas = ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
                 return View();
             }
             catch (Exception ex)
@@ -163,6 +291,257 @@ namespace AsisPas.Controllers
                 return View();
             }
 
+        }
+        /// <summary>
+        /// para guarda al nuevo usuario Fiscalizadores
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> GuardarFiscalizador(AdmoEmpresaDTO_in ins)
+        {
+            try
+            {
+                var usuario = await userManager.FindByEmailAsync(ins.Email);
+                if (usuario == null)
+                {
+                    var UsEnt = mapper.Map<Usuario>(ins);
+                    UsEnt.Complete();
+                    var user = new IdentityUser { UserName = ins.Email, Email = ins.Email };
+                    var result = await userManager.CreateAsync(user, ins.Password);
+                    if (result.Succeeded)
+                    {
+                        usuario = await userManager.FindByEmailAsync(ins.Email);
+                        UsEnt.userid = usuario.Id;
+
+                        context.Add(UsEnt);
+                        await context.SaveChangesAsync();
+
+                        Fiscal last = new()
+                        {
+                            Empresaid = ins.Empresaid,
+                            act = true,
+                            userid = UsEnt.id,
+                        };
+
+                        context.Add(last);
+                        await context.SaveChangesAsync();
+
+                        return RedirectToAction("Fiscalizadores");
+                    }
+
+                }
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                ViewBag.Err = "Este Usuario Ya Existe";
+                return View("CrearFiscalizador", ins);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                ViewBag.Err = "Parece que algo no esta bien.. intente mas tarde";
+                return View("CrearFiscalizador", ins);
+            }
+        }
+
+        #endregion
+
+        #region Empleado
+        /// <summary>
+        /// para ver un listado de los Fiscalizadores
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Empleados()
+        {
+            try
+            {
+                var ent = await Empleado.EmpleadosXUsuario(context, User);  
+                return View(ent);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return View();
+            }
+        }
+
+
+        /// <summary>
+        /// para crear un nuevo usuario Fiscalizadores
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> CrearEmpleado()
+        {
+
+            try
+            {
+                ViewBag.Empresas = ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Err = "upss, parece que no tienes permisos para Crear Usuarios";
+                return View();
+            }
+
+        }
+        /// <summary>
+        /// para guarda al nuevo usuario Fiscalizadores
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> GuardarEmpleado(AdmoEmpresaDTO_in ins)
+        {
+            try
+            {
+                var usuario = await userManager.FindByEmailAsync(ins.Email);
+                if (usuario == null)
+                {
+                    var UsEnt = mapper.Map<Usuario>(ins);
+                    UsEnt.Complete();
+                    var user = new IdentityUser { UserName = ins.Email, Email = ins.Email };
+                    var result = await userManager.CreateAsync(user, ins.Password);
+                    if (result.Succeeded)
+                    {
+                        usuario = await userManager.FindByEmailAsync(ins.Email);
+                        UsEnt.userid = usuario.Id;
+
+                        context.Add(UsEnt);
+                        await context.SaveChangesAsync();
+
+                        Empleado last = new()
+                        {
+                            Empresaid = ins.Empresaid,
+                            act = true,
+                            userid = UsEnt.id,
+                        };
+
+                        context.Add(last);
+                        await context.SaveChangesAsync();
+
+                        return RedirectToAction("Empleados");
+                    }
+
+                }
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                ViewBag.Err = "Este Usuario Ya Existe";
+                return View("CrearEmpleado", ins);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                ViewBag.Err = "Parece que algo no esta bien.. intente mas tarde";
+                return View("CrearEmpleado", ins);
+            }
+        }
+
+
+        #endregion
+
+
+        #region admo sistema
+
+        /// <summary>
+        /// para ver un listado de los Fiscalizadores
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> AdmoSistema()
+        {
+            if (User.IsInRole("SuperAdmin"))
+            {
+                try
+                {
+                    var ent = await context.AdmoSistema.Include(x => x.user).Where(x => x.act == true).ToListAsync();
+                    return View(ent);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return View();
+                }
+            }
+            return RedirectToAction("Logout");
+        }
+
+
+        /// <summary>
+        /// para crear un nuevo usuario Fiscalizadores
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult CrearAdmoSistema()
+        {
+            if (User.IsInRole("SuperAdmin"))
+            {
+                   try
+               {
+                   return View();
+               }
+               catch (Exception ex)
+               {
+                   Console.WriteLine(ex.Message);
+                   ViewBag.Err = "upss, parece que no tienes permisos para Crear Usuarios";
+                   return View();
+               }
+            }
+            return RedirectToAction("Logout");
+        }
+        /// <summary>
+        /// para guarda al nuevo usuario Fiscalizadores
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> GuardarAdmoSistema(UsuarioDTO_in ins)
+        {
+            if (User.IsInRole("SuperAdmin"))
+            {
+                try
+            {
+
+                var usuario = await userManager.FindByEmailAsync(ins.Email);
+                if (usuario == null)
+                {
+                    var UsEnt = mapper.Map<Usuario>(ins);
+                    UsEnt.Complete();
+                    var user = new IdentityUser { UserName = ins.Email, Email = ins.Email };
+                    var result = await userManager.CreateAsync(user, ins.Password);
+                    if (result.Succeeded)
+                    {
+                        usuario = await userManager.FindByEmailAsync(ins.Email);
+                        UsEnt.userid = usuario.Id;
+
+                        context.Add(UsEnt);
+                        await context.SaveChangesAsync();
+
+                        AdmoSistema last = new()
+                        {
+                            act = true,
+                            userid = UsEnt.id,
+                        };
+
+                        context.Add(last);
+                        await context.SaveChangesAsync();
+
+                        return RedirectToAction("AdmoSistema");
+                    }
+
+
+
+                }
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                ViewBag.Err = "Este Usuario Ya Existe";
+                return View("CrearAdmoSistema", ins);
+           
+        }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Empresas = Empresa.toSelect(await Empresa.FiltrarEmpresas(context, User));
+                ViewBag.Err = "Parece que algo no esta bien.. intente mas tarde";
+                return View("CrearAdmoSistema", ins);
+            }
+            }
+            return RedirectToAction("Logout");
         }
 
 

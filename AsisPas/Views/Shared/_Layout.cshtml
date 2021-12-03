@@ -134,20 +134,44 @@
 
               
           <!--Usuarios-->
-                    <li class="nav-item has-sub @ViewBag.HorarioMenu">
+                    <li class="nav-item has-sub @ViewBag.UsuarioMenu">
                  <a class="alert-dark" href="#">
                      <i class="la la-users text-dark"></i>
                      <span class="menu-title" data-i18n="">Usuarios</span>
                  </a>
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.SistListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="AdmoSistema">
+                             <i class="la la-building"></i>
+                             Admo Sistema
+                         </a>
+                     </li>
+                </ul>
                  <ul class="menu-content">
-                     <li class="is-shown @ViewBag.HorarioListActive">
-                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="AdmoEmpresa">
+                     <li class="is-shown @ViewBag.AdmoEListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="IndexEmpresas">
                              <i class="la la-building"></i>
                              Admo. Empresas
                          </a>
                      </li>
-                     
                 </ul>
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.FiscalListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="Fiscalizadores">
+                             <i class="la la-building"></i>
+                             Fiscalizadores
+                         </a>
+                     </li>
+                </ul>
+                 <ul class="menu-content">
+                     <li class="is-shown @ViewBag.EmpListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="Empleados">
+                             <i class="la la-building"></i>
+                             Empleados
+                         </a>
+                     </li>
+                </ul>
+                
            </li>
 
           <!--otro-->
