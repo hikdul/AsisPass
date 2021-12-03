@@ -22,54 +22,56 @@
     <link rel="stylesheet" type="text/css" href="~/theme/theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="~/theme/theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="~/theme/theme-assets/css/pages/dashboard-ecommerce.css">
+     <link rel="stylesheet" type="text/css" href="~/css/login.css" />
 </head>
 <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-white" data-col="2-columns">
-    <header>
-      <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
-      <div class="navbar-wrapper">
-        <div class="navbar-container content">
-          <div class="collapse navbar-collapse show" id="navbar-mobile">
-            <ul class="nav navbar-nav mr-auto float-left">
-              <li class="nav-item d-block d-md-none">
-                                <a class="nav-link nav-menu-main menu-toggle hidden-xs is-active p-0 pr-2" href="#">
-                                    <i class="ft-align-right text-danger" style="font-size:2rem"></i>
-                                </a>
-                            </li>
-                <li class="nav-item d-block d-md-none">
-                  <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-                    <li class="nav-item nav-item dropdown">
-                     <h3 class="mb-0 text-dark text-encabezado-alau">@ViewBag.Encabezado</h3>
-                    </li>
-              </ul>
-            <ul class="nav navbar-nav float-right">         
-            
-            </ul>
-            <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-user nav-item">
-                  <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                    <span class="avatar avatar-online">
-                    </span>
-                        <i class="ft-user danger"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right">
-                    </div>
-                    <a class="dropdown-item" href="#"><i class="ft-user"></i> Perfil@correo.com</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="ft-power"></i> Salir</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-    </header>
+   
+     @if (User.Identity.IsAuthenticated)
+    {
+        <header>
+            <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+                <div class="navbar-wrapper">
+                    <div class="navbar-container content">
+                        <div class="collapse navbar-collapse show" id="navbar-mobile">
+                            <ul class="nav navbar-nav mr-auto float-left">
+                                <li class="nav-item d-block d-md-none">
+                                    <a class="nav-link nav-menu-main menu-toggle hidden-xs is-active p-0 pr-2" href="#">
+                                        <i class="ft-align-right text-danger" style="font-size:2rem"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item d-block d-md-none">
+                                    <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
+                                <li class="nav-item nav-item dropdown">
+                                    <h3 class="mb-0 text-dark text-encabezado-alau">@ViewBag.Encabezado</h3>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav float-right">         
 
-    <!-- links para navegar-->
-     <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true" data-img="~/img/navbar.png">
-      <div class="navbar-header">
+                            </ul>
+                            <ul class="nav navbar-nav float-right">
+                                <li class="dropdown dropdown-user nav-item">
+                                    <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                        <p class="text-danger">@User.Identity.Name</p>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="arrow_box_right">
+                                        </div>
+                                        <a class="dropdown-item" href="#"><i class="ft-user"></i> Perfil@correo.com</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#"><i class="ft-power"></i> Salir</a>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- links para navegar-->
+        <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true" data-img="~/img/navbar.png">
+            <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
           <li class="nav-item mr-auto">
               <a class="navbar-brand" asp-controller="home" asp-action="Index">
@@ -130,15 +132,44 @@
                 </ul>
            </li>
 
+              
+          <!--Usuarios-->
+                    <li class="nav-item has-sub @ViewBag.HorarioMenu">
+                 <a class="alert-dark" href="#">
+                     <i class="la la-users text-dark"></i>
+                     <span class="menu-title" data-i18n="">Usuarios</span>
+                 </a>
+                 <ul class="menu-content">
+                     <li class="is-shown @ViewBag.HorarioListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="AdmoEmpresa">
+                             <i class="la la-building"></i>
+                             Admo. Empresas
+                         </a>
+                     </li>
+                     
+                </ul>
+           </li>
 
           <!--otro-->
 
           
          
         </ul>
-      </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank">Download PRO!</a>
+
+                @{
+                    string ScreemRole = "???";
+                    if (User.IsInRole("SuperAdmin")) ScreemRole = "Super Adminintrador";
+                    if (User.IsInRole("Admin")) ScreemRole = "Adminintrador";
+                    if (User.IsInRole("Empresa")) ScreemRole = "Empresa";
+                    if (User.IsInRole("Empleado")) ScreemRole = "Empleado";
+                    if (User.IsInRole("Fiscal")) ScreemRole = "Fiscal";
+                }
+
+      </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank">@ScreemRole</a>
       <div class="navigation-background"></div>
     </div>
+
+    }
     <!-- Page Content-->
      <div class="app-content content">
       <div class="content-wrapper">

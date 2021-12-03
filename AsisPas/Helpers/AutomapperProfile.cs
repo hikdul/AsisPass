@@ -18,6 +18,7 @@ namespace AsisPas.Helpers
             EmpresaMap();
             SedesMap();
             HorariosMap();
+            UsuariosMap();
         }
 
         #endregion
@@ -78,7 +79,21 @@ namespace AsisPas.Helpers
             return dto.Empresa.Nombre;
         }
 
-     
+
+
+        #endregion
+
+        #region usuarios
+
+        private void UsuariosMap()
+        {
+            CreateMap<AdmoEmpresaDTO_in, Usuario>()
+                .ForMember(x => x.Hash, opt => opt.Ignore())
+                .ForMember(x => x.Salt, opt => opt.Ignore())
+                .ForMember(x => x.user, opt => opt.Ignore())
+                .ForMember(x => x.userid, opt => opt.Ignore())
+                .ForMember(x => x.id, opt => opt.Ignore());
+        }
 
         #endregion
     }

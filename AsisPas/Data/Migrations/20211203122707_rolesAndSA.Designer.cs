@@ -4,38 +4,22 @@ using AsisPas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsisPas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211203122707_rolesAndSA")]
+    partial class rolesAndSA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AsisPas.Entitys.AdmoEmpresas", b =>
-                {
-                    b.Property<int>("Empresaid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Empresaid", "userid");
-
-                    b.HasIndex("userid");
-
-                    b.ToTable("AdmoEmpresas");
-                });
 
             modelBuilder.Entity("AsisPas.Entitys.Empresa", b =>
                 {
@@ -175,54 +159,6 @@ namespace AsisPas.Data.Migrations
                     b.ToTable("Sedes");
                 });
 
-            modelBuilder.Entity("AsisPas.Entitys.Usuario", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Hash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombres")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Rut")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("telefono")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("userid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("userid");
-
-                    b.ToTable("Usuarios");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -248,6 +184,43 @@ namespace AsisPas.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5e2a8afe-fe62-4598-a773-1f89ce15af3a",
+                            ConcurrencyStamp = "390c8317-db17-4762-a895-083c4590d750",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        },
+                        new
+                        {
+                            Id = "16e33ec0-7fa5-4c84-b073-15ce21f4e60a",
+                            ConcurrencyStamp = "dbcf99ef-40b7-43e0-9b19-7ab6c8ac5e46",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "073c51e1-fdab-4349-83d5-5b34cc82e541",
+                            ConcurrencyStamp = "de3ec7c1-e1f5-45a4-99eb-98c217b0a58a",
+                            Name = "Empresa",
+                            NormalizedName = "EMPRESA"
+                        },
+                        new
+                        {
+                            Id = "dddb7443-d5c8-4b38-ba6e-abd0ef20d9f3",
+                            ConcurrencyStamp = "ded4258b-a253-4443-9053-22d6e4212b06",
+                            Name = "Fiscal",
+                            NormalizedName = "FISCAL"
+                        },
+                        new
+                        {
+                            Id = "d95a2f3d-531f-4466-b6fe-2a69a6e49e5a",
+                            ConcurrencyStamp = "318c6279-2c89-482e-8e25-80c5eed814ee",
+                            Name = "Empleado",
+                            NormalizedName = "EMPLEADO"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -337,6 +310,25 @@ namespace AsisPas.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "71032b9d-207e-4c27-a0d6-b4fb94342ba8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "089c80f0-1092-4d2d-bef0-264e51ae8e60",
+                            Email = "desarrollo@automatismoslau.cl",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DESARROLLO@AUTOMATISMOSLAU.CL",
+                            NormalizedUserName = "DESARROLLO@AUTOMATISMOSLAU.CL",
+                            PasswordHash = "AQAAAAEAACcQAAAAECk/8OmgAk0044PAa7PvWN6TDXktpQaLSw/DfNHRbhtgi+RrpFR+RkcdviJK/yiowA==",
+                            PhoneNumber = "+56 9 3315 8879",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "aa44e724-9c40-47d3-afaf-cbc7ed34e01c",
+                            TwoFactorEnabled = false,
+                            UserName = "desarrollo@automatismoslau.cl"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -366,10 +358,12 @@ namespace AsisPas.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -398,6 +392,13 @@ namespace AsisPas.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "71032b9d-207e-4c27-a0d6-b4fb94342ba8",
+                            RoleId = "5e2a8afe-fe62-4598-a773-1f89ce15af3a"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -406,10 +407,12 @@ namespace AsisPas.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -417,25 +420,6 @@ namespace AsisPas.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.AdmoEmpresas", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("Empresaid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AsisPas.Entitys.Usuario", "user")
-                        .WithMany()
-                        .HasForeignKey("userid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Horario", b =>
@@ -458,17 +442,6 @@ namespace AsisPas.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Empresa");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Usuario", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
-                        .WithMany()
-                        .HasForeignKey("userid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

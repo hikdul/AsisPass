@@ -175,3 +175,6 @@ C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Sedes\Edi
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Horario\Index.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Horario\Nueva.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Horario\Editar.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\login.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\Index.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Cuentas\AdmoEmpresa.cshtml.g.cs

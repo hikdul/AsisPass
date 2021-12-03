@@ -155,6 +155,47 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.CuentasController.#ctor(Microsoft.AspNetCore.Identity.SignInManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.AspNetCore.Identity.UserManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.Extensions.Configuration.IConfiguration,AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            constructor
+            </summary>
+            <param name="signInManager"></param>
+            <param name="userManager"></param>
+            <param name="configuration"></param>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.Index">
+            <summary>
+            aqui devuelve los datos de usuario en base a mi correo electronico
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.login">
+            <summary>
+            vista para ingresar al sistema
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.Singin(AsisPas.DTO.UserLogin)">
+            <summary>
+            verifica si el usuario existe y le permite el paso a la app
+            </summary>
+            <param name="userInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.Logout">
+            <summary>
+            para salir del sistema
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.AdmoEmpresa">
+            <summary>
+            para crear un nuevo usuario Administrador de empresas
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.EmpresaController">
             <summary>
             vistas de empresas
@@ -361,9 +402,25 @@
             Horarios
             </summary>
         </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Usuarios">
+            <summary>
+            para almacenar los datos de un usuario en especifico
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.AdmoEmpresas">
+            <summary>
+            para almacenar los usuarios con el rol de administradores de empresas
+            </summary>
+        </member>
         <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             para sobreescibir algunos valores en la base de datos
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:AsisPas.Data.ApplicationDbContext.RolesYSU(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            funcion que crea mis roles y el SA
             </summary>
             <param name="builder"></param>
         </member>
@@ -451,6 +508,92 @@
             down
             </summary>
             <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.rolesAndSA">
+            <summary>
+            migracion que crea los roles y el super usuario inicial
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.rolesAndSA.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.rolesAndSA.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.SAjefe">
+            <summary>
+            ...
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.SAjefe.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.SAjefe.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.AdmoEmpres">
+            <summary>
+            admo empresas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.AdmoEmpres.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.AdmoEmpres.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
+            <summary>
+            para agregar un nueva admo de empresas
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Empresaid">
+            <summary>
+            empresa a la que pertenece
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Nombres">
+            <summary>
+            nombre del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Apellidos">
+            <summary>
+            apellidos del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Rut">
+            <summary>
+            identificacion del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.Email">
+            <summary>
+            correo electronico del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoEmpresaDTO_in.telefono">
+            <summary>
+            numero telefonico
+            </summary>
         </member>
         <member name="T:AsisPas.DTO.EmpresaDTO">
             <summary>
@@ -737,6 +880,85 @@
             empresa a la que pertenece la sede
             </summary>
         </member>
+        <member name="T:AsisPas.DTO.UserLogin">
+            <summary>
+            para que los usuarios se puedan logear
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UserLogin.Email">
+            <summary>
+            Email suscrito del ususario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UserLogin.Password">
+            <summary>
+            psw del usuario
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.UserToken">
+            <summary>
+            clase que administra los token de usuarios
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UserToken.ok">
+            <summary>
+            ok
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UserToken.Token">
+            <summary>
+            JWT token
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UserToken.Expiration">
+            <summary>
+            expiration
+            </summary>
+        </member>
+        <member name="M:AsisPas.DTO.UserToken.#ctor">
+            <summary>
+            contructor Por Defecto
+            </summary>
+        </member>
+        <member name="M:AsisPas.DTO.UserToken.#ctor(AsisPas.DTO.UserLogin,System.Collections.Generic.IList{System.String},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            para contruor el token
+            </summary>
+            <param name="userInfo"></param>
+            <param name="roles"></param>
+            <param name="_configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Entitys.AdmoEmpresas">
+            <summary>
+            Administradores de empresas
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoEmpresas.userid">
+            <summary>
+            usuario que tiene el ros
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoEmpresas.user">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoEmpresas.Empresaid">
+            <summary>
+            empresa en la que esta a cargo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoEmpresas.Empresa">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoEmpresas.act">
+            <summary>
+            si se encuentra activo o no
+            </summary>
+        </member>
         <member name="T:AsisPas.Entitys.Empresa">
             <summary>
             entidad para empresas
@@ -935,6 +1157,74 @@
             si se encuentra activo o no
             </summary>
         </member>
+        <member name="T:AsisPas.Entitys.Usuario">
+            <summary>
+            almacena los datos de usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.id">
+            <summary>
+            id en base de datos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.user">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.userid">
+            <summary>
+            Usuario al que pertenece
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.Nombres">
+            <summary>
+            nombre del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.Apellidos">
+            <summary>
+            apellidos del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.Rut">
+            <summary>
+            identificacion del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.Email">
+            <summary>
+            correo electronico del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.telefono">
+            <summary>
+            numero telefonico
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.Hash">
+            <summary>
+            Hash generado del usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Usuario.Salt">
+            <summary>
+            Salt para la desencriptacion de datos
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Usuario.Complete">
+            <summary>
+            para el llenado de hash y salt
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Usuario.verData(System.String,System.String)">
+            <summary>
+            me retorna un objeto con los datos del hash
+            </summary>
+            <param name="hash"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Helpers.AutomapperProfile">
             <summary>
             para encapsular mis mapeos
@@ -964,6 +1254,62 @@
             <summary>
             id:int
             </summary>
+        </member>
+        <member name="T:AsisPas.Helpers.MD5">
+            <summary>
+            clase para generar key, hash y salt
+            </summary>
+        </member>
+        <member name="M:AsisPas.Helpers.MD5.Encriptar(System.String,System.String)">
+            <summary>
+             encriptar usarndo el metodo MD5
+            </summary>
+            <param name="texto"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Helpers.MD5.Desencriptar(System.String,System.String)">
+            <summary>
+            ahora desencriptamos usando MD5 y con la sal
+            </summary>
+            <param name="textoEncriptado"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Helpers.MD5.GenerarKey">
+            <summary>
+            genera una clave aleatoria 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Startup">
+            <summary>
+            startup class
+            </summary>
+        </member>
+        <member name="M:AsisPas.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            constructor
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:AsisPas.Startup.Configuration">
+            <summary>
+            conf obj
+            </summary>
+        </member>
+        <member name="M:AsisPas.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:AsisPas.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
         </member>
     </members>
 </doc>
