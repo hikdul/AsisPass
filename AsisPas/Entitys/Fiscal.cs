@@ -1,4 +1,6 @@
-﻿namespace AsisPas.Entitys
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AsisPas.Entitys
 {
     /// <summary>
     /// para contener los datos de los fiscales
@@ -8,7 +10,7 @@
         /// <summary>
         /// id del fiscal
         /// </summary>
-        [key]
+        [Key]
         public int id { get; set; }
         /// <summary>
         /// usuario que tiene el ros

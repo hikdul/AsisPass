@@ -96,7 +96,7 @@ namespace AsisPas.Entitys
             List<Empresa> empresas = new();
             if (User == null)
                 return empresas;
-            if (User.IsInRole("SuperAdmin"))
+            if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
                 return await context.Empresas.Where(x => x.act == true).ToListAsync();
             if(User.IsInRole("Empresa"))
             {
@@ -112,6 +112,13 @@ namespace AsisPas.Entitys
                     empresas.Add(await context.Empresas.FirstOrDefaultAsync(x => x.id == emp.Empresaid));
                 return empresas;
             }
+            if (User.IsInRole("Empleado"))
+            {
+                var emp = await context.Empleados.Where(x => x.user.Email == User.Identity.Name).FirstOrDefaultAsync();
+                empresas.Add(await context.Empresas.FirstOrDefaultAsync(x => x.id == emp.Empresaid));
+                return empresas;
+            }
+
             empresas.Clear();
             return empresas;
         }

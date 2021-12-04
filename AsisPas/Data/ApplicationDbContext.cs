@@ -25,6 +25,8 @@ namespace AsisPas.Data
         #endregion
 
         #region tablan de negocio
+        // == seccion principal
+
         /// <summary>
         /// empresas
         /// </summary>
@@ -33,10 +35,20 @@ namespace AsisPas.Data
         /// sedes que contiene una empresa
         /// </summary>
         public DbSet<Sedes> Sedes { get; set; }
+        
+        // == manejo de horarios
+        
         /// <summary>
         /// Horarios
         /// </summary>
         public DbSet<Horario> Horarios { get; set; }
+        /// <summary>
+        /// admo de horarios
+        /// </summary>
+        public DbSet<AdmoHorario> AdmoHorarios { get; set; }
+
+        // == manejo de usuarios
+
         /// <summary>
         /// para almacenar los datos de un usuario en especifico
         /// </summary>

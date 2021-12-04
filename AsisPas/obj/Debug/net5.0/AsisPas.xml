@@ -4,6 +4,28 @@
         <name>AsisPas</name>
     </assembly>
     <members>
+        <member name="T:AsisPas.Controllers.AdministradorHorariosController">
+            <summary>
+            para manipular los datos del controlador de horarios
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.Index">
+            <summary>
+            listado de los que se encuentran realizados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.Historico">
+            <summary>
+            para ver el historial de los admo asignados
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.API.CustomBaseController">
             <summary>
             clase para disminuir la escrituro de elementos en controller base 
@@ -477,6 +499,11 @@
             Horarios
             </summary>
         </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.AdmoHorarios">
+            <summary>
+            admo de horarios
+            </summary>
+        </member>
         <member name="P:AsisPas.Data.ApplicationDbContext.Usuarios">
             <summary>
             para almacenar los datos de un usuario en especifico
@@ -701,6 +728,23 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:AsisPas.Data.Migrations.admoHorarios">
+            <summary>
+            admo horarios
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.admoHorarios.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.admoHorarios.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
             para agregar un nueva admo de empresas
@@ -740,6 +784,69 @@
             <summary>
             nombre de la empresa a la que pertenece
             </summary>
+        </member>
+        <member name="T:AsisPas.DTO.AsignadorDeHorarios">
+            <summary>
+            para mostrar los datos del asignador de horarios
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.idAdmo">
+            <summary>
+            id administrador de horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.inicio">
+            <summary>
+            fecha en la que inicia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.fin">
+            <summary>
+            fecha en la que acaba
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.NombreHorario">
+            <summary>
+            nombre del horario asignado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.idEmpleado">
+            <summary>
+            id del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.Nombre">
+            <summary>
+            nombre empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.Apellido">
+            <summary>
+            apellido empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.Rut">
+            <summary>
+            rut del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AsignadorDeHorarios.asignado">
+            <summary>
+            si tiene un horario asignado para hoy
+            </summary>
+        </member>
+        <member name="M:AsisPas.DTO.AsignadorDeHorarios.#ctor(AsisPas.Entitys.Empleado,AsisPas.Entitys.AdmoHorario)">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:AsisPas.DTO.AsignadorDeHorarios.VerListado(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener una lista de elementos
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
         </member>
         <member name="T:AsisPas.DTO.EmpresaDTO">
             <summary>
@@ -1144,6 +1251,90 @@
             <summary>
             si se encuentra activo o no
             </summary>
+        </member>
+        <member name="T:AsisPas.Entitys.AdmoHorario">
+            <summary>
+            para almacenar los horarios asignados a empleados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.fechaAsignacion">
+            <summary>
+            fecha en que se asigno el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.inicio">
+            <summary>
+            inicio del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.fin">
+            <summary>
+            fin del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Empleado">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Empleadoid">
+            <summary>
+            empleado al que se le asigna el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Horario">
+            <summary>
+            porp nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Horarioid">
+            <summary>
+            horario asignado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Admo">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Admoid">
+            <summary>
+            administrador que asigno el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.AdmoHorario.Razon">
+            <summary>
+            razon por la que se realiza el cambio
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.AdmoHorario.listadoPorTipoUsuario(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            retorna una lista de administradores en base a su usuario
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.AdmoHorario.listadoPorTipoUsuarioComplete(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            el listado completo
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.AdmoHorario.listadoPorTipoUsuarioHistorico(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            historico
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
         </member>
         <member name="T:AsisPas.Entitys.AdmoSistema">
             <summary>

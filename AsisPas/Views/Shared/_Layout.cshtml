@@ -123,10 +123,16 @@
                              Horarios
                          </a>
                      </li>
-                     <li class="is-shown @ViewBag.SedeListActive">
-                         <a class="menu-item" asp-area="" asp-controller="AdmoH" asp-action="Index">
+                      <li class="is-shown @ViewBag.AsignacionHistoryActive">
+                         <a class="menu-item" asp-area="" asp-controller="AdministradorHorarios" asp-action="Index">
+                             <i class="la la-hourglass-half"></i>
+                             Asignar
+                         </a>
+                     </li>
+                     <li class="is-shown @ViewBag.HorarioHistoryActive">
+                         <a class="menu-item" asp-area="" asp-controller="AdministradorHorarios" asp-action="Historico">
                              <i class="la la-calendar-check-o"></i>
-                             Admo.
+                             Historico
                          </a>
                      </li>
                 </ul>

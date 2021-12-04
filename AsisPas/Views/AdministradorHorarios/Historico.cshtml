@@ -1,0 +1,83 @@
+﻿@using AsisPas.Entitys;
+@model IEnumerable<AdmoHorario>
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Historico asignacion De Horarios";
+    ViewBag.HorarioHistoryActive = "active";
+    ViewBag.HorarioMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                   
+                       
+                   
+                    <h4 class="card-title"> @ViewBag.Encabezado</h4>
+                </div>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
+                </div>
+                <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Horario
+                                </th>
+                                <th scope="col">
+                                   Empleado
+                                </th>
+                                <th scope="col">
+                                   Inicia
+                                </th>
+                                <th scope="col">
+                                   Culmina
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Horario.Nombre)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Empleado.user.Nombres)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.inicio.ToString("dd/MM/yyyy"))
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.fin.ToString("dd/MM/yyyy"))
+                                        </td>
+                                       
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
