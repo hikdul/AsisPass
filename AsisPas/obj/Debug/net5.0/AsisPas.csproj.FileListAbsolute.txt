@@ -189,3 +189,6 @@ C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Administr
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\AdministradorHorarios\Historico.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\AdministradorHorarios\Crear.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\AdministradorHorarios\Editar.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Marca\Index.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Gates\Index.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Gates\Crear.cshtml.g.cs

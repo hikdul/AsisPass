@@ -69,6 +69,14 @@ namespace AsisPas.Data
         /// almacena el admo sistema
         /// </summary>
         public DbSet<AdmoSistema> AdmoSistema { get; set; }
+        /// <summary>
+        /// para almacenar las marcas una a una
+        /// </summary>
+        public DbSet<Marca> Marcaciones { get; set; }
+        /// <summary>
+        /// para almacenar los puntos de ingresos por medio de la api
+        /// </summary>
+        public DbSet<Gate> Gates { get; set; }
         #endregion
 
         #region on model creating

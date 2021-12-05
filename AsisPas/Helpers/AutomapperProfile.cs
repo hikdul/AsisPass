@@ -187,5 +187,18 @@ namespace AsisPas.Helpers
         }
 
         #endregion
+
+        #region Gate
+
+        private void GateMap()
+        {
+            CreateMap<GateDTO_in, Gate>()
+                .ForMember(x => x.act, opt => opt.MapFrom(y => true))
+                .ForMember(x => x.Sede, opt => opt.Ignore())
+                .ForMember(x => x.code, opt => opt.Ignore());
+           
+        }
+
+        #endregion
     }
 }

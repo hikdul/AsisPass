@@ -105,6 +105,12 @@
                              Sedes
                          </a>
                      </li>
+                      <li class="is-shown @ViewBag.GateListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Gates" asp-action="Index">
+                             <i class="la la-object-group"></i>
+                             Gates
+                         </a>
+                     </li>
                 </ul>
            </li>
 
@@ -180,9 +186,25 @@
                 
            </li>
 
-          <!--otro-->
+          <!--Marcaciones-->
 
-          
+                <li class="nav-item has-sub @ViewBag.MarcasMenu">
+                 <a class="alert-dark" href="#">
+                     <i class="la la-users text-dark"></i>
+                     <span class="menu-title" data-i18n="">Marcaciones</span>
+                 </a>
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.MarcacionesActive">
+                         <a class="menu-item" asp-area="" asp-controller="Marca" asp-action="Index">
+                             <i class="la la-building"></i>
+                             busquedas
+                         </a>
+                     </li>
+                </ul>
+                
+                
+           </li>
+          <!--otro-->
          
         </ul>
 

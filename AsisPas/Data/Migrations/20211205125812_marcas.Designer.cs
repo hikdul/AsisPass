@@ -4,14 +4,16 @@ using AsisPas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsisPas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211205125812_marcas")]
+    partial class marcas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,34 +186,6 @@ namespace AsisPas.Data.Migrations
                     b.HasIndex("userid");
 
                     b.ToTable("Fiscales");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Gate", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Desc")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("Sedeid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Sedeid");
-
-                    b.ToTable("Gates");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Horario", b =>
@@ -701,17 +675,6 @@ namespace AsisPas.Data.Migrations
                     b.Navigation("Empresa");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Gate", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.Sedes", "Sede")
-                        .WithMany()
-                        .HasForeignKey("Sedeid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sede");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Horario", b =>

@@ -390,6 +390,51 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.GatesController">
+            <summary>
+            para administrar los puntos de acceso
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.GatesController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            constructor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.GatesController.Index">
+            <summary>
+            vista del listado inicial
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.GatesController.Crear">
+            <summary>
+            vista para crear una nueva puerta
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.GatesController.Guardar(AsisPas.DTO.GateDTO_in)">
+            <summary>
+            para almacenar los datos
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.GatesController.Eliminar(System.Int32)">
+            <summary>
+            para desactivar un elemento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.GatesController.Activar(System.Int32)">
+            <summary>
+            para activar un elemento
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.HomeController">
             <summary>
             home controller
@@ -468,6 +513,31 @@
             <summary>
             para eliminar un elemento
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.MarcaController">
+            <summary>
+            para ver las marcas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.MarcaController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            constructor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.MarcaController.Index">
+            <summary>
+            la vista inicial indica el filtro para ver las marcas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.MarcaController.Busqueda(AsisPas.DTO.BusquedaRegistroPorUsuario)">
+            <summary>
+            para generar el resultado
+            </summary>
+            <param name="find"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Controllers.SedesController">
@@ -573,6 +643,16 @@
         <member name="P:AsisPas.Data.ApplicationDbContext.AdmoSistema">
             <summary>
             almacena el admo sistema
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Marcaciones">
+            <summary>
+            para almacenar las marcas una a una
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Gates">
+            <summary>
+            para almacenar los puntos de ingresos por medio de la api
             </summary>
         </member>
         <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -791,6 +871,57 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:AsisPas.Data.Migrations.marcas">
+            <summary>
+            registro de marcas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.marcas.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.marcas.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.gates">
+            <summary>
+            gates
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.gates.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.gates.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.descgate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.descgate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.descgate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
             para agregar un nueva admo de empresas
@@ -959,6 +1090,27 @@
             <param name="User"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.DTO.BusquedaRegistroPorUsuario">
+            <summary>
+            para hacer la busqueda de registros
+            se obtiene el periodo y el empledo destino
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.BusquedaRegistroPorUsuario.Empleadoid">
+            <summary>
+            empleado destino
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.BusquedaRegistroPorUsuario.inicio">
+            <summary>
+            inicio del periodo de busqueda
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.BusquedaRegistroPorUsuario.fin">
+            <summary>
+            fin del periodo de busquedo
+            </summary>
+        </member>
         <member name="T:AsisPas.DTO.EmpresaDTO">
             <summary>
             para ver los datos de la empresas
@@ -1017,6 +1169,21 @@
         <member name="P:AsisPas.DTO.empresaDTO_in.Logo">
             <summary>
             logo de la empresa
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.GateDTO_in">
+            <summary>
+            para crear una nueva gate
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.GateDTO_in.Sedeid">
+            <summary>
+            sede que se desea crear el gate
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.GateDTO_in.Desc">
+            <summary>
+            descripcion
             </summary>
         </member>
         <member name="T:AsisPas.DTO.HorarioDTO">
@@ -1242,6 +1409,29 @@
         <member name="P:AsisPas.DTO.SedeDTO_up.Empresaid">
             <summary>
             empresa a la que pertenece la sede
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.TipoMarca">
+            <summary>
+            sub clase que no llevara tabla
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.TipoMarca.value">
+            <summary>
+            valor ent
+            0 => inincio a jornada
+            1 => inicio descanso
+            2 => fin descanso
+            3 => fin de jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.TipoMarca.desc">
+            <summary>
+             desc segun su marca
+            0 => inincio a jornada
+            1 => inicio descanso
+            2 => fin descanso
+            3 => fin de jornada
             </summary>
         </member>
         <member name="T:AsisPas.DTO.UserLogin">
@@ -1633,6 +1823,46 @@
             si se encuentra activo o no
             </summary>
         </member>
+        <member name="T:AsisPas.Entitys.Gate">
+            <summary>
+            asignacion de puntos de acceso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Gate.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Gate.act">
+            <summary>
+            activo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Gate.code">
+            <summary>
+            codigo de identificacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Gate.Sedeid">
+            <summary>
+            sede a la que pertenece
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Gate.Sede">
+            <summary>
+            prop de navegacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Gate.Desc">
+            <summary>
+            para agregar una descripcion de la gate
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Gate.complete">
+            <summary>
+            para generar el code
+            </summary>
+        </member>
         <member name="T:AsisPas.Entitys.Horario">
             <summary>
             clase para la entidad de horario
@@ -1767,6 +1997,106 @@
             <param name="idSelect"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Entitys.Marca">
+            <summary>
+            registra una marca echa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.id">
+            <summary>
+            identificacion de la marca
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.marca">
+            <summary>
+            la marca con hora y fecha
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Sede">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Sedeid">
+            <summary>
+            sede en la que se realizo la marca
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Gate">
+            <summary>
+            codigo de puerta en caso de utilizarlo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Empleado">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Empleadoid">
+            <summary>
+            persona que realiza la marca
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Horario">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Horarioid">
+            <summary>
+            horario que tiene activo en este momento
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.TipoIngreso">
+            <summary>
+            indica tipo de ingreso
+            0 => inincio a jornada
+            1 => inicio descanso
+            2 => fin descanso
+            3 => fin de jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.Hash">
+            <summary>
+            hash
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Marca.key">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Marca.Complete">
+            <summary>
+            para generar nuestros hash and key
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Marca.tipoIngreso">
+            <summary>
+            entrega en lenguaje el valor de tipo de ingreso
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Marca.TiposIngresos">
+            <summary>
+            entrega los tipos de ingresos necesarios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Marca.toSelect(AsisPas.DTO.TipoMarca,System.Boolean)">
+            <summary>
+            para retornar 1 elemento como select
+            </summary>
+            <param name="tipe"></param>
+            <param name="select"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Marca.toSelect">
+            <summary>
+            para el retorno en lista
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Entitys.Sedes">
             <summary>
             para implementar los lugares de trabajo de cada empresa
@@ -1811,6 +2141,22 @@
             <summary>
             si se encuentra activo o no
             </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Sedes.toSelect(AsisPas.Entitys.Sedes,System.Boolean)">
+            <summary>
+            para retornar 1 elemento como select
+            </summary>
+            <param name="emp"></param>
+            <param name="select"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Sedes.toSelect(System.Collections.Generic.List{AsisPas.Entitys.Sedes},System.Int32)">
+            <summary>
+            para el retorno en lista
+            </summary>
+            <param name="emp"></param>
+            <param name="idSelect"></param>
+            <returns></returns>
         </member>
         <member name="T:AsisPas.Entitys.Usuario">
             <summary>

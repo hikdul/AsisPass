@@ -1,0 +1,132 @@
+﻿@using AsisPas.DTO;
+@using AsisPas.Entitys;
+@model IEnumerable<BusquedaRegistroPorUsuario>
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Marcaciones";
+    ViewBag.MarcacionesActive = "active";
+    ViewBag.MarcasMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+    List<Marca> marcas = ViewBag.Marcas;
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h2 class="card-title"> @ViewBag.Encabezado</h2>
+                </div>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+
+                    <div class="row m-1">
+                        <div class="col-12">
+                                <form asp-action="Busqueda" method="post">
+                                  <div class="card">
+                                        <div class="card-body">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inicio" class="control-label">Fecha De Inicio</label>
+                                                    <input type="date" name="inicio" class="form-control text-to-upper-alau" value=@ViewBag.fi />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="fin" class="control-label">Fecha Final</label>
+                                                    <input type="date" name="fin" class="form-control text-to-upper-alau" value=@ViewBag.ff />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="Emprleadoid" class="control-label">Seleccione Empleado</label>
+                                                    <select name="Empleadoid" class="form-control" asp-items="@ViewBag.Empleados"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                   <div class="form-group text-center m-0">
+                                       <input type="submit" value="Buscar" class="btn btn-danger rounded-pill" />
+                                   </div>
+                                </div>
+                         </form>
+                        </div>
+                    </div>
+
+
+                    @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show  m-1" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
+                </div>
+                 @if (marcas == null || marcas.Count < 1)
+                   {
+                       <div class="alert alert-info alert-dismissible fade show  m-1" role="alert">
+                          <strong>No Hay Registros: </strong> El sistema no ha encontrado coincidencias para su busqueda.
+                       </div>
+                   }
+                <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                   fecha
+                                </th>
+                                <th scope="col">
+                                   Hora
+                                </th>
+                                <th scope="col">
+                                    Marca
+                                </th>
+                                <th scope="col">
+                                    Empleado
+                                </th>
+                                <th scope="col">
+                                    Rut
+                                </th>
+                                <th scope="col">
+                                    Sede
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (marcas != null && marcas.Count > 0)
+                                @foreach (var item in marcas)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                            @item.marca.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                            @item.marca.ToString("HH:mm:ss")
+                                        </td>
+                                        <td scope="row">
+                                            @item.Empleado.user.Nombres 
+                                        </td>
+                                        <td scope="row">
+                                            @item.Empleado.user.Rut 
+                                        </td>
+                                        <td scope="row">
+                                            @item.Sede.Nombre 
+                                        </td>
+                                        <td scope="row">
+                                            @item.tipoIngreso()
+                                        </td>
+                                        
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
