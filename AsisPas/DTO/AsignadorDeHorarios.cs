@@ -94,7 +94,7 @@ namespace AsisPas.DTO
         /// <param name="context"></param>
         /// <param name="User"></param>
         /// <returns></returns>
-        public static async Task<List<AsignadorDeHorarios>> VerListado(ApplicationDbContext context, ClaimsPrincipal User)
+        public static async System.Threading.Tasks.Task<List<AsignadorDeHorarios>> VerListado(ApplicationDbContext context, ClaimsPrincipal User)
         {
             List<AsignadorDeHorarios> list = new();
 

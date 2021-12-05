@@ -26,6 +26,52 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.Crear(System.Int32)">
+            <summary>
+            vista para crear un nuevo administrador
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.Guardar(AsisPas.DTO.AdmoHorarioDTO_in)">
+            <summary>
+            para guardar el nuevo admo
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.NewValid(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            verifica si ne existe algo que no funcione
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.Editar(System.Int32)">
+            <summary>
+            vista para crear un nuevo administrador
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.Edit(AsisPas.DTO.AdmoHorarioDTO_up)">
+            <summary>
+            para almacenar los nuevos datos de las modificacion
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.AdministradorHorariosController.validarEdit(System.Int32,System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            para validar que la edicion y los datos sean correctos
+            </summary>
+            <param name="id"></param>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.API.CustomBaseController">
             <summary>
             clase para disminuir la escrituro de elementos en controller base 
@@ -785,6 +831,71 @@
             nombre de la empresa a la que pertenece
             </summary>
         </member>
+        <member name="T:AsisPas.DTO.AdmoHorarioDTO_in">
+            <summary>
+            para ingresar los datos al sistema
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_in.inicio">
+            <summary>
+            inicio del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_in.fin">
+            <summary>
+            fin del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_in.Empleadoid">
+            <summary>
+            empleado al que se le asigna el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_in.Horarioid">
+            <summary>
+            horario asignado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_in.Razon">
+            <summary>
+            razon por la que se realiza el cambio
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.AdmoHorarioDTO_up">
+            <summary>
+            para actualizar 
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_up.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_up.inicio">
+            <summary>
+            inicio del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_up.fin">
+            <summary>
+            fin del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_up.Empleadoid">
+            <summary>
+            empleado al que se le asigna el horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_up.Horarioid">
+            <summary>
+            horario asignado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AdmoHorarioDTO_up.Razon">
+            <summary>
+            razon por la que se realiza el cambio
+            </summary>
+        </member>
         <member name="T:AsisPas.DTO.AsignadorDeHorarios">
             <summary>
             para mostrar los datos del asignador de horarios
@@ -1412,6 +1523,22 @@
             <param name="User"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Entitys.Empleado.toSelect(AsisPas.Entitys.Empleado,System.Boolean)">
+            <summary>
+            para retornar 1 elemento como select
+            </summary>
+            <param name="emp"></param>
+            <param name="select"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Empleado.toSelect(System.Collections.Generic.List{AsisPas.Entitys.Empleado},System.Int32)">
+            <summary>
+            para el retorno en lista
+            </summary>
+            <param name="emp"></param>
+            <param name="idSelect"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Entitys.Empresa">
             <summary>
             entidad para empresas
@@ -1606,6 +1733,38 @@
             verifica si este dia es laboral o na
             </summary>
             <param name="dia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.ListadoPorUsuario(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener los horarios en base al tipo de usuario
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.ListadoPorUsuarioComplete(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            listado por usuario completa
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.toSelect(AsisPas.Entitys.Horario,System.Boolean)">
+            <summary>
+            para retornar 1 elemento como select
+            </summary>
+            <param name="emp"></param>
+            <param name="select"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.toSelect(System.Collections.Generic.List{AsisPas.Entitys.Horario},System.Int32)">
+            <summary>
+            para el retorno en lista
+            </summary>
+            <param name="emp"></param>
+            <param name="idSelect"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Entitys.Sedes">

@@ -48,7 +48,7 @@ namespace AsisPas.Controllers.API
         /// <param name="insert"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<EmpresaDTO>> Post([FromForm] empresaDTO_in insert)
+        public async System.Threading.Tasks.Task<ActionResult<EmpresaDTO>> Post([FromForm] empresaDTO_in insert)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace AsisPas.Controllers.API
 /// <param name="ins"></param>
 /// <returns></returns>
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromForm] empresaDTO_in ins)
+        public async System.Threading.Tasks.Task<ActionResult> Put(int id, [FromForm] empresaDTO_in ins)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace AsisPas.Controllers.API
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult> Delete(int id) 
+        public async System.Threading.Tasks.Task<ActionResult> Delete(int id) 
         {
             try
             {
@@ -118,7 +118,7 @@ namespace AsisPas.Controllers.API
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<EmpresaDTO>>> GetElement()
+        public async System.Threading.Tasks.Task<ActionResult<List<EmpresaDTO>>> GetElement()
         {
             try
             {
@@ -143,7 +143,7 @@ namespace AsisPas.Controllers.API
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<EmpresaDTO>> Get(int id)
+        public async System.Threading.Tasks.Task<ActionResult<EmpresaDTO>> Get(int id)
         {
             try
             {

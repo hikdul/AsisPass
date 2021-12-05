@@ -1,0 +1,84 @@
+﻿@using AsisPas.DTO;
+@model AdmoHorarioDTO_up
+
+@{
+   ViewBag.Encabezado = ViewData["Title"] = "Asignar Horario";
+    ViewBag.AsignacionHistoryActive = "active";
+    ViewBag.HorarioMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" method="post">
+            <div class="card">
+            
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>     
+                     <input type="hidden" asp-for="id" />
+                      @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
+                     <div class="row">
+                         <div class="form-group col-md-6">
+                            <label asp-for="Empleadoid" class="control-label"></label>
+                              <select asp-for="Empleadoid" class="form-control" asp-items="@ViewBag.Empleados"></select>
+                            <span asp-validation-for="Empleadoid" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Horarioid" class="control-label"></label>
+                              <select asp-for="Horarioid" class="form-control" asp-items="@ViewBag.Horarios"></select>
+                            <span asp-validation-for="Horarioid" class="text-danger"></span>
+                        </div>
+
+                      
+                    </div>
+
+                    <div class="row">
+                         <div class="form-group col-md-6">
+                            <label asp-for="inicio" class="control-label"></label>
+                            <input type="date" disabled asp-for="inicio" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="inicio" class="text-danger"></span>
+                            <br/>
+                            <label asp-for="fin" class="control-label"></label>
+                            <input type="date" asp-for="fin" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="fin" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Razon" class="control-label"> Razon Del Cambio</label>
+                           <br/>
+                            <textarea class="form-control" id="basicTextarea" rows="3" asp-for="Razon"></textarea>
+                            <span asp-validation-for="Razon" class="text-danger"></span>
+                        </div>
+
+                      
+                    </div>
+                     
+                    <div class="row">
+                        <div class="form-group col-12">
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <div class="card-footer form-group text-center m-0">
+                    <a class="btn btn-warning rounded-pill" asp-action="Index">Volver</a>
+                    <input type="submit" value="Guardar" class="btn btn-danger rounded-pill" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

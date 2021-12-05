@@ -1,5 +1,6 @@
 ﻿using AsisPas.Data;
 using AsisPas.Helpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace AsisPas.Entitys
         /// <param name="context"></param>
         /// <param name="User"></param>
         /// <returns></returns>
-        public static async Task<List<Empleado>> EmpleadosXUsuarioLigth(ApplicationDbContext context, ClaimsPrincipal User)
+        public static async System.Threading.Tasks.Task<List<Empleado>> EmpleadosXUsuarioLigth(ApplicationDbContext context, ClaimsPrincipal User)
         {
             List<Empleado> list = new();
             var empresas = await Empresa.FiltrarEmpresas(context, User);
@@ -72,7 +73,7 @@ namespace AsisPas.Entitys
         /// <param name="context"></param>
         /// <param name="User"></param>
         /// <returns></returns>
-        public static async Task<List<Empleado>> EmpleadosXUsuario(ApplicationDbContext context, ClaimsPrincipal User)
+        public static async System.Threading.Tasks.Task<List<Empleado>> EmpleadosXUsuario(ApplicationDbContext context, ClaimsPrincipal User)
         {
             List<Empleado> list = new();
             var empresas = await Empresa.FiltrarEmpresas(context, User);
@@ -92,5 +93,40 @@ namespace AsisPas.Entitys
 
         #endregion
 
+        #region aux para vistas
+
+        /// <summary>
+        /// para retornar 1 elemento como select
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="select"></param>
+        /// <returns></returns>
+        public static SelectListItem toSelect(Empleado emp, bool select)
+        {
+            if(emp.user != null)
+            return new SelectListItem()
+            {
+                Text = $"{emp.user.Nombres} {emp.user.Apellidos} {emp.user.Rut}",
+                Value = emp.id.ToString(),
+                Selected = select
+            };
+            return new();
+        }
+
+        /// <summary>
+        /// para el retorno en lista
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="idSelect"></param>
+        /// <returns></returns>
+        public static List<SelectListItem> toSelect(List<Empleado> emp, int idSelect = 0)
+        {
+            List<SelectListItem> ret = new();
+            
+            foreach (var item in emp)
+                ret.Add(toSelect(item, item.id == idSelect));
+            return ret;
+        }
+        #endregion
     }
 }

@@ -91,7 +91,7 @@ namespace AsisPas.Entitys
         /// <param name="context"></param>
         /// <param name="User"></param>
         /// <returns></returns>
-        public static async Task<List<Empresa>> FiltrarEmpresas(ApplicationDbContext context, ClaimsPrincipal User)
+        public static async System.Threading.Tasks.Task<List<Empresa>> FiltrarEmpresas(ApplicationDbContext context, ClaimsPrincipal User)
         {
             List<Empresa> empresas = new();
             if (User == null)

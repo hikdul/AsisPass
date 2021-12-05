@@ -12,10 +12,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
+  @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
                 <div class="d-flex align-items-center">
-                   
-                       
-                   
                     <h4 class="card-title"> @ViewBag.Encabezado</h4>
                 </div>
                 <div class="heading-elements">
@@ -65,10 +68,10 @@
                                             @Html.DisplayFor(modelItem => item.Empleado.user.Nombres)
                                         </td>
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.inicio.ToString("dd/MM/yyyy"))
+                                            @item.inicio.ToString("dd/MM/yyyy")
                                         </td>
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.fin.ToString("dd/MM/yyyy"))
+                                            @item.fin.ToString("dd/MM/yyyy")
                                         </td>
                                        
                                     </tr>

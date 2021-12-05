@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AsisPas.Controllers
@@ -72,7 +73,7 @@ namespace AsisPas.Controllers
         /// vista para ingresar al sistema
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> login()
+        public async System.Threading.Tasks.Task<ActionResult> login()
         {
             HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
             HttpContext.Response.Cookies.Delete("Token");
@@ -86,7 +87,7 @@ namespace AsisPas.Controllers
         /// <param name="userInfo"></param>
         /// <returns></returns>
 
-        public async Task<ActionResult> Singin(UserLogin userInfo)
+        public async System.Threading.Tasks.Task<ActionResult> Singin(UserLogin userInfo)
         {
             HttpClient client = new();
             try
@@ -133,7 +134,7 @@ namespace AsisPas.Controllers
         /// para salir del sistema
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Logout()
+        public async System.Threading.Tasks.Task<IActionResult> Logout()
         {
             HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
             HttpContext.Response.Cookies.Delete("Token");
@@ -144,14 +145,13 @@ namespace AsisPas.Controllers
 
         #endregion
 
-
         #region Crear usuarios Administradores de empresas
 
         /// <summary>
         /// para ver un listado de los administradores de empresas
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> IndexEmpresas()
+        public async System.Threading.Tasks.Task<IActionResult> IndexEmpresas()
         {
             try
             {
@@ -175,7 +175,7 @@ namespace AsisPas.Controllers
         /// para crear un nuevo usuario Administrador de empresas
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> AdmoEmpresa()
+        public async System.Threading.Tasks.Task<IActionResult> AdmoEmpresa()
         {
 
             try
@@ -197,7 +197,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> GuardarAdmoEmpresa(AdmoEmpresaDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> GuardarAdmoEmpresa(AdmoEmpresaDTO_in ins)
         {
             try
             {
@@ -225,6 +225,7 @@ namespace AsisPas.Controllers
 
                         context.Add(last);
                         await context.SaveChangesAsync();
+                        await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Empresa"));
 
                         return RedirectToAction("IndexEmpresas");
                     }
@@ -245,14 +246,13 @@ namespace AsisPas.Controllers
 
         #endregion
 
-
         #region fiscalizador
 
         /// <summary>
         /// para ver un listado de los Fiscalizadores
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Fiscalizadores()
+        public async System.Threading.Tasks.Task<IActionResult> Fiscalizadores()
         {
             try
             {
@@ -276,7 +276,7 @@ namespace AsisPas.Controllers
         /// para crear un nuevo usuario Fiscalizadores
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> CrearFiscalizador()
+        public async System.Threading.Tasks.Task<IActionResult> CrearFiscalizador()
         {
 
             try
@@ -297,7 +297,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> GuardarFiscalizador(AdmoEmpresaDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> GuardarFiscalizador(AdmoEmpresaDTO_in ins)
         {
             try
             {
@@ -325,6 +325,7 @@ namespace AsisPas.Controllers
 
                         context.Add(last);
                         await context.SaveChangesAsync();
+                        await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Fiscal"));
 
                         return RedirectToAction("Fiscalizadores");
                     }
@@ -350,7 +351,7 @@ namespace AsisPas.Controllers
         /// para ver un listado de los Fiscalizadores
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Empleados()
+        public async System.Threading.Tasks.Task<IActionResult> Empleados()
         {
             try
             {
@@ -369,7 +370,7 @@ namespace AsisPas.Controllers
         /// para crear un nuevo usuario Fiscalizadores
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> CrearEmpleado()
+        public async System.Threading.Tasks.Task<IActionResult> CrearEmpleado()
         {
 
             try
@@ -390,7 +391,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> GuardarEmpleado(AdmoEmpresaDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> GuardarEmpleado(AdmoEmpresaDTO_in ins)
         {
             try
             {
@@ -418,6 +419,7 @@ namespace AsisPas.Controllers
 
                         context.Add(last);
                         await context.SaveChangesAsync();
+                        await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Empleado"));
 
                         return RedirectToAction("Empleados");
                     }
@@ -439,14 +441,13 @@ namespace AsisPas.Controllers
 
         #endregion
 
-
         #region admo sistema
 
         /// <summary>
         /// para ver un listado de los Fiscalizadores
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> AdmoSistema()
+        public async System.Threading.Tasks.Task<IActionResult> AdmoSistema()
         {
             if (User.IsInRole("SuperAdmin"))
             {
@@ -491,7 +492,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> GuardarAdmoSistema(UsuarioDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> GuardarAdmoSistema(UsuarioDTO_in ins)
         {
             if (User.IsInRole("SuperAdmin"))
             {
@@ -521,6 +522,7 @@ namespace AsisPas.Controllers
 
                         context.Add(last);
                         await context.SaveChangesAsync();
+                        await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
 
                         return RedirectToAction("AdmoSistema");
                     }

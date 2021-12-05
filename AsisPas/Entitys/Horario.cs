@@ -1,5 +1,11 @@
-﻿using AsisPas.Helpers;
+﻿using AsisPas.Data;
+using AsisPas.Helpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Claims;
 
 namespace AsisPas.Entitys
 {
@@ -137,6 +143,84 @@ namespace AsisPas.Entitys
 
         #endregion
 
+        #region obtener horarios por tipo de usuario
+        /// <summary>
+        /// para obtener los horarios en base al tipo de usuario
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="User"></param>
+        /// <returns></returns>
+        public static async System.Threading.Tasks.Task<List<Horario>> ListadoPorUsuario(ApplicationDbContext context, ClaimsPrincipal User)
+        {
+            List<Horario> list = new();
+            var empresas = await Empresa.FiltrarEmpresas(context, User);
+
+            foreach (var emp in empresas)
+            {
+                var flag = await context.Horarios.Where(x => x.Empresaid == emp.id && x.act == true).ToListAsync();
+                foreach (var h in flag)
+                    list.Add(h);
+            }
+
+            return list;
+        }
+
+
+        /// <summary>
+        /// listado por usuario completa
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="User"></param>
+        /// <returns></returns>
+        public static async System.Threading.Tasks.Task<List<Horario>> ListadoPorUsuarioComplete(ApplicationDbContext context, ClaimsPrincipal User)
+        {
+            List<Horario> list = new();
+            var empresas = await Empresa.FiltrarEmpresas(context, User);
+
+            foreach (var emp in empresas)
+            {
+                var flag = await context.Horarios.Include(x => x.Empresa).Where(x => x.Empresaid == emp.id && x.act == true).ToListAsync();
+                foreach (var h in flag)
+                    list.Add(h);
+            }
+
+            return list;
+        }
+
+        #endregion
+
+        #region aux para vistas
+
+        /// <summary>
+        /// para retornar 1 elemento como select
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="select"></param>
+        /// <returns></returns>
+        public static SelectListItem toSelect(Horario emp, bool select)
+        {
+            return new SelectListItem()
+            {
+                Text = emp.Nombre,
+                Value = emp.id.ToString(),
+                Selected = select
+            };
+        }
+
+        /// <summary>
+        /// para el retorno en lista
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <param name="idSelect"></param>
+        /// <returns></returns>
+        public static List<SelectListItem> toSelect(List<Horario> emp, int idSelect = 0)
+        {
+            List<SelectListItem> ret = new();
+            foreach (var item in emp)
+                ret.Add(toSelect(item, item.id == idSelect));
+            return ret;
+        }
+        #endregion
 
     }
 }

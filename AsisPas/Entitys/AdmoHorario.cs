@@ -79,7 +79,7 @@ namespace AsisPas.Entitys
         /// <param name="context"></param>
         /// <param name="User"></param>
         /// <returns></returns>
-        public static async Task<List<AdmoHorario>> listadoPorTipoUsuario(ApplicationDbContext context, ClaimsPrincipal User) 
+        public static async System.Threading.Tasks.Task<List<AdmoHorario>> listadoPorTipoUsuario(ApplicationDbContext context, ClaimsPrincipal User) 
         {
 
             List<AdmoHorario> list = new();
@@ -102,7 +102,7 @@ namespace AsisPas.Entitys
         /// <param name="context"></param>
         /// <param name="User"></param>
         /// <returns></returns>
-        public static async Task<List<AdmoHorario>> listadoPorTipoUsuarioComplete(ApplicationDbContext context, ClaimsPrincipal User)
+        public static async System.Threading.Tasks.Task<List<AdmoHorario>> listadoPorTipoUsuarioComplete(ApplicationDbContext context, ClaimsPrincipal User)
         {
 
             List<AdmoHorario> list = new();
@@ -130,7 +130,7 @@ namespace AsisPas.Entitys
         /// <param name="User"></param>
         /// <returns></returns>
 
-        public static async Task<List<AdmoHorario>> listadoPorTipoUsuarioHistorico(ApplicationDbContext context, ClaimsPrincipal User)
+        public static async System.Threading.Tasks.Task<List<AdmoHorario>> listadoPorTipoUsuarioHistorico(ApplicationDbContext context, ClaimsPrincipal User)
         {
 
             List<AdmoHorario> list = new();

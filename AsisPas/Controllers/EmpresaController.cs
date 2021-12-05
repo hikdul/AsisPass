@@ -38,7 +38,7 @@ namespace AsisPas.Controllers
         /// vista inicial
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index()
+        public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             try
             {
@@ -81,7 +81,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Guardar(empresaDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> Guardar(empresaDTO_in ins)
         {
             try { 
 
@@ -106,7 +106,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Edit(int id)
+        public async System.Threading.Tasks.Task<IActionResult> Edit(int id)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> save(EmpresaDTO ins)
+        public async System.Threading.Tasks.Task<IActionResult> save(EmpresaDTO ins)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace AsisPas.Controllers
         /// para eliminar un elemento
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Eliminar(int id)
+        public async System.Threading.Tasks.Task<IActionResult> Eliminar(int id)
         {
             try
             {

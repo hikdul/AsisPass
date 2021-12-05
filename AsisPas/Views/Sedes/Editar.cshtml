@@ -17,7 +17,12 @@
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
                     <input type="hidden" asp-for="id" />
-
+                      @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label asp-for="Nombre" class="control-label"></label>

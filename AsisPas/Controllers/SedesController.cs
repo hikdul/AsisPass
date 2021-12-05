@@ -37,7 +37,7 @@ namespace AsisPas.Controllers
         /// index
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index()
+        public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             try
             { 
@@ -63,7 +63,7 @@ namespace AsisPas.Controllers
         /// vista para editar, crear una empresa
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Nueva()
+        public async System.Threading.Tasks.Task<IActionResult> Nueva()
         {
             try
             {
@@ -84,7 +84,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Guardar(SedeDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> Guardar(SedeDTO_in ins)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Editar(int id)
+        public async System.Threading.Tasks.Task<IActionResult> Editar(int id)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async Task<IActionResult> save(SedeDTO_up ins)
+        public async System.Threading.Tasks.Task<IActionResult> save(SedeDTO_up ins)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace AsisPas.Controllers
         /// para eliminar un elemento
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Eliminar(int id)
+        public async System.Threading.Tasks.Task<IActionResult> Eliminar(int id)
         {
             try
             {

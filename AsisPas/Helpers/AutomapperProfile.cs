@@ -9,7 +9,7 @@ namespace AsisPas.Helpers
     /// </summary>
     public class AutomapperProfile: Profile
     {
-#region constructor
+        #region constructor
         /// <summary>
         /// constructor
         /// </summary>
@@ -19,6 +19,7 @@ namespace AsisPas.Helpers
             SedesMap();
             HorariosMap();
             UsuariosMap();
+            AdmoHorarioMap();
         }
 
         #endregion
@@ -158,6 +159,32 @@ namespace AsisPas.Helpers
                     return "--";
                 return In.Empresa.Nombre;
             }
+
+        #endregion
+
+        #region Administrador de Horario
+
+        private void AdmoHorarioMap()
+        {
+            CreateMap<AdmoHorarioDTO_in, AdmoHorario>()
+            .ForMember(x => x.Admo, opt => opt.Ignore())
+            .ForMember(x => x.Admoid, opt => opt.Ignore())
+            .ForMember(x => x.Empleado, opt => opt.Ignore())
+            .ForMember(x => x.Horario, opt => opt.Ignore());
+
+            CreateMap<AdmoHorario,AdmoHorarioDTO_in>();
+
+            CreateMap<AdmoHorarioDTO_up, AdmoHorario>()
+           .ForMember(x => x.Admo, opt => opt.Ignore())
+           .ForMember(x => x.Admoid, opt => opt.Ignore())
+           .ForMember(x => x.Empleado, opt => opt.Ignore())
+           .ForMember(x => x.Horario, opt => opt.Ignore());
+
+            CreateMap<AdmoHorario, AdmoHorarioDTO_up>();
+
+
+            
+        }
 
         #endregion
     }
