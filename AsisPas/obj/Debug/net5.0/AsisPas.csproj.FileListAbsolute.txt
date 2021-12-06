@@ -198,3 +198,5 @@ C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Incidenci
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Incidencias\Crear.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Permisos\Index.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Permisos\Crear.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Feriado\Index.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Feriado\Nuevo.cshtml.g.cs

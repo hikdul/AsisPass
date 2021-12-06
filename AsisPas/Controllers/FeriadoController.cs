@@ -3,46 +3,46 @@ using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace AsisPas.Controllers
 {
     /// <summary>
-    /// controlador de vistas de incidencias
+    /// Feriados
     /// </summary>
-    public class IncidenciasController : Controller
+    public class FeriadoController : Controller
     {
         #region ctor
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="context"></param>
         /// <param name="mapper"></param>
-        public IncidenciasController(ApplicationDbContext context, IMapper mapper)
+        public FeriadoController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
+
         #endregion
 
-
         #region vista inicial
-
         /// <summary>
-        /// para ver mi listado de incidencias
+        /// para mostrar la lista de feriados activos
         /// </summary>
         /// <returns></returns>
         public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             try
             {
-                return View(await Incidencia.ListadoXUsuarioLast15Days(context,User));
+                return View(await Feriado.listado(context));
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.Message);
+                ViewBag.Err = "Error al cargar los datos";
                 return View();
             }
         }
@@ -50,55 +50,43 @@ namespace AsisPas.Controllers
         #endregion
 
 
-        #region crear incidencia
+        #region Crear
+
         /// <summary>
-        /// vista para crear una incidencia
+        /// vista para crear un nuevo feriado
         /// </summary>
         /// <returns></returns>
-        public IActionResult Crear()
+        public IActionResult Nuevo()
         {
-
             try
             {
-                ViewBag.TiposMarca = Marca.toSelect();  
                 return View();
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.Message);
                 return View();
             }
         }
 
         /// <summary>
-        /// guardar la nueva incidencia
+        /// para guardar un nuevo elemento
         /// </summary>
-        /// <param name="ins"></param>
         /// <returns></returns>
-        public async System.Threading.Tasks.Task<IActionResult> Guardar(IncidenciaDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> Guardar(FeriadoDTO_in ins)
         {
             try
             {
-                var emp = await Empleado.EmpleadosXEmail(User.Identity.Name, context, User);
-                if (emp == null || emp.id < 1)
-                {
-                    ViewBag.Err = "Parece Que No Tienes Permisos para ejecutar esta accion...";
-                    return View("Index",await Incidencia.ListadoXUsuarioLast15Days(context, User));
-                }
-
-                var ent = mapper.Map<Incidencia>(ins);
-                ent.Empleado = emp;
-                ent.Empleadoid = emp.id;
-                
+                var ent = mapper.Map<Feriado>(ins); 
                 context.Add(ent);
                 await context.SaveChangesAsync();
-
-                return View("Index");
+                return RedirectToAction("Index");
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return View("Index",await Incidencia.ListadoXUsuarioLast15Days(context, User));
+                System.Console.WriteLine(ex.Message);
+                ViewBag.Err = "Algo salio mal intente nuevamente";
+                return View(ins);
             }
         }
 

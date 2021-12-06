@@ -25,6 +25,7 @@ namespace AsisPas.Helpers
             CambiosMap();
             IncidenciasMap();
             PermisosMap();
+            FeriadosMap();
         }
 
         #endregion
@@ -251,6 +252,17 @@ namespace AsisPas.Helpers
                 .ForMember(x => x.AprobadoPor, opt => opt.Ignore())
                 .ForMember(x => x.AprobadoPorid, opt => opt.Ignore())
                 .ForMember(x => x.PruebaFotografica, opt => opt.Ignore());
+
+        }
+
+        #endregion
+
+        #region feriados
+
+        private void FeriadosMap()
+        {
+            CreateMap<FeriadoDTO_in, Feriado>()
+                .ForMember(y => y.act, opt => opt.MapFrom(x => true));
 
         }
 

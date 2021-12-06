@@ -129,6 +129,7 @@ namespace AsisPas.Controllers
         /// <summary>
         /// verifica si ne existe algo que no funcione
         /// </summary>
+        /// <param name="idEmpleado"></param>
         /// <param name="inicio"></param>
         /// <param name="fin"></param>
         /// <returns></returns>

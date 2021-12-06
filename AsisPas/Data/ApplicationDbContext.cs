@@ -89,6 +89,10 @@ namespace AsisPas.Data
         /// almaceno los permisos
         /// </summary>
         public DbSet<Permisos> Permisos { get; set; }
+        /// <summary>
+        /// para almacenar los feriados
+        /// </summary>
+        public DbSet<Feriado> Feriados { get; set; }
         #endregion
 
         #region on model creating

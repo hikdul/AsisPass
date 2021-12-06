@@ -44,6 +44,7 @@
             <summary>
             verifica si ne existe algo que no funcione
             </summary>
+            <param name="idEmpleado"></param>
             <param name="inicio"></param>
             <param name="fin"></param>
             <returns></returns>
@@ -443,6 +444,36 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.FeriadoController">
+            <summary>
+            Feriados
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.FeriadoController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.FeriadoController.Index">
+            <summary>
+            para mostrar la lista de feriados activos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.FeriadoController.Nuevo">
+            <summary>
+            vista para crear un nuevo feriado
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.FeriadoController.Guardar(AsisPas.DTO.FeriadoDTO_in)">
+            <summary>
+            para guardar un nuevo elemento
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.GatesController">
             <summary>
             para administrar los puntos de acceso
@@ -567,6 +598,11 @@
             para eliminar un elemento
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.IncidenciasController">
+            <summary>
+            controlador de vistas de incidencias
+            </summary>
         </member>
         <member name="M:AsisPas.Controllers.IncidenciasController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
             <summary>
@@ -777,6 +813,11 @@
         <member name="P:AsisPas.Data.ApplicationDbContext.Permisos">
             <summary>
             almaceno los permisos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Feriados">
+            <summary>
+            para almacenar los feriados
             </summary>
         </member>
         <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -1131,6 +1172,23 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:AsisPas.Data.Migrations.feriados">
+            <summary>
+            feriado
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.feriados.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.feriados.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
             para agregar un nueva admo de empresas
@@ -1413,6 +1471,26 @@
         <member name="P:AsisPas.DTO.empresaDTO_in.Logo">
             <summary>
             logo de la empresa
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.FeriadoDTO_in">
+            <summary>
+            para agregar un feriado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.FeriadoDTO_in.desc">
+            <summary>
+            descripcion o contesto histarico
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.FeriadoDTO_in.UnaSolaVes">
+            <summary>
+            en el caso de feriados que se declaran como nuevo dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.FeriadoDTO_in.fecha">
+            <summary>
+            fecha en la que se aplica el feriado
             </summary>
         </member>
         <member name="T:AsisPas.DTO.GateDTO_in">
@@ -2251,6 +2329,36 @@
             <param name="context"></param>
             <param name="User"></param>
             <returns></returns>
+        </member>
+        <member name="T:AsisPas.Entitys.Feriado">
+            <summary>
+            feriados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Feriado.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Feriado.desc">
+            <summary>
+            descripcion o contesto histarico
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Feriado.UnaSolaVes">
+            <summary>
+            en el caso de feriados que se declaran como nuevo dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Feriado.fecha">
+            <summary>
+            fecha en la que se aplica el feriado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Feriado.act">
+            <summary>
+            active
+            </summary>
         </member>
         <member name="T:AsisPas.Entitys.Fiscal">
             <summary>
