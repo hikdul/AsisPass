@@ -391,7 +391,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="ins"></param>
         /// <returns></returns>
-        public async System.Threading.Tasks.Task<IActionResult> GuardarEmpleado(AdmoEmpresaDTO_in ins)
+        public async System.Threading.Tasks.Task<IActionResult> GuardarEmpleado(UserEmpleado_in ins)
         {
             try
             {
@@ -415,6 +415,7 @@ namespace AsisPas.Controllers
                             Empresaid = ins.Empresaid,
                             act = true,
                             userid = UsEnt.id,
+                            Articulo22 = ins.Articulo22,
                         };
 
                         context.Add(last);

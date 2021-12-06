@@ -99,6 +99,7 @@ namespace AsisPas.DTO
             List<AsignadorDeHorarios> list = new();
 
             var empleados = await Empleado.EmpleadosXUsuario(context, User);
+            empleados = empleados.Where(x => x.Articulo22 == false).ToList();
 
             foreach (var empleado in empleados)
             {

@@ -39,8 +39,11 @@ namespace AsisPas.Entitys
         /// prop de nav
         /// </summary>
         public Empresa Empresa { get; set; }
-
-
+        /// <summary>
+        /// si el empleado esta contratado bajo el articulo
+        /// segun articulo 22
+        /// </summary>
+        public bool Articulo22 { get; set; } = false;
         #endregion
 
         #region obtener empleados por usuario

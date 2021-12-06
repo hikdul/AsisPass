@@ -100,6 +100,13 @@ namespace AsisPas.Helpers
                 .ForMember(x => x.userid, opt => opt.Ignore())
                 .ForMember(x => x.id, opt => opt.Ignore());
 
+            CreateMap<UserEmpleado_in, Usuario>()
+               .ForMember(x => x.Hash, opt => opt.Ignore())
+               .ForMember(x => x.Salt, opt => opt.Ignore())
+               .ForMember(x => x.user, opt => opt.Ignore())
+               .ForMember(x => x.userid, opt => opt.Ignore())
+               .ForMember(x => x.id, opt => opt.Ignore());
+
             CreateMap<AdmoEmpresas, AdmoEmpresasDTO>()
                 .ForMember(x => x.Empresa, opt => opt.MapFrom(NameEmp))
                 .ForMember(x => x.Email, opt => opt.MapFrom(EmailTo))

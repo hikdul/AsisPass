@@ -366,7 +366,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AsisPas.Controllers.CuentasController.GuardarEmpleado(AsisPas.DTO.AdmoEmpresaDTO_in)">
+        <member name="M:AsisPas.Controllers.CuentasController.GuardarEmpleado(AsisPas.DTO.UserEmpleado_in)">
             <summary>
             para guarda al nuevo usuario Fiscalizadores
             </summary>
@@ -1114,6 +1114,23 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:AsisPas.Data.Migrations.articulo22">
+            <summary>
+            agregando el articulo 22
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.articulo22.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.articulo22.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
             para agregar un nueva admo de empresas
@@ -1801,6 +1818,16 @@
             3 => fin de jornada
             </summary>
         </member>
+        <member name="T:AsisPas.DTO.UserEmpleado_in">
+            <summary>
+            para ingresar un empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.UserEmpleado_in.Articulo22">
+            <summary>
+            para indicar si tiene o no el derecho a este articulo
+            </summary>
+        </member>
         <member name="T:AsisPas.DTO.UserLogin">
             <summary>
             para que los usuarios se puedan logear
@@ -2117,6 +2144,12 @@
         <member name="P:AsisPas.Entitys.Empleado.Empresa">
             <summary>
             prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Empleado.Articulo22">
+            <summary>
+            si el empleado esta contratado bajo el articulo
+            segun articulo 22
             </summary>
         </member>
         <member name="M:AsisPas.Entitys.Empleado.EmpleadosXUsuarioLigth(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">

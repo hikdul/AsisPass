@@ -1,5 +1,5 @@
 ﻿@using AsisPas.DTO;
-@model AdmoEmpresaDTO_in
+@model UserEmpleado_in
 
 
 @{
@@ -28,15 +28,20 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
 
                      <div class="row">
-                       <div class="form-group col-md-6">
+                       <div class="form-group col-md-4">
                             <label asp-for="Empresaid" class="control-label"></label>
                              <select asp-for="Empresaid" class="form-control" asp-items="@ViewBag.Empresas"></select>
                             <span asp-validation-for="Empresaid" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label asp-for="Password" class="control-label"></label>
                             <input asp-for="Password" class="form-control text-to-upper-alau" />
                             <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                          <div class="form-group form-check col-md-4 text-center mt-2">
+                            <label asp-for="Articulo22" class="form-check-label">
+                               <input class="form-check-input" asp-for="Articulo22" />  Articulo 22
+                            </label>
                         </div>
 
                      </div>

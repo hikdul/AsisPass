@@ -66,7 +66,9 @@ namespace AsisPas.Controllers
         /// <returns></returns>
         public async System.Threading.Tasks.Task<IActionResult> Crear(int id = 0)
         {
-            ViewBag.Empleados = Empleado.toSelect(await Empleado.EmpleadosXUsuario(context, User),id);
+            var emp = await Empleado.EmpleadosXUsuario(context, User);
+            emp = emp.Where(x => x.Articulo22 == false).ToList();
+            ViewBag.Empleados = Empleado.toSelect(emp,id);
             ViewBag.Horarios = Horario.toSelect(await Horario.ListadoPorUsuario(context, User));
 
             return View();
