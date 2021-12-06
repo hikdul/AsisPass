@@ -4,14 +4,16 @@ using AsisPas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsisPas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211206113724_cambios")]
+    partial class cambios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,44 +326,6 @@ namespace AsisPas.Data.Migrations
                     b.ToTable("Horarios");
                 });
 
-            modelBuilder.Entity("AsisPas.Entitys.Incidencia", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Empleadoid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Hora")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Razon")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("TipoMarca")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("fecha")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Empleadoid");
-
-                    b.ToTable("Incidencias");
-                });
-
             modelBuilder.Entity("AsisPas.Entitys.Marca", b =>
                 {
                     b.Property<int>("id")
@@ -404,45 +368,6 @@ namespace AsisPas.Data.Migrations
                     b.HasIndex("Sedeid");
 
                     b.ToTable("Marcaciones");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Permisos", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AprobadoPorid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Empleadoid")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PruebaFotografica")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("act")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("fin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("inicio")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("AprobadoPorid");
-
-                    b.HasIndex("Empleadoid");
-
-                    b.ToTable("Permisos");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Sedes", b =>
@@ -853,17 +778,6 @@ namespace AsisPas.Data.Migrations
                     b.Navigation("Empresa");
                 });
 
-            modelBuilder.Entity("AsisPas.Entitys.Incidencia", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.Empleado", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("Empleadoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empleado");
-                });
-
             modelBuilder.Entity("AsisPas.Entitys.Marca", b =>
                 {
                     b.HasOne("AsisPas.Entitys.Empleado", "Empleado")
@@ -889,25 +803,6 @@ namespace AsisPas.Data.Migrations
                     b.Navigation("Horario");
 
                     b.Navigation("Sede");
-                });
-
-            modelBuilder.Entity("AsisPas.Entitys.Permisos", b =>
-                {
-                    b.HasOne("AsisPas.Entitys.AdmoEmpresas", "AprobadoPor")
-                        .WithMany()
-                        .HasForeignKey("AprobadoPorid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AsisPas.Entitys.Empleado", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("Empleadoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AprobadoPor");
-
-                    b.Navigation("Empleado");
                 });
 
             modelBuilder.Entity("AsisPas.Entitys.Sedes", b =>

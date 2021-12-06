@@ -4,8 +4,15 @@ using System;
 
 namespace AsisPas.Data.Migrations
 {
+    /// <summary>
+    /// create identity
+    /// </summary>
     public partial class CreateIdentitySchema : Migration
     {
+        /// <summary>
+        /// up
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -192,7 +199,10 @@ namespace AsisPas.Data.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
-
+        /// <summary>
+        /// down
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

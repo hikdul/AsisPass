@@ -77,6 +77,18 @@ namespace AsisPas.Data
         /// para almacenar los puntos de ingresos por medio de la api
         /// </summary>
         public DbSet<Gate> Gates { get; set; }
+        /// <summary>
+        /// Cambios realizados
+        /// </summary>
+        public DbSet<Cambios> Cambios { get; set; }
+        /// <summary>
+        /// contiene las incidencias generada por el usuario
+        /// </summary>
+        public DbSet<Incidencia> Incidencias { get; set; }
+        /// <summary>
+        /// almaceno los permisos
+        /// </summary>
+        public DbSet<Permisos> Permisos { get; set; }
         #endregion
 
         #region on model creating
@@ -94,9 +106,7 @@ namespace AsisPas.Data
 
         #endregion
 
-        #region creacion de llaves
-
-        #endregion
+       
 
         #region Asignacion de llaves
         private void AsignacionLlaves(ModelBuilder builder)

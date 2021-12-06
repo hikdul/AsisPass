@@ -1,6 +1,7 @@
 ﻿using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using System;
 
 namespace AsisPas.Helpers
 {
@@ -20,6 +21,10 @@ namespace AsisPas.Helpers
             HorariosMap();
             UsuariosMap();
             AdmoHorarioMap();
+            GateMap();
+            CambiosMap();
+            IncidenciasMap();
+            PermisosMap();
         }
 
         #endregion
@@ -197,6 +202,49 @@ namespace AsisPas.Helpers
                 .ForMember(x => x.Sede, opt => opt.Ignore())
                 .ForMember(x => x.code, opt => opt.Ignore());
            
+        }
+
+        #endregion
+
+        #region Cambios
+
+        private void CambiosMap()
+        {
+            CreateMap<CambiosDTO_in, Cambios>()
+                .ForMember(x => x.PruebaFotografica, opt => opt.Ignore())
+                .ForMember(x => x.act, ac => ac.MapFrom(x => true))
+                .ForMember(x => x.fechaGenerado, opt => opt.MapFrom(x => DateTime.Now));
+        }
+
+        #endregion
+
+        #region Incidencias
+        private void IncidenciasMap()
+        {
+            CreateMap<IncidenciaDTO_in, Incidencia>()
+                .ForMember(x => x.act, opt => opt.MapFrom(y => true))
+                .ForMember(x => x.fecha, opt => opt.MapFrom(y => DateTime.Now))
+                .ForMember(x => x.Estado, opt => opt.MapFrom(y => 0))
+                .ForMember(x => x.Empleado, opt => opt.Ignore())
+                .ForMember(x => x.Empleadoid, opt => opt.Ignore());
+
+
+
+        }
+
+        #endregion
+
+        #region Permisos
+
+        private void PermisosMap()
+        {
+            CreateMap<PermisosDTO_in, Permisos>()
+                .ForMember(x => x.act, opt => opt.MapFrom(y => true))
+                .ForMember(x => x.Empleado, opt => opt.Ignore())
+                .ForMember(x => x.AprobadoPor, opt => opt.Ignore())
+                .ForMember(x => x.AprobadoPorid, opt => opt.Ignore())
+                .ForMember(x => x.PruebaFotografica, opt => opt.Ignore());
+
         }
 
         #endregion

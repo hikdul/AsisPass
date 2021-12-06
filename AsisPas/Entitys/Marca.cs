@@ -35,7 +35,7 @@ namespace AsisPas.Entitys
         /// <summary>
         /// codigo de puerta en caso de utilizarlo
         /// </summary>
-        public string Gate { get; set; } = "NoCode";
+        public string Gate { get; set; } = "NCode";
         /// <summary>
         /// prop nav
         /// </summary>
@@ -151,6 +151,29 @@ namespace AsisPas.Entitys
            
         }
 
+        /// <summary>
+        /// ver tipo de ingreso
+        /// </summary>
+        /// <param name="tipoMarca"></param>
+        /// <returns></returns>
+        public static string VerTiposIngresos(int tipoMarca)
+        {
+            switch (tipoMarca)
+            {
+                case 0:
+                    return "Inicio De Jornada";
+                case 1:
+                    return "Inicio del descanzo";
+                case 2:
+                    return "fin del descanzo";
+                case 3:
+                    return "Fin de la jornada";
+                default:
+                    return "";
+            }
+
+
+        }
 
         #endregion
 

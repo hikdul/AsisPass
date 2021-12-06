@@ -1,0 +1,62 @@
+﻿
+@using AsisPas.DTO;
+@using AsisPas.Entitys;
+@model IncidenciaDTO_in
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Generar Incidencia";
+    ViewBag.IncidenciastActive = "active";
+    ViewBag.MarcasMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Guardar" method="post">
+            <div class="card">
+            
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+
+                    <div class="row">
+                        
+                     
+                        <div class="form-group col-md-4 col-xs-12">
+                            <label asp-for="fecha" class="control-label"></label>
+                            <input type="date" asp-for="fecha" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="fecha" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-4 col-xs-12">
+                            <label asp-for="TipoMarca" class="control-label"> Tipo Marca</label>
+                             <select asp-for="TipoMarca" class="form-control" asp-items="@ViewBag.TiposMarca"></select>
+                            <span asp-validation-for="TipoMarca" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-4 col-xs-12">
+                            <label asp-for="Hora" class="control-label"></label>
+                            <input type="time" asp-for="Hora" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="Hora" class="text-danger"></span>
+                        </div>
+
+                        
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-12">
+                            <label asp-for="Razon" class="control-label">Justifique Incidencia</label>
+                            <textarea asp-for="Razon" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Razon" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer form-group text-center m-0">
+                    <a class="btn btn-warning rounded-pill" asp-action="Index">Volver</a>
+                    <input type="submit" value="Guardar" class="btn btn-danger rounded-pill" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

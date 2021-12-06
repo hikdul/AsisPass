@@ -1,0 +1,78 @@
+﻿
+@using AsisPas.DTO;
+@using AsisPas.Entitys;
+@model CambiosDTO_in
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Generar Un Cambio";
+    ViewBag.CambiosActive = "active";
+    ViewBag.MarcasMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Crear" method="post">
+            <div class="card">
+            
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-xs-12">
+                            <label asp-for="Empleadoid" class="control-label"> Seleccione empleado</label>
+                             <select asp-for="Empleadoid"  class="form-control" asp-items="@ViewBag.Empleados" ></select>
+                            <span asp-validation-for="Empleadoid" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-xs-12">
+                            <label asp-for="fecha" class="control-label"> </label>
+                            <input  asp-for="fecha" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="fecha" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="form-group col-md-6 col-xs-12">
+                            <label asp-for="tipoMarca" class="control-label">Seleccione la marca destino</label>
+                             <select asp-for="tipoMarca"  class="form-control" asp-items="@ViewBag.TiposMarca" ></select>
+                            <span asp-validation-for="tipoMarca" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6 col-xs-12">
+                            <label asp-for="Hora" class="control-label"></label>
+                            <input type="time" asp-for="Hora" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="Hora" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                     <div class="form-group col-6">
+                            <label asp-for="Razon" class="control-label">Prueba Fotografica</label>
+                            <input  asp-for="PruebaFotografica"  />
+                            <span asp-validation-for="Razon" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group col-6">
+                            <label asp-for="Razon" class="control-label">Describa La Razon Del Cambio</label>
+                            <textarea asp-for="Razon" class="form-control"></textarea>
+                            <span asp-validation-for="Razon" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer form-group text-center m-0">
+                    <a class="btn btn-warning rounded-pill" asp-action="Index">Volver</a>
+                    <input type="submit" value="Guardar" class="btn btn-danger rounded-pill" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,10 +1,11 @@
-﻿@using AsisPas.Entitys;
-@model IEnumerable<Gate>
+﻿
+@using AsisPas.Entitys;
+@model IEnumerable<Cambios>
 
 @{
-    ViewBag.Encabezado = ViewData["Title"] = "Puntos De Acceso";
-    ViewBag.GateListActive = "active";
-    ViewBag.EmpresaMenu = "open";
+    ViewBag.Encabezado = ViewData["Title"] = "Cambios Generados";
+    ViewBag.CambiosActive = "active";
+    ViewBag.MarcasMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
 }
@@ -14,7 +15,7 @@
             <div class="card-header">
                 <div class="d-flex align-items-center">
                    
-                        <a asp-controller="Gates" asp-action="Crear"  alt="Crear Nuevo" class="btn btn-danger btn-add-alau ml-3 mr-2">
+                        <a asp-controller="Cambios" asp-action="Nuevo" alt="Crear Nuevo" class="btn btn-danger btn-add-alau ml-3 mr-2">
                             <i class="ft-plus font-medium-5"></i>
                         </a>
                    
@@ -35,10 +36,10 @@
                             <strong>Mensaje: </strong> @mensaje
                         </div>
                     }
-                    @if (Model == null || Model.Count() < 1)
+                     @if (Model == null || Model.Count() < 1)  
                     {
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <strong>Mensaje: </strong> No Hay Accesos agregados en este momento
+                            <strong>Mensaje: </strong> No Hay Datos en este Momento
                         </div>
                     }
                 </div>
@@ -47,21 +48,24 @@
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    Empresa
+                                    Fecha
                                 </th>
                                 <th scope="col">
-                                    Sede
+                                    Hora
                                 </th>
                                 <th scope="col">
-                                    Desc
+                                    Marca
                                 </th>
                                 <th scope="col">
-                                    Codigo
+                                    Rut
                                 </th>
                                 <th scope="col">
-                                    Activo
+                                    Nombre
                                 </th>
                                 <th scope="col">
+                                    Razon
+                                </th>
+                                 <th scope="col">
                                     <i class="la la-gears"></i>
                                 </th>
                             </tr>
@@ -72,34 +76,25 @@
                                 {
                                     <tr class="line--hover">
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.Sede.Empresa.Nombre)
+                                            @item.fecha.ToString("dd/MM/yyyy")
                                         </td>
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.Sede.Nombre)
+                                            @Html.DisplayFor(modelItem => item.Hora)
                                         </td>
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.Desc)
+                                            @Html.DisplayFor(modelItem => item.tipoMarca)
                                         </td>
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.code)
+                                            @Html.DisplayFor(modelItem => item.Empleado.user.Rut)
                                         </td>
-                                         <td scope="row">
-                                           @if(item.act)
-                                           {
-                                            <p class="badge badge-success">SI</p>
-                                           }else
-                                           {
-                                            <p class="badge badge-danger">NO</p>
-                                           }  
-                                       </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Empleado.user.Nombres)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Razon)
+                                        </td>
                                         <td>
-                                              @if(item.act)
-                                           {
                                              <a asp-action="Eliminar" asp-route-id="@item.id" alt="Eliminar" class="la la-remove text-danger">  </a>
-                                           }else
-                                           {
-                                             <a asp-action="Activar" asp-route-id="@item.id" alt="Activar" class="la la-remove text-success">  </a>
-                                           } 
                                         </td>
                                     </tr>
 

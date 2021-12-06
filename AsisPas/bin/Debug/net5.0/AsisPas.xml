@@ -223,6 +223,59 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.API.MarcajeController">
+            <summary>
+            para ingresar marcaciones, 
+            este controlador es de libre acceso
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.API.MarcajeController.#ctor(AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            controlador
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.API.MarcajeController.Post(AsisPas.DTO.MarcaDTO_in)">
+            <summary>
+            para insertar una nueva marca
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.API.MarcajeController.CalcularTipoIngreso(System.DateTime,System.Int32,AsisPas.Entitys.Empleado,AsisPas.Entitys.Horario)">
+            <summary>
+            verifica el ingreso que viene acontinuacion y lo agrega
+            </summary>
+            <param name="marca"></param>
+            <param name="tipoIngreso"></param>
+            <param name="usuario"></param>
+            <param name="horario"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.CambiosController">
+            <summary>
+            para generar los cambios
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.CambiosController.Index">
+            <summary>
+            para ver el listado de cambios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CambiosController.Nuevo">
+            <summary>
+            vista para crear un nuevo cambio
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CambiosController.Crear(AsisPas.DTO.CambiosDTO_in)">
+            <summary>
+            para agregar un nuevo cambio
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.CuentasController">
             <summary>
             controlador para la manipulacion de cuentas a nivel visual
@@ -515,6 +568,32 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.IncidenciasController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.IncidenciasController.Index">
+            <summary>
+            para ver mi listado de incidencias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.IncidenciasController.Crear">
+            <summary>
+            vista para crear una incidencia
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.IncidenciasController.Guardar(AsisPas.DTO.IncidenciaDTO_in)">
+            <summary>
+            guardar la nueva incidencia
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.MarcaController">
             <summary>
             para ver las marcas
@@ -538,6 +617,36 @@
             para generar el resultado
             </summary>
             <param name="find"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Controllers.PermisosController">
+            <summary>
+            para generar los permisos y/o vacaciones
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.PermisosController.#ctor(AsisPas.Data.ApplicationDbContext,AutoMapper.IMapper)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.PermisosController.Index">
+            <summary>
+            vista inicial
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.PermisosController.Crear">
+            <summary>
+            vista para crear un nuevo permisos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.PermisosController.Guardar(AsisPas.DTO.PermisosDTO_in)">
+            <summary>
+            vista para crear un nuevo permisos
+            </summary>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Controllers.SedesController">
@@ -655,6 +764,21 @@
             para almacenar los puntos de ingresos por medio de la api
             </summary>
         </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Cambios">
+            <summary>
+            Cambios realizados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Incidencias">
+            <summary>
+            contiene las incidencias generada por el usuario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Data.ApplicationDbContext.Permisos">
+            <summary>
+            almaceno los permisos
+            </summary>
+        </member>
         <member name="M:AsisPas.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             para sobreescibir algunos valores en la base de datos
@@ -666,6 +790,23 @@
             funcion que crea mis roles y el SA
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.CreateIdentitySchema">
+            <summary>
+            create identity
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.CreateIdentitySchema.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.CreateIdentitySchema.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
         </member>
         <member name="T:AsisPas.Data.Migrations.Initial">
             <summary>
@@ -922,6 +1063,57 @@
             </summary>
             <param name="migrationBuilder"></param>
         </member>
+        <member name="T:AsisPas.Data.Migrations.cambios">
+            <summary>
+            cambios
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.cambios.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.cambios.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.incidencias">
+            <summary>
+            incidencia
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.incidencias.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.incidencias.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            dovn
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.Data.Migrations.permisos">
+            <summary>
+            permisos
+            </summary>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.permisos.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            up
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
+        <member name="M:AsisPas.Data.Migrations.permisos.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            down
+            </summary>
+            <param name="migrationBuilder"></param>
+        </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
             para agregar un nueva admo de empresas
@@ -1109,6 +1301,41 @@
         <member name="P:AsisPas.DTO.BusquedaRegistroPorUsuario.fin">
             <summary>
             fin del periodo de busquedo
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.CambiosDTO_in">
+            <summary>
+            para agregar un nuevo cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambiosDTO_in.Razon">
+            <summary>
+            si ya se estudio el caso o no
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambiosDTO_in.fecha">
+            <summary>
+            fecha en la que aplica el cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambiosDTO_in.Hora">
+            <summary>
+            hora de ingreso jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambiosDTO_in.tipoMarca">
+            <summary>
+            tipo marca
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambiosDTO_in.Empleadoid">
+            <summary>
+            empleado al que se le realiza el cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambiosDTO_in.PruebaFotografica">
+            <summary>
+            para insertar una prueba fotografica.
             </summary>
         </member>
         <member name="T:AsisPas.DTO.EmpresaDTO">
@@ -1299,6 +1526,146 @@
         <member name="P:AsisPas.DTO.HorarioDTO_Details.Sabado">
             <summary>
             indica si aplica para el dia
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.IncidenciaDTO_in">
+            <summary>
+            datos necesarios para crear una incidencia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.IncidenciaDTO_in.Razon">
+            <summary>
+            razon por la que se realiza
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.IncidenciaDTO_in.fecha">
+            <summary>
+            fecha en que se realiza la solicitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.IncidenciaDTO_in.Hora">
+            <summary>
+            hora que expresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.IncidenciaDTO_in.TipoMarca">
+            <summary>
+            tipo de marca a la que se le realiza la solicitud
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.MarcaDTO">
+            <summary>
+            para entregar los datos al cliente
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.marca">
+            <summary>
+            la marca con hora y fecha
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.Sede">
+            <summary>
+            prop de nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.Gate">
+            <summary>
+            Codigo de la puerta
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.EmpleadoNombre">
+            <summary>
+            nombre
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.EmpleadoApellido">
+            <summary>
+            apellido
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.EmpleadoRut">
+            <summary>
+            rut del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.HorarioNombre">
+            <summary>
+            horario nombre
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.TipoIngreso">
+            <summary>
+            tipo de ingreso
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.Hash">
+            <summary>
+            hash
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO.key">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.MarcaDTO_in">
+            <summary>
+            para ingresar una nueva marca por medio de la api
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO_in.Rut">
+            <summary>
+            rut del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO_in.marca">
+            <summary>
+            tiempo en fecha y hora 
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO_in.GateCode">
+            <summary>
+            codigo de la puenta
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.MarcaDTO_in.TipoIngreso">
+            <summary>
+            tipo de ingreso
+            1 => Inicio de jornada
+            2 => Inicio de descanzo
+            3 => fin del descanzo
+            4 => fin de la jornada
+            5 => undefined
+            </summary>
+        </member>
+        <member name="T:AsisPas.DTO.PermisosDTO_in">
+            <summary>
+            para agregar un permiso al sistema
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.PermisosDTO_in.Desc">
+            <summary>
+            descrigcion del permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.PermisosDTO_in.PruebaFotografica">
+            <summary>
+            alguna imagen que desee acompañar
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.PermisosDTO_in.inicio">
+            <summary>
+            inicio del periodo del permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.PermisosDTO_in.fin">
+            <summary>
+            fin del periodo del permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.PermisosDTO_in.Empleadoid">
+            <summary>
+            Empleado al que se le otorga el permiso
             </summary>
         </member>
         <member name="T:AsisPas.DTO.SedeDTO">
@@ -1662,6 +2029,61 @@
             active
             </summary>
         </member>
+        <member name="T:AsisPas.Entitys.Cambios">
+            <summary>
+            cambios generados y validados por el administrador de empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.act">
+            <summary>
+            act
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.Razon">
+            <summary>
+            si ya se estudio el caso o no
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.fecha">
+            <summary>
+            fecha en la que aplica el cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.fechaGenerado">
+            <summary>
+            fecha en el que fue generado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.Hora">
+            <summary>
+            hora de ingreso jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.tipoMarca">
+            <summary>
+            tipo marca
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.Empleadoid">
+            <summary>
+            empleado al que se le realiza el cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.Empleado">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Cambios.PruebaFotografica">
+            <summary>
+            para insertar una prueba fotografica.
+            </summary>
+        </member>
         <member name="T:AsisPas.Entitys.Empleado">
             <summary>
             mantiene los datos de empleados
@@ -1709,6 +2131,15 @@
             <summary>
             obtiene todos los datos des empleados
             </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Empleado.EmpleadosXEmail(System.String,AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener los datos de un empleado por medio de su email
+            </summary>
+            <param name="Email"></param>
             <param name="context"></param>
             <param name="User"></param>
             <returns></returns>
@@ -1997,6 +2428,77 @@
             <param name="idSelect"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Entitys.Incidencia">
+            <summary>
+            registros generados por el empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.id">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.act">
+            <summary>
+            si se encuentra activo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.Razon">
+            <summary>
+            razon por la que se realiza
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.fecha">
+            <summary>
+            fecha en que se realiza la solicitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.Hora">
+            <summary>
+            hora que expresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.TipoMarca">
+            <summary>
+            tipo de marca a la que se le realiza la solicitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.Empleadoid">
+            <summary>
+            empleado que hace la solicitud
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.Empleado">
+            <summary>
+            prop de navegacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Incidencia.Estado">
+            <summary>
+            define el estado de la incidencia
+            0 => solicitada
+            1 => Aprobada
+            2 => rechazada
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Incidencia.ListadoXUsuarioLast15Days(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener un listado de incidencias en base al usuario
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Incidencia.IncidenciaPorDiaYEmpleado(System.Int32,System.DateTime,AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener las incidencias papa un dia especifico
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="fecha"></param>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Entitys.Marca">
             <summary>
             registra una marca echa
@@ -2083,6 +2585,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Entitys.Marca.VerTiposIngresos(System.Int32)">
+            <summary>
+            ver tipo de ingreso
+            </summary>
+            <param name="tipoMarca"></param>
+            <returns></returns>
+        </member>
         <member name="M:AsisPas.Entitys.Marca.toSelect(AsisPas.DTO.TipoMarca,System.Boolean)">
             <summary>
             para retornar 1 elemento como select
@@ -2095,6 +2604,76 @@
             <summary>
             para el retorno en lista
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Entitys.Permisos">
+            <summary>
+            clase para almocenar permisos y otros elementos
+            permisos medicos, vacaciones, etc...
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.act">
+            <summary>
+            act
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.Empleadoid">
+            <summary>
+            Empleado al que se le otorga el permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.Empleado">
+            <summary>
+            prop de navegacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.Desc">
+            <summary>
+            descrigcion del permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.PruebaFotografica">
+            <summary>
+            alguna imagen que desee acompañar
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.inicio">
+            <summary>
+            inicio del periodo del permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.fin">
+            <summary>
+            fin del periodo del permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.AprobadoPorid">
+            <summary>
+            quien aprueba el permiso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Entitys.Permisos.AprobadoPor">
+            <summary>
+            prop nav
+            </summary>
+        </member>
+        <member name="M:AsisPas.Entitys.Permisos.validate">
+            <summary>
+            valida que el periodo sea correcto
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Permisos.listadolastMont(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para obtener el listado de los permisos de los ultimo 30 dias
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Entitys.Sedes">

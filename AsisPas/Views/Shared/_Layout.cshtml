@@ -201,8 +201,30 @@
                          </a>
                      </li>
                 </ul>
-                
-                
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.CambiosActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cambios" asp-action="Index">
+                             <i class="la la-building"></i>
+                             Cambios
+                         </a>
+                     </li>
+                </ul>
+                <ul class="menu-content">
+                     <li class="is-shown @ViewBag.IncidenciasActive">
+                         <a class="menu-item" asp-area="" asp-controller="Incidencias" asp-action="Index">
+                             <i class="la la-building"></i>
+                             Incidencias
+                         </a>
+                     </li>
+                </ul>   
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.IncidenciasActive">
+                         <a class="menu-item" asp-area="" asp-controller="Permisos" asp-action="Index">
+                             <i class="la la-building"></i>
+                             permisos
+                         </a>
+                     </li>
+                </ul> 
            </li>
           <!--otro-->
          

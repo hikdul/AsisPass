@@ -53,6 +53,13 @@ namespace AsisPas.Entitys
         public static async System.Threading.Tasks.Task<List<Empleado>> EmpleadosXUsuarioLigth(ApplicationDbContext context, ClaimsPrincipal User)
         {
             List<Empleado> list = new();
+
+            if (User.IsInRole("Empleado"))
+            {
+                list.Add(await EmpleadosXEmail(User.Identity.Name, context, User));
+                return list;
+            }
+
             var empresas = await Empresa.FiltrarEmpresas(context, User);
 
             if (empresas == null || empresas.Count < 1)
@@ -76,6 +83,12 @@ namespace AsisPas.Entitys
         public static async System.Threading.Tasks.Task<List<Empleado>> EmpleadosXUsuario(ApplicationDbContext context, ClaimsPrincipal User)
         {
             List<Empleado> list = new();
+
+            if (User.IsInRole("Empleado")) {
+                list.Add(await EmpleadosXEmail(User.Identity.Name, context, User));
+                return list; 
+            }
+
             var empresas = await Empresa.FiltrarEmpresas(context, User);
 
             if (empresas == null || empresas.Count < 1)
@@ -89,6 +102,17 @@ namespace AsisPas.Entitys
             }
 
             return list;
+        }
+        /// <summary>
+        /// para obtener los datos de un empleado por medio de su email
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <param name="context"></param>
+        /// <param name="User"></param>
+        /// <returns></returns>
+        public static async System.Threading.Tasks.Task<Empleado> EmpleadosXEmail(string Email,ApplicationDbContext context, ClaimsPrincipal User)
+        {
+            return await context.Empleados.Include(x => x.user).Where(x => x.user.Email == Email).FirstOrDefaultAsync();
         }
 
         #endregion
