@@ -2,6 +2,7 @@
 using AsisPas.Helpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace AsisPas.Entitys
     /// <summary>
     /// clase para la entidad de horario
     /// </summary>
-    public class Horario: Iid,IAct
+    public class Horario : Iid, IAct
     {
         #region propiedades
         /// <summary>
@@ -24,7 +25,7 @@ namespace AsisPas.Entitys
         /// <summary>
         /// nombre del horario
         /// </summary>
-        [Required(ErrorMessage ="Ingrese un Nombre para el Horraio")]
+        [Required(ErrorMessage = "Ingrese un Nombre para el Horraio")]
         [StringLength(25)]
         public string Nombre { get; set; }
         /// <summary>
@@ -64,7 +65,7 @@ namespace AsisPas.Entitys
         /// <summary>
         /// empresa a la que pertenece el horario
         /// </summary>
-        [Required(ErrorMessage ="Empresa a la que pertenece el horario")]
+        [Required(ErrorMessage = "Empresa a la que pertenece el horario")]
         public int Empresaid { get; set; }
         /// <summary>
         /// prop de navegarion
@@ -75,27 +76,27 @@ namespace AsisPas.Entitys
         /// indica si aplica para el dia
         /// </summary>
         public bool Domingo { get; set; }
-        
+
         /// <summary>
         /// indica si aplica para el dia
         /// </summary>
         public bool Lunes { get; set; }
-        
+
         /// <summary>
         /// indica si aplica para el dia
         /// </summary>
         public bool Martes { get; set; }
-        
+
         /// <summary>
         /// indica si aplica para el dia
         /// </summary>
         public bool Miercoles { get; set; }
-        
+
         /// <summary>
         /// indica si aplica para el dia
         /// </summary>
         public bool Jueves { get; set; }
-        
+
         /// <summary>
         /// indica si aplica para el dia
         /// </summary>
@@ -111,7 +112,7 @@ namespace AsisPas.Entitys
 
 
         #region funciones
-        
+
         /// <summary>
         /// verifica si este dia es laboral o na
         /// </summary>
@@ -140,6 +141,47 @@ namespace AsisPas.Entitys
             }
         }
 
+        /// <summary>
+        /// para obtener el tiempo laborado en segundos
+        /// </summary>
+        /// <returns></returns>
+        public double TiempoLaborado()
+        {
+
+            DateTime hi = comvertirStraHora1990(this.hi);
+            DateTime hf = comvertirStraHora1990(this.hf);
+
+            var resp = (hi - hf).TotalMilliseconds;
+
+            return resp - TiempoDescansado();
+
+
+
+        }
+        /// <summary>
+        /// para obtener el tiempo de descanzo en segundos
+        /// </summary>
+        /// <returns></returns>
+        public double TiempoDescansado()
+        {
+            if (String.IsNullOrEmpty(this.hbi) || String.IsNullOrEmpty(this.hbf))
+                return 0;
+
+            DateTime hbi = comvertirStraHora1990(this.hbi);
+            DateTime hbf = comvertirStraHora1990(this.hbf);
+
+            var resp = hbi - hbf;
+            return resp.TotalSeconds;
+        }
+
+
+        private DateTime comvertirStraHora1990(string hora, bool otrodia = false)
+        {
+            var split = hora.Split(":");
+            int hor = Int32.Parse(split[0]);
+            int min = Int32.Parse(split[1]);
+            return new(1990, 22, 3, hor, min, 3);
+        }
 
         #endregion
 
@@ -188,6 +230,49 @@ namespace AsisPas.Entitys
         }
 
         #endregion
+
+        #region obtener horario por fecha y empleado
+        /// <summary>
+        /// para obtener un horario para una fecha y un empleado
+        /// </summary>
+        /// <param name="idEmpleado"></param>
+        /// <param name="fecha"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static async System.Threading.Tasks.Task<Horario> HorarioPorIdEmpleado(int idEmpleado, DateTime fecha, ApplicationDbContext context)
+        {
+            try
+            {
+                string date = fecha.ToString("dd/MM/yyyy");
+                var ah = await context.AdmoHorarios
+                    .Include(x => x.Horario)
+                    .Where(x => x.Empleadoid == idEmpleado && x.inicio <= fecha && x.fin >= fecha)
+                    .FirstOrDefaultAsync();
+
+                if (ah == null)
+                    return null;
+                return ah.Horario;
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+        }
+        /// <summary>
+        /// para obtener un horario segun la fecha
+        /// </summary>
+        /// <param name="ah"></param>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        public static Horario HorarioPorFecha(List<AdmoHorario> ah, DateTime fecha)
+        { 
+            var resp =  ah.Where(x => x.inicio >= fecha && x.fin <= fecha).First();
+            return resp.Horario;
+        }
+
+#endregion
 
         #region aux para vistas
 

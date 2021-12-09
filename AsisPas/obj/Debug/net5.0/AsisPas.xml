@@ -685,6 +685,30 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.ReporteAsistenciaController">
+            <summary>
+            controlado para generar reportes por asistencia
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteAsistenciaController.#ctor(AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteAsistenciaController.Index">
+            <summary>
+            esta vista carga el buscador y sus elementos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteAsistenciaController.Generar(AsisPas.Reportes.Finder)">
+            <summary>
+            para generar el listado de reportes
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.SedesController">
             <summary>
             controller para sedes
@@ -2537,6 +2561,18 @@
             <param name="dia"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Entitys.Horario.TiempoLaborado">
+            <summary>
+            para obtener el tiempo laborado en segundos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.TiempoDescansado">
+            <summary>
+            para obtener el tiempo de descanzo en segundos
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AsisPas.Entitys.Horario.ListadoPorUsuario(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
             <summary>
             para obtener los horarios en base al tipo de usuario
@@ -2878,6 +2914,14 @@
             <param name="idSelect"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Entitys.Sedes.ListadoPorUsuario(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            para filtrar las sedes dependiendo del usuario
+            </summary>
+            <param name="context"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Entitys.Usuario">
             <summary>
             almacena los datos de usuario
@@ -3032,6 +3076,289 @@
         <member name="M:AsisPas.Helpers.MD5.GenerarKey">
             <summary>
             genera una clave aleatoria 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.DiasAsistencia">
+            <summary>
+            para llenar los dias de los reportes de asistencia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.DiasAsistencia.fecha">
+            <summary>
+            fecha en la que se esta estudiando
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.DiasAsistencia.Asistio">
+            <summary>
+            dice si asistio o no
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.DiasAsistencia.Observacion">
+            <summary>
+            se llena en caso de no haber asistido
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.DiasAsistencia.permiso">
+            <summary>
+            permiso
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.DiasAsistencia.#ctor(System.DateTime,System.Boolean,AsisPas.Entitys.Permisos)">
+            <summary>
+            ctor
+            </summary>
+            <param name="fecha"></param>
+            <param name="asistio"></param>
+            <param name="permiso"></param>
+        </member>
+        <member name="T:AsisPas.Reportes.ReporteAsistencia">
+            <summary>
+            para generar un reporte por asistencia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ReporteAsistencia.Recorrido">
+            <summary>
+            lista del recorrido por los dias habiles
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.ReporteAsistencia.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenar los datos de mi reporte por asistencia
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.CabeceraReportes">
+            <summary>
+            contiene los datos que tienen todos los reportes
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.FechaGenerado">
+            <summary>
+            fecha en que se genero
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.NombreEmpleado">
+            <summary>
+            nombre del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.RutEmpleado">
+            <summary>
+            Rut del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.NombreEmpresa">
+            <summary>
+            Nombre Empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.RutEmpresa">
+            <summary>
+            rut de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.inicio">
+            <summary>
+            inicio del perioda de busqueda del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.fin">
+            <summary>
+            fin del perioda de busquedo del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.NombreSede">
+            <summary>
+            nombre de la sede dondo esta actualmente el empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.DireccionDelaSede">
+            <summary>
+            direccion de la sede actual
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.NombreHorario">
+            <summary>
+            Nombre del horario
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.CabeceraReportes.UpHead(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenar los datos de la cabecera
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Domingos.DiaDomingos">
+            <summary>
+            para obtener la informacion base de un dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.DiaDomingos.fecha">
+            <summary>
+            fecha de estudio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.DiaDomingos.Asistio">
+            <summary>
+            SI asistio o NO
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.DiaDomingos.Observacion">
+            <summary>
+            algun mensaje o descripcion
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.Domingos.MensualDomingos">
+            <summary>
+            datos por mes
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.MensualDomingos.Diario">
+            <summary>
+            listado de dias
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.Domingos.RangoTotalesDomingo">
+            <summary>
+            para obtener los totales por periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.inicio">
+            <summary>
+            inicio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.fin">
+            <summary>
+            fin
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.totalDomingos">
+            <summary>
+            la cantidad de dias
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.totalFeriados">
+            <summary>
+            el total de feriados
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados">
+            <summary>
+            para generar el reporte para domingos y feriados
+            obteniendo solo el id de empleado y el rango
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.TotalDomingosPeriodo">
+            <summary>
+            total domingos del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.TotalFeriadosPeriodo">
+            <summary>
+            total feriados del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.totalesPorAno">
+            <summary>
+            calculos totales por ano
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.RegitroMensual">
+            <summary>
+            lleva el registro mes a mes
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenar los datos del reporte
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.ElementosBusqueda">
+            <summary>
+            para generar toda la data necesaria en la busqueda de reportes.
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.id">
+            <summary>
+            id del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.nombres">
+            <summary>
+            nombres del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.Apellidos">
+            <summary>
+            apellidos del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.Rut">
+            <summary>
+            rut del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.Faena">
+            <summary>
+            Faena actual
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.Turno">
+            <summary>
+            turno o nombre de horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.PrimerRegistro">
+            <summary>
+            primer registro obtenido en la BD
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.ElementosBusqueda.Up(System.Int32,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            llena los registros
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Finder">
+            <summary>
+            para enviar los datos que luega se transforman en reportes
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Finder.Empleadoids">
+            <summary>
+            lista de empleados seleccionados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Finder.inicio">
+            <summary>
+            inicio del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Finder.fin">
+            <summary>
+            fin del periodo
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Finder.validate">
+            <summary>
+            valida los elementos
             </summary>
             <returns></returns>
         </member>

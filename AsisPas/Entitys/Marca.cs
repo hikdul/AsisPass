@@ -1,18 +1,22 @@
-﻿using AsisPas.DTO;
+﻿using AsisPas.Data;
+using AsisPas.DTO;
 using AsisPas.Helpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace AsisPas.Entitys
 {
-    #region propiedades
     /// <summary>
     /// registra una marca echa
     /// </summary>
     public class Marca : MD5
     {
+
+        #region props
         /// <summary>
         /// identificacion de la marca
         /// </summary>
@@ -75,7 +79,6 @@ namespace AsisPas.Entitys
         [Required]
         public string key { get; set; }
         #endregion
-
 
         #region complete hash
         /// <summary>
@@ -218,8 +221,43 @@ namespace AsisPas.Entitys
             return ret;
         }
         #endregion
+
+        #region asnync method
+        /// <summary>
+        /// para obtener las 4 marcas del usuario
+        /// </summary>
+        /// <param name="idEmpleado"></param>
+        /// <param name="fecha"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static async System.Threading.Tasks.Task<List<Marca>> MarcasDiaYUsuario(int idEmpleado, DateTime fecha, ApplicationDbContext context)
+        {
+            try
+            {
+                var marcas = await context.Marcaciones.Where(x => x.Empleadoid == idEmpleado
+                && x.marca.ToString("dd/MM/yyyy") == fecha.ToString("dd/MM/yyyy")).ToListAsync();
+                var ini = marcas.Where(x => x.TipoIngreso == 0).FirstOrDefault();
+                var end = marcas.Where(x => x.TipoIngreso == 3).FirstOrDefault();
+                var iniD = marcas.Where(x => x.TipoIngreso == 1).FirstOrDefault();
+                var endD = marcas.Where(x => x.TipoIngreso == 2).FirstOrDefault();
+
+                return new() { ini, end, iniD, endD };
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+
+        }
+
+
+            #endregion
+     
     }
 
-    
+
 
 }

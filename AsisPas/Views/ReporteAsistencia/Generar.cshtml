@@ -1,0 +1,125 @@
+﻿
+@using AsisPas.Reportes;
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Reporte Por Asistencia";
+    ViewBag.ReporteAsistenciaActive = "active";
+    ViewBag.ReporteMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+    List<ReporteAsistencia> Reportes = ViewBag.Reportes; 
+}
+
+                    @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="card-body">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Mensaje: </strong> @mensaje
+                            </div>
+                        </div>
+                    }
+                     @if (Reportes == null || Reportes.Count() < 1)  
+                    {
+                        <div class="card-body">
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong>Mensaje: </strong> No Hay Datos en este Momento
+                            </div>
+                        </div>
+                    }
+
+
+@foreach(var reporte in Reportes)
+{
+    <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title text-white"> @reporte.NombreEmpleado </h4>
+                </div>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+                <div class="mt-1">
+                    <h6 class="card-subtitle text-white">@reporte.RutEmpleado</h6>   
+                </div>
+            </div>
+            <div class="card-content collapse show">
+             <div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item">
+                         Empresa: <strong> @reporte.NombreEmpresa</strong>
+                         <br/>
+                         RUT: <strong> @reporte.RutEmpresa</strong>
+                     </li>
+                     <li class="list-group-item">
+                        Lugar Pretacion Servicio: @reporte.NombreSede
+                         <br/>
+                        Direccion: @reporte.DireccionDelaSede
+                     </li>
+                     <li class="list-group-item">
+                        Turno: @reporte.NombreHorario
+                     </li>
+                     <li class="list-group-item">
+                        Periodo: @reporte.inicio.ToString("dd/MM/yyyy") al @reporte.fin.ToString("dd/MM/yyyy")
+                     </li>
+                     
+                 </ul>
+             </div> 
+             <div class="mt-2">
+                 <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Fecha
+                                </th>
+                                <th scope="col">
+                                    Asistio
+                                </th>
+                                <th scope="col">
+                                    Observacion
+                                </th>
+                                 <th scope="col">
+                                    <i class="la la-gears"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(reporte.Recorrido != null && reporte.Recorrido.Count > 0)
+                                @foreach (var item in reporte.Recorrido)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.fecha)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Asistio)
+                                        </td>
+                                        <td scope="row">
+                                            @Html.DisplayFor(modelItem => item.Observacion)
+                                        </td>
+                                        <td>
+                                             <a asp-action="verObs"  alt="verPermiso" class="la la-see text-success">  </a>
+                                        </td>
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+
+             </div>
+             
+            </div>
+            <div class="card-footer">
+                <h6 class="card-subtitle"> Fecha Solicitud Reporte: @reporte.FechaGenerado.ToString("dd/MM/yyyy") </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

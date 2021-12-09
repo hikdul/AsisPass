@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 
 namespace AsisPas.Entitys
 {
@@ -92,6 +93,41 @@ namespace AsisPas.Entitys
                 ret.Add(toSelect(item, item.id == idSelect));
             return ret;
         }
+        #endregion
+
+        #region filtrar sedes por usuario
+
+        /// <summary>
+        /// para filtrar las sedes dependiendo del usuario
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="User"></param>
+        /// <returns></returns>
+        public static async System.Threading.Tasks.Task<List<Sedes>> ListadoPorUsuario(ApplicationDbContext context, ClaimsPrincipal User)
+        {
+            List<Sedes> resp = new();
+
+            try
+            {
+                var empresas = await Empresa.FiltrarEmpresas(context, User);
+                foreach (var emp in empresas)
+                {
+                    var band = await context.Sedes.Where(x => x.act == true)
+                        .Include(x => x.Empresa).ToListAsync();
+                    foreach (var item in band)
+                        resp.Add(item);
+                }
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            return resp;
+            
+        }
+
+
         #endregion
 
     }

@@ -40,10 +40,8 @@ namespace AsisPas.Controllers
         public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             try
-            { 
-                var ent = await context.Sedes.Where(x => x.act == true)
-                    .Include(x => x.Empresa).ToListAsync();
-                
+            {
+                var ent = await Sedes.ListadoPorUsuario(context, User);
                 var ret = mapper.Map<List<SedeDTO>>(ent);
                 return View(ret);
             }

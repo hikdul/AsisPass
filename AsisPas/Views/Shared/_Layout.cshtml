@@ -83,7 +83,23 @@
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
          
+             <!--Reportes-->
 
+          <li class="nav-item has-sub @ViewBag.ReporteMenu">
+                 <a class="alert-dark" href="#">
+                     <i class="la la-dot-circle-o text-dark"></i>
+                     <span class="menu-title" data-i18n="">Reportes</span>
+                 </a>
+                 <ul class="menu-content">
+                     <li class="is-shown @ViewBag.ReporteAsistenciaActive">
+                         <a class="menu-item" asp-area="" asp-controller="ReporteAsistencia" asp-action="Index">
+                             <i class="la la-building"></i>
+                             Asistencia
+                         </a>
+                     </li>
+                    
+                </ul>
+           </li>
      
           <!--Empresa-->
 
