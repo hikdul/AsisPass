@@ -33,10 +33,10 @@
                             <strong>Mensaje: </strong> @mensaje
                         </div>
                     }
-                   
+
                 </div>
                 <div class="pb-4 pr-4 pl-4">
-                <form asp-action="Generar" method="post">
+                <form asp-action="Generar" name="form" method="post">
 
 
                     <div class="card-header text-center">
@@ -66,36 +66,37 @@
                       <div class="row">
                         <div class="form-group col-md-6">
                             <label for="faena" id="faena" class="control-label">Faena</label>
-                            <select for="faena" id="faena"  class="form-control" asp-items="@ViewBag.Faenas"></select>
+                            <select for="faena" id="BuscarFaena"  class="form-control" asp-items="@ViewBag.Faenas"></select>
                         </div>
                          
                          <div class="form-group col-md-6">
                             <label for="turno" id="turno" class="control-label">Turno</label>
-                            <select for="turno" id="turno"  class="form-control" asp-items="@ViewBag.Turnos"></select>
+                            <select for="turno" id="BuscarTurno"  class="form-control" asp-items="@ViewBag.Turnos"></select>
                         </div>
 
                      </div>
                          <div class="row">
                         <div class="form-group col-md-4">
                             <label for="nombre"  class="control-label">Nombre</label>
-                            <input type="text"  class="form-control" name="nombre" id="nombre" />
+                            <input type="text" id="BusacarNombre"  class="form-control" name="nombre"  />
                             
                         </div>
                           <div class="form-group col-md-4">
                             <label for="apellido" id="apellido" class="control-label">Apellido</label>
-                            <input type="text"  class="form-control" name="apellido" id="apellido" />
+                            <input type="text"  class="form-control" name="apellido" id="BuscarApellido" />
                             
                         </div>
                           <div class="form-group col-md-4">
                             <label for="rut" id="rut" class="control-label">RUT</label>
-                            <input type="text"  class="form-control" name="rut" id="rut" />
+                            <input type="text"  class="form-control" name="rut" id="BuscarRut" />
                             
                         </div>
                      </div>
-                    <select multiple asp-for="Empleadoids" id="Empleadoids"></select>
-
-                     <input type="submit" value="Crear" class="btn btn-danger" />
-                </form>
+                    <div class="text-center">
+                    <select class="hidden" asp-for="Empleadoids" id="Empleadoids"></select>
+                        <input type="submit" value="Crear" class="btn btn-danger" />
+                    </div>
+                 </form>
                 </div>
                  <div class="card-body">
                    <div class="card-header text-center">
@@ -108,7 +109,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">
-                                        <input class="form-control" type="checkbox" id="all" />
+                                        <input class="form-control" type="checkbox" id="SeleccionarTodos" />
                                 </th>
                                 <th scope="col">
                                     Nombre
@@ -117,7 +118,16 @@
                                     Apellido
                                 </th>
                                 <th scope="col">
-                                    rut
+                                    RUT
+                                </th>
+                                <th scope="col">
+                                    Faena
+                                </th>
+                                <th scope="col">
+                                    Horario
+                                </th>
+                                <th scope="col">
+                                    Primer Registro
                                 </th>
                                 <th scope="col">
                                     botones
@@ -129,21 +139,32 @@
                                 @foreach (var item in empleados)
                                 {
                                     <tr class="line--hover">
-                                        <td hidden class="ids">@item.id</td>
+                                        <td hidden class="Bids">@item.id</td>
+                                        <td hidden class="Bfaenasids">@item.Faenaid</td>
+                                        <td hidden class="Bturnosids">@item.Turnoid</td>
                                         <td scope="row" class="text-center">
                                            <input type="checkbox" class="check form-check" />
                                         </td>
-                                        <td scope="row">
+                                        <td class="Bnombres" scope="row">
                                             @Html.DisplayFor(modelItem => item.nombres)
                                         </td>
-                                        <td scope="row">
+                                        <td class="Bapellidos"  scope="row">
                                             @Html.DisplayFor(modelItem => item.Apellidos)
                                         </td>
-                                        <td scope="row">
+                                        <td  class="Bruts"  scope="row">
                                             @Html.DisplayFor(modelItem => item.Rut)
                                         </td>
+                                        <td  class="Bfaenas"  scope="row">
+                                            @Html.DisplayFor(modelItem => item.Faena)
+                                        </td>
+                                        <td  class="Bturnos"  scope="row">
+                                            @Html.DisplayFor(modelItem => item.Turno)
+                                        </td>
+                                         <td  class="Bprimer"  scope="row">
+                                            @item.PrimerRegistro.ToString("dd/MM/yyyy")
+                                        </td>
                                         <td scope="row">
-                                           botones
+                                           <button onclick="RepInd(@item.id)" class="btn btn-primary" > <i class="la la-book"></i></button>
                                         </td>
                                     </tr>
 
@@ -155,22 +176,42 @@
         </div>
     </div>
 </div>
+</div>
+
 
 <script>
     
-    
+   
+
 
     //inicializacion de variables
+    //para jugar con los check
     let listTotal = []
-    let ListId = document.getElementsByClassName("ids");
+    let listaEnVista = []
+    let ListId = document.getElementsByClassName("Bids");
     let ListChecked = document.getElementsByClassName("check");
     let ListEmploy = document.getElementById('Empleadoids');
+    let SeleccionarTodos = document.getElementById("SeleccionarTodos");
+    // para llenar mis variables y generar las busquedas
+    let nombres = document.getElementsByClassName('Bnombres')
+    let apellidos = document.getElementsByClassName('Bapellidos')
+    let ruts = document.getElementsByClassName('Bruts')
+    let faenas = document.getElementsByClassName('Bfaenas')
+    let turnos = document.getElementsByClassName('Bturnos')
+    let turnosids = document.getElementsByClassName('Bturnosids')
+    let faenasids = document.getElementsByClassName('Bfaenasids')
+    let primerosReg = document.getElementsByClassName('Bprimer')
+    // para generar mis busquedas
+    let TextoEnTabla = document.getElementById('DataTable')
+    let BusacarNombre = document.getElementById('BusacarNombre')
+    let BuscarApellido = document.getElementById('BuscarApellido')
+    let BuscarRut = document.getElementById('BuscarRut')
+    let BuscarFaena = document.getElementById('BuscarFaena')
+    let BuscarTurno = document.getElementById('BuscarTurno')
     //para que genere el evento a cada check
         const CheckboxApply = () => {
-        console.log('aplicando cambxi')
 
         Checkbox = document.querySelectorAll("#DataTable [type='checkbox']");
-        console.log(Checkbox)
         for (var i = 0; i < Checkbox.length; i++) {
             Checkbox[i].addEventListener('change', (event) => {
                 if (event.currentTarget.checked) {
@@ -181,44 +222,226 @@
             });
         }
     }
+
+   
+
+   
+
+
     // para que me llene el <select de empleados
     const llenarIdsEmpleados = () => {
         limpiarIdsEmpleados()
         for (let i = 0; i < ListId.length; i++) {
              if(ListChecked[i].checked){
                 var option = document.createElement("option");
-                console.log(ListId[i].innerText)
                 option.text = ListId[i].innerText;
                 option.value = ListId[i].innerText;
                 option.selected = true;
                 ListEmploy.add(option);
-
             }
         }
-
-
     }
+    /// me quita todos los elementos del select
     const limpiarIdsEmpleados = () => {
         for (let i = ListEmploy.options.length; i >= 0; i--) {
           ListEmploy.remove(i);
         }
     };
-    //para llenar la lista con los valores actuales
-    const llenarListTotal = () =>{
-        ListTotal = [];
+ 
+    //para usa el seleccionar todos
+    SeleccionarTodos.addEventListener('change', () =>{
+        for (let check of ListChecked) {
+            check.checked = SeleccionarTodos.checked 
+        }
+        llenarIdsEmpleados();
+    })
 
-        for (let i = 0; i < ListId.length; i++) {
-            ListTotal.push({
+    
+
+    /// ### script para busquedas
+  
+//console.log(ListId)
+//console.log(ListChecked)
+//console.log(nombres)
+//console.log(apellidos)
+//console.log(faenas)
+//console.log(turnos)
+//console.log(turnoidss)
+//console.log(faenaidss)
+
+    const llenarListaTotal = () => {
+        for(let i= 0 ; i < ListId.length; i++ ){
+            listTotal.push({
+                id: ListId[i].innerText,
                 checked: ListChecked[i].checked,
-                id: ListId[i].innerText.toUpperCase(),
-            });
+                nombre: nombres[i].innerText,
+                apellido: apellidos[i].innerText,
+                rut: ruts[i].innerText,
+                faena: faenas[i].innerText,
+                turno: turnos[i].innerText,
+                turnoids: turnosids[i].innerText,
+                faenaids: faenasids[i].innerText,
+                fecha: primerosReg[i].innerText
+            })
+          
         }
     }
+ 
 
+    
+    const elementoView = (elemento) =>{ return (`
+               <tr class="line--hover">
+                    <td hidden class="Bids">${elemento.id}</td>
+                    <td hidden class="Bfaenasids">${elemento.faenaids}</td>
+                    <td hidden class="Bturnosids">${elemento.turnoids}</td>
+                    <td scope="row" class="text-center">
+                       <input ${elemento.checked ? checked : '' } type="checkbox" class="check form-check" />
+                    </td>
+                    <td class="Bnombres" scope="row">
+                        ${elemento.nombre}
+                    </td>
+                    <td class="Bapellidos"  scope="row">
+                        ${elemento.apellido}
+                    </td>
+                    <td  class="Bruts"  scope="row">
+                        ${elemento.rut}
+                    </td>
+                    <td  class="Bfaenas"  scope="row">
+                       ${elemento.faena}
+                    </td>
+                    <td  class="Bturnos"  scope="row">
+                        ${elemento.turno}
+                    </td>
+                     <td  class="Bturnos"  scope="row">
+                        ${elemento.fecha}
+                    </td>
+                    <td scope="row">
+                      <button onclick="RepInd(${elemento.id})" class="btn btn-primary" > <i class="la la-book"></i></button>
+                    </td>
+                </tr>
+            `
+    
+    )}
+
+
+    const llenarVisual = temporal => {
+    
+        if(temporal.length < 1)
+            listaEnVista = listTotal
+        else
+            listaEnVista = temporal
+
+        let textoParaVista = "";
+        for (let valor of listaEnVista)
+            textoParaVista += elementoView(valor)
+        
+       TextoEnTabla.innerHTML =''
+       TextoEnTabla.innerHTML =textoParaVista
+       CheckboxApply()
+
+    }
+
+     const llenarVisualSelect = temporal => {
+    
+
+        let textoParaVista = "";
+        for (let valor of temporal)
+            textoParaVista += elementoView(valor)
+        
+       TextoEnTabla.innerHTML =''
+       TextoEnTabla.innerHTML =textoParaVista
+       CheckboxApply()
+
+    }
+  
+
+    //buscadores individuales
+
+    BusacarNombre.addEventListener('keyup',() =>{
+        temporal = []
+        for (let valor of listTotal) {
+            if (valor["nombre"].toUpperCase().indexOf(BusacarNombre.value.toUpperCase()) != -1)
+                temporal.push(valor);
+        }
+
+        llenarVisual(temporal)
+
+       
+    })
+    
+    BuscarApellido.addEventListener('keyup',() =>{
+        temporal = []
+        for (let valor of listTotal) {
+            if (valor["apellido"].toUpperCase().indexOf(BuscarApellido.value.toUpperCase()) != -1)
+                temporal.push(valor);
+        }
+
+        llenarVisual(temporal)
+
+        
+    })
+
+     BuscarRut.addEventListener('keyup',() =>{
+        temporal = []
+        for (let valor of listTotal) {
+            if (valor["rut"].toUpperCase().indexOf(BuscarRut.value.toUpperCase()) != -1)
+                temporal.push(valor);
+        }
+
+        llenarVisual(temporal)
+
+        
+    })
+
+    BuscarFaena.addEventListener('change',() =>{
+        
+        
+        temporal = []
+        if(BuscarFaena.value == '-1')
+            temporal = listTotal
+        else{
+          for (let valor of listTotal) {
+              if (valor["faenaids"] == BuscarFaena.value)
+                  temporal.push(valor);
+        }
+        }
+            llenarVisualSelect(temporal)
+    })
+
+     BuscarTurno.addEventListener('change',() =>{
+        
+       
+        temporal = []
+        if(BuscarTurno.value == '-1')
+            temporal = listTotal
+        else{
+          for (let valor of listTotal) {
+              if (valor["faenaids"] == BuscarTurno.value)
+                  temporal.push(valor);
+        }
+        }
+            llenarVisualSelect(temporal)
+    })
+
+
+    //para llenar los datos de mi lista
+    llenarListaTotal()
+   
+    //console.log(elementoView(listTotal[i]))
     //inicializacion de funciones
     CheckboxApply();    
-</script>
 
+
+    const  RepInd = (id) => {
+        limpiarIdsEmpleados()
+        var option = document.createElement("option");
+        option.text = id;
+        option.value = id;
+        option.selected = true;
+        ListEmploy.add(option);
+        document.form.submit();
+    }
+</script>
 
 
 @section Scripts {

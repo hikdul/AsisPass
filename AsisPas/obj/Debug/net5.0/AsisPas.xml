@@ -2589,6 +2589,23 @@
             <param name="User"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Entitys.Horario.HorarioPorIdEmpleado(System.Int32,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para obtener un horario para una fecha y un empleado
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="fecha"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Horario.HorarioPorFecha(System.Collections.Generic.List{AsisPas.Entitys.AdmoHorario},System.DateTime)">
+            <summary>
+            para obtener un horario segun la fecha
+            </summary>
+            <param name="ah"></param>
+            <param name="fecha"></param>
+            <returns></returns>
+        </member>
         <member name="M:AsisPas.Entitys.Horario.toSelect(AsisPas.Entitys.Horario,System.Boolean)">
             <summary>
             para retornar 1 elemento como select
@@ -2781,6 +2798,15 @@
             <summary>
             para el retorno en lista
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Entitys.Marca.MarcasDiaYUsuario(System.Int32,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para obtener las 4 marcas del usuario
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="fecha"></param>
+            <param name="context"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Entitys.Permisos">
@@ -3187,6 +3213,11 @@
             Nombre del horario
             </summary>
         </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.Mensaje">
+            <summary>
+            mensaje es caso de querer avisar algo
+            </summary>
+        </member>
         <member name="M:AsisPas.Reportes.CabeceraReportes.UpHead(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
             <summary>
             para llenar los datos de la cabecera
@@ -3196,6 +3227,66 @@
             <param name="fin"></param>
             <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.CambiosTurno.DiaCambio">
+            <summary>
+            representa la unidad de cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.DiaCambio.Anterior">
+            <summary>
+            datos sobre el ah anterior
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.DiaCambio.nuevo">
+            <summary>
+            daton sobre el oh actual
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.DiaCambio.SolicitanteCambio">
+            <summary>
+            solicitante del cambio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.DiaCambio.Desc">
+            <summary>
+            decripcion del cambio
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.CambiosTurno.modificaciones">
+            <summary>
+            para mostrar el listado de los cambios de turno
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.modificaciones.Modificacion">
+            <summary>
+            fecha en la que se realizo la modificacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.modificaciones.inicio">
+            <summary>
+            inincio del periodo de la asignacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.modificaciones.fin">
+            <summary>
+            fin del periodo de asignacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.modificaciones.Horario">
+            <summary>
+            Horario que representa el periodo
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.CambiosTurno.ReporteCombioDeTurno">
+            <summary>
+            para generar el reporte por turnos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CambiosTurno.ReporteCombioDeTurno.cambios">
+            <summary>
+            listado de cambios
+            </summary>
         </member>
         <member name="T:AsisPas.Reportes.Domingos.DiaDomingos">
             <summary>
@@ -3244,12 +3335,22 @@
         </member>
         <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.totalDomingos">
             <summary>
-            la cantidad de dias
+            la cantidad de dias demingos laborados
             </summary>
         </member>
         <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.totalFeriados">
             <summary>
-            el total de feriados
+            el total de feriados laborados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.totalDomingosenPeriodo">
+            <summary>
+            total domingos en periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoTotalesDomingo.totalFeriadosenPeriodo">
+            <summary>
+            total feriados en periodo
             </summary>
         </member>
         <member name="T:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados">
@@ -3263,9 +3364,19 @@
             total domingos del periodo
             </summary>
         </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.TotalDomingos">
+            <summary>
+            laborados
+            </summary>
+        </member>
         <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.TotalFeriadosPeriodo">
             <summary>
             total feriados del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.TotalFeriadosLaborados">
+            <summary>
+            laborados
             </summary>
         </member>
         <member name="P:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.totalesPorAno">
@@ -3318,9 +3429,19 @@
             Faena actual
             </summary>
         </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.Faenaid">
+            <summary>
+            faena id
+            </summary>
+        </member>
         <member name="P:AsisPas.Reportes.ElementosBusqueda.Turno">
             <summary>
             turno o nombre de horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ElementosBusqueda.Turnoid">
+            <summary>
+            horario id
             </summary>
         </member>
         <member name="P:AsisPas.Reportes.ElementosBusqueda.PrimerRegistro">
@@ -3335,6 +3456,118 @@
             <param name="idEmpleado"></param>
             <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Excesojornada.DiaExcesoJornada">
+            <summary>
+            para almacenar el dia a dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.DiaExcesoJornada.fecha">
+            <summary>
+            fecha
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.DiaExcesoJornada.Horario">
+            <summary>
+            Horario solicitado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.DiaExcesoJornada.Marcas">
+            <summary>
+            Marcas solicitada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.DiaExcesoJornada.calculos">
+            <summary>
+            tiempo de exceso
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada">
+            <summary>
+            para generar el reporte por exceso de jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.Dias">
+            <summary>
+            listado de dias
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.Semanal">
+            <summary>
+            listado de totales por semana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.tiempoExceso">
+            <summary>
+            tiempo de exceso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.tiempoRetrazo">
+            <summary>
+            tiempo de retrazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.Compensacion">
+            <summary>
+            Compensacion
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenar datos
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoJornada.calcularDifEnSegundos(System.DateTime,System.String)">
+            <summary>
+            para calcular la diferencia entre una hora dada y su marca
+            </summary>
+            <param name="reg"></param>
+            <param name="hora"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada">
+            <summary>
+            indica los totales de tiempos por periodos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada.inicio">
+            <summary>
+            inicio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada.fin">
+            <summary>
+            fin
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada.tiempoExc">
+            <summary>
+            el total de tiempo acumulado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada.tiempoRet">
+            <summary>
+            tiempo de retrazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada.Compensacion">
+            <summary>
+            Compensacion
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada.#ctor(System.DateTime,System.DateTime,System.Double,System.Double)">
+            <summary>
+            constructor
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="ExcesoSG"></param>
+            <param name="RetrazoSG"></param>
         </member>
         <member name="T:AsisPas.Reportes.Finder">
             <summary>
@@ -3360,6 +3593,179 @@
             <summary>
             valida los elementos
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Jornada.DiaJornada">
+            <summary>
+            para almacenar los datos de un dia en jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.DiaJornada.fecha">
+            <summary>
+            fecha de estudio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.DiaJornada.horario">
+            <summary>
+            horario del dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.DiaJornada.marcas">
+            <summary>
+            marcas del dia
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.DiaJornada.tiempoLaborado">
+            <summary>
+            tiempo laborado
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.Jornada.horas">
+            <summary>
+            almacena las marcas vinculadas
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.horas.InicioJornada">
+            <summary>
+            inicio de la jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.horas.FinJornada">
+            <summary>
+            fin de la jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.horas.InicioDescanzo">
+            <summary>
+            inicio del descanzo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.horas.FinDescazo">
+            <summary>
+            fin del descanzo
+            </summary>
+        </member>
+        <member name="T:AsisPas.Reportes.Jornada.ReportePorJornada">
+            <summary>
+            para generar el reporte por jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.ReportePorJornada.Dias">
+            <summary>
+            sobre los dias totales de estudio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.ReportePorJornada.TotalesSemanales">
+            <summary>
+            para almacenar los totales por semana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.ReportePorJornada.TotalPeriodo">
+            <summary>
+            verifica el total del periodo
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornada.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenar los datos del reporte
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Jornada.TotalesJornada">
+            <summary>
+            totales por jornada
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.TotalesJornada.inicio">
+            <summary>
+            inicio
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.TotalesJornada.fin">
+            <summary>
+            fin
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.TotalesJornada.tiempo">
+            <summary>
+            el total de tiempo acumulado
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.TotalesJornada.#ctor(System.DateTime,System.DateTime,System.Double)">
+            <summary>
+            constructor
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="TiempoAcumuladoEnSegundos"></param>
+        </member>
+        <member name="T:AsisPas.Reportes.RTime">
+            <summary>
+            para manipular las tiempos para las vistas que lo utilicen
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.RTime.Hora">
+            <summary>
+            cantidad de horas
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.RTime.min">
+            <summary>
+            cantidad de minutos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.RTime.seg">
+            <summary>
+            cantidad de segundos
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.RTime.#ctor(System.Double)">
+            <summary>
+            constructor, pasandole el total de segundos
+            </summary>
+            <param name="TiempoEnSegundos"></param>
+        </member>
+        <member name="M:AsisPas.Reportes.RTime.toStr">
+            <summary>
+            para obtener el valor de modo visual
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.RTime.ObtenerTotalSg(System.DateTime,System.DateTime,System.DateTime,System.DateTime,System.Boolean)">
+            <summary>
+            para obtener un valor en double
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="Dinicio"></param>
+            <param name="Dfin"></param>
+            <param name="mismodia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.RTime.CalcularTiempos(System.DateTime,System.DateTime,System.DateTime,System.DateTime,System.Boolean)">
+            <summary>
+            para obtener resultados en base a un complemento entregado
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="Dinicio"></param>
+            <param name="Dfin"></param>
+            <param name="mismodia"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.RTime.CalcularTiemposToStr(System.DateTime,System.DateTime,System.DateTime,System.DateTime,System.Boolean)">
+            <summary>
+            para obtener el valor en string
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="Dinicio"></param>
+            <param name="Dfin"></param>
+            <param name="mismodia"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Startup">

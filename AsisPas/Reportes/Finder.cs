@@ -36,6 +36,9 @@ namespace AsisPas.Reportes
         /// <returns></returns>
         public bool validate()
         {
+            if(this.inicio.ToString("dd/MM/yyyy") == "1/1/ 0001" || this.fin.ToString("dd/MM/yyyy") == "1/1/ 0001")
+                return false;
+
             return inicio <= fin;
         }
 

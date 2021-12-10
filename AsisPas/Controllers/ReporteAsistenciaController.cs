@@ -83,6 +83,12 @@ namespace AsisPas.Controllers
         {
             try
             {
+
+                if(ins.validate())
+                    return await CargarIndex("Las fecha no son validas");
+                if (ins == null || ins.Empleadoids == null || ins.Empleadoids.Count < 1)
+                    return await CargarIndex("Seleccione al menos un Empleado");
+
                 List<ReporteAsistencia> list = new();
                 foreach (var id in ins.Empleadoids)
                 {
@@ -100,6 +106,45 @@ namespace AsisPas.Controllers
             }
         }
 
+
+        #endregion
+
+
+        #region cargar index
+
+
+        private async System.Threading.Tasks.Task<IActionResult> CargarIndex( string err = "")
+        {
+            if(err != "")
+                ViewBag.Err = err;
+            List<ElementosBusqueda> elementos = new();
+            SelectListItem empty = new()
+            {
+                Value = "-1",
+                Selected = true,
+                Text = "-- ### Todo- ### --"
+            };
+
+            var turnos = Horario.toSelect(await Horario.ListadoPorUsuario(context, User));
+            var faenas = Sedes.toSelect(await Sedes.ListadoPorUsuario(context, User));
+            turnos.Add(empty);
+            faenas.Add(empty);
+
+            ViewBag.Turnos = turnos;
+            ViewBag.Faenas = faenas;
+
+            var empleados = await Empleado.EmpleadosXUsuarioLigth(context, User);
+            foreach (var item in empleados)
+            {
+                var elemento = new ElementosBusqueda();
+                await elemento.Up(item.id, context);
+                elementos.Add(elemento);
+            }
+
+            ViewBag.Empleados = elementos;
+
+            return View("Index");
+        }
 
         #endregion
     }

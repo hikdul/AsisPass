@@ -32,9 +32,17 @@ namespace AsisPas.Reportes
         /// </summary>
         public string Faena { get; set; }
         /// <summary>
+        /// faena id
+        /// </summary>
+        public string Faenaid { get; set; }
+        /// <summary>
         /// turno o nombre de horario
         /// </summary>
         public string Turno { get; set; }
+        /// <summary>
+        /// horario id
+        /// </summary>
+        public string Turnoid { get; set; }
         /// <summary>
         /// primer registro obtenido en la BD
         /// </summary>
@@ -74,12 +82,16 @@ namespace AsisPas.Reportes
             if(first == null || last == null)
             {
                 this.Faena = this.Turno = "S/R";
+                this.Faenaid = this.Turnoid = "0";
                 this.PrimerRegistro = DateTime.Now;
             }
             else
             {
                 this.Faena = last.Sede.Nombre;
                 this.Turno = last.Horario.Nombre;
+                this.Faenaid = last.Sedeid.ToString();
+                this.Turnoid = last.Horario.id.ToString();
+
                 this.PrimerRegistro = first.marca;
             }
 
