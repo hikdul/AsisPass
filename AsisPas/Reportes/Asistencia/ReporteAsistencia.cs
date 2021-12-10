@@ -1,8 +1,10 @@
 ﻿using AsisPas.Data;
 using AsisPas.Entitys;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AsisPas.Reportes
@@ -95,6 +97,87 @@ namespace AsisPas.Reportes
 
 
         #endregion
+
+        #region exportar en excel
+        /// <summary>
+        /// para exportar un reporte en excel
+        /// </summary>
+        /// <param name="reporte"></param>
+        /// <returns></returns>
+        public static byte[] Excel(ReporteAsistencia reporte)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                    using (ExcelPackage ep = new ExcelPackage())
+                    {
+                        int fila = 9;
+                        ep.Workbook.Worksheets.Add("Reporte Por Asistencia");
+                        ExcelWorksheet ew = ep.Workbook.Worksheets[0];
+
+                        ew.Cells[1, 1].Value = "Reporte Generado el ";
+                        ew.Cells[1, 2].Value = DateTime.Now.ToString("dd/MM/yyyy");
+
+                        ew.Cells[3, 1].Value = "Trabajador";
+                        ew.Cells[3, 2].Value = reporte.NombreEmpleado;
+                        ew.Cells[3, 3].Value = "Rut";
+                        ew.Cells[3, 4].Value = reporte.RutEmpleado;
+
+                        ew.Cells[4, 1].Value = "Empresa";
+                        ew.Cells[4, 2].Value = reporte.NombreEmpresa;
+                        ew.Cells[4, 3].Value = "Rut";
+                        ew.Cells[4, 4].Value = reporte.RutEmpresa;
+
+
+                        ew.Cells[5, 1].Value = "Periodo de estudio";
+                        ew.Cells[5, 2].Value = "Inicia";
+                        ew.Cells[5, 3].Value = reporte.inicio.ToString("dd/MM/yyyy");
+                        ew.Cells[5, 4].Value = "Termina";
+                        ew.Cells[5, 5].Value = reporte.fin.ToString("dd/MM/yyyy");
+
+                        ew.Cells[6, 1].Value = "Lugar de prestacion de servicio";
+                        ew.Cells[6, 2].Value = reporte.NombreSede;
+                        ew.Cells[6, 3].Value = reporte.DireccionDelaSede;
+                        ew.Cells[6, 5].Value = "Turno";
+                        ew.Cells[6, 6].Value = reporte.NombreHorario;
+
+                        ew.Cells[8, 1].Value = "Fecha";
+                        ew.Cells[8, 2].Value = "Asistio";
+                        ew.Cells[8, 3].Value = "Observaciones";
+
+
+                        if(reporte.Recorrido != null && reporte.Recorrido.Count > 0)
+                        foreach (var item in reporte.Recorrido)
+                        {
+                            ew.Cells[fila, 1].Value = item.fecha;
+                            ew.Cells[fila, 2].Value = item.Asistio;
+                            ew.Cells[fila, 3].Value = item.Observacion;
+                            if(item.permiso != null && item.permiso.id > 0 && item.permiso.act == true)
+                            {
+                                ew.Cells[fila, 4].Value = $"Periodo del permiso, del {item.permiso.inicio.ToString("dd/MM/yyyy")} al {item.permiso.fin.ToString("dd/MM/yyyy")} ";
+
+                            }
+                            fila++;
+                        }
+
+
+                        ep.SaveAs(ms);
+                        return ms.ToArray();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Catch!!");
+                Console.WriteLine($"Message: {0}", ex.Message);
+                return new Byte[0];
+            }
+
+        }
+
+#endregion
 
     }
 }

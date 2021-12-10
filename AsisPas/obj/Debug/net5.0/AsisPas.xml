@@ -709,6 +709,13 @@
             <param name="ins"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.ReporteAsistenciaController.Excel(AsisPas.Reportes.ToPrint)">
+            <summary>
+             para retornar el reporte en excel
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.SedesController">
             <summary>
             controller para sedes
@@ -3158,9 +3165,21 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Reportes.ReporteAsistencia.Excel(AsisPas.Reportes.ReporteAsistencia)">
+            <summary>
+            para exportar un reporte en excel
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Reportes.CabeceraReportes">
             <summary>
             contiene los datos que tienen todos los reportes
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.CabeceraReportes.idEmpleado">
+            <summary>
+            el id del empleado
             </summary>
         </member>
         <member name="P:AsisPas.Reportes.CabeceraReportes.FechaGenerado">
@@ -3766,6 +3785,32 @@
             <param name="Dinicio"></param>
             <param name="Dfin"></param>
             <param name="mismodia"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.ToPrint">
+            <summary>
+            para generar el reporte de imprecion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ToPrint.Empleadoid">
+            <summary>
+            lista de empleados seleccionados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ToPrint.Finicio">
+            <summary>
+            inicio del periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.ToPrint.Ffin">
+            <summary>
+            fin del periodo
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.ToPrint.validate">
+            <summary>
+            valida los elementos
+            </summary>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Startup">

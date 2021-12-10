@@ -130,7 +130,7 @@
                                     Primer Registro
                                 </th>
                                 <th scope="col">
-                                    botones
+                                    <i class="la la-gears" ></i>
                                 </th>
                             </tr>
                         </thead>
@@ -164,8 +164,10 @@
                                             @item.PrimerRegistro.ToString("dd/MM/yyyy")
                                         </td>
                                         <td scope="row">
-                                           <button onclick="RepInd(@item.id)" class="btn btn-primary" > <i class="la la-book"></i></button>
-                                        </td>
+                                            <div class="btn-group">
+                                                <button onclick="RepInd(@item.id)" class="btn btn-primary" > <i class="la la-book"></i></button>
+                                            </div> 
+                                       </td>
                                     </tr>
 
                                 }
@@ -180,9 +182,7 @@
 
 
 <script>
-    
    
-
 
     //inicializacion de variables
     //para jugar con los check
@@ -441,6 +441,37 @@
         ListEmploy.add(option);
         document.form.submit();
     }
+
+    const RepIndEx = id => {
+        console.log(id)
+        let form = document.createElement("form");
+        form.setAttribute('method',"post");
+        form.setAttribute('action',"ReporteAsistencia/Excel");
+        
+        let i = document.createElement("input"); //input element, text
+        i.setAttribute('type',"date");
+        i.setAttribute('name',"inicio");
+        i.value = document.getElementById('inicio').value
+
+        
+        let fi = document.createElement("input"); //input element, text
+        fi.setAttribute('type',"date");
+        fi.setAttribute('name',"fin");
+        fi.value = document.getElementById('fin').value
+        
+        let us = document.createElement("input"); //input element, text
+        us.setAttribute('type',"text");
+        us.setAttribute('name',"Empleadoid");
+        us.value = document.getElementById('fin').value
+
+        
+        form.appendChild(i);
+        form.appendChild(fi);
+        form.appendChild(us);
+
+        form.submit();
+    }
+
 </script>
 
 

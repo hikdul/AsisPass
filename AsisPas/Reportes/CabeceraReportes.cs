@@ -12,6 +12,10 @@ namespace AsisPas.Reportes
     {
         #region prop
         /// <summary>
+        /// el id del empleado
+        /// </summary>
+        public int idEmpleado { get; set; }
+        /// <summary>
         /// fecha en que se genero
         /// </summary>
         public DateTime FechaGenerado { get; set; } = DateTime.Now;
@@ -84,7 +88,7 @@ namespace AsisPas.Reportes
                     .FirstOrDefaultAsync(x => x.id == idEmpleado);
                 if (user == null)
                     return;
-
+                this.idEmpleado = user.id;
                 this.NombreEmpleado = $"{user.user.Nombres} {user.user.Apellidos}";
                 this.RutEmpleado = user.user.Rut;
                 this.NombreEmpresa = user.Empresa.Nombre;

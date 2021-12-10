@@ -84,10 +84,13 @@ namespace AsisPas.Controllers
             try
             {
 
-                if(ins.validate())
-                    return await CargarIndex("Las fecha no son validas");
-                if (ins == null || ins.Empleadoids == null || ins.Empleadoids.Count < 1)
-                    return await CargarIndex("Seleccione al menos un Empleado");
+               if(!ins.validate())
+                   return await CargarIndex("Las fecha no son validas");
+               if (ins == null || ins.Empleadoids == null || ins.Empleadoids.Count < 1)
+                   return await CargarIndex("Seleccione al menos un Empleado");
+
+                ViewBag.fechai = ins.inicio.ToString("yyyy-MM-dd");
+                ViewBag.fechaf = ins.fin.ToString("yyyy-MM-dd");
 
                 List<ReporteAsistencia> list = new();
                 foreach (var id in ins.Empleadoids)
@@ -109,6 +112,41 @@ namespace AsisPas.Controllers
 
         #endregion
 
+
+        #region exportar excel
+        /// <summary>
+        ///  para retornar el reporte en excel
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+
+
+        public async System.Threading.Tasks.Task<FileResult> Excel(ToPrint ins)
+        {
+            try
+            {
+                if (!ins.validate())
+                    return File(new byte[0], "application/vnd.ms-excel", "FechasNoValidas.xlsx");
+                if (ins == null || ins.Empleadoid< 1 )
+                    return File(new byte[0], "application/vnd.ms-excel", "AlMenosSeleccioneUnEmpleado.xlsx");
+
+                ReporteAsistencia resp = new();
+                await resp.Up(ins.Empleadoid,ins.Finicio,ins.Ffin,context);
+                var buffer = ReporteAsistencia.Excel(resp);
+                return File(buffer, "pplication/vnd.ms-excel", "Reporte Asistencias" + "-" + ins.Finicio+ "-al-" + ins.Ffin + ".xlsx");
+       
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Catch!!");
+                Console.WriteLine("Exception msn: {0}", ex.Message);
+                return File(new byte[0], "application/vnd.ms-excel", "Empty.xlsx");
+       
+            }
+        }
+
+
+        #endregion
 
         #region cargar index
 

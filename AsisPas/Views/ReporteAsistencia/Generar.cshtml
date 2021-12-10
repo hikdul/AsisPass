@@ -8,24 +8,27 @@
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
     List<ReporteAsistencia> Reportes = ViewBag.Reportes; 
+    
+
+
 }
 
-                    @if (mensaje != " " && mensaje != "" && mensaje != null)  
-                    {
-                        <div class="card-body">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>Mensaje: </strong> @mensaje
-                            </div>
-                        </div>
-                    }
-                     @if (Reportes == null || Reportes.Count() < 1)  
-                    {
-                        <div class="card-body">
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <strong>Mensaje: </strong> No Hay Datos en este Momento
-                            </div>
-                        </div>
-                    }
+ @if (mensaje != " " && mensaje != "" && mensaje != null)  
+ {
+     <div class="card-body">
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+             <strong>Mensaje: </strong> @mensaje
+         </div>
+     </div>
+ }
+  @if (Reportes == null || Reportes.Count() < 1)  
+ {
+     <div class="card-body">
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+             <strong>Mensaje: </strong> No Hay Datos en este Momento
+         </div>
+     </div>
+ }
 
 
 @foreach(var reporte in Reportes)
@@ -37,6 +40,7 @@
                 <div class="d-flex align-items-center">
                     <h4 class="card-title text-white"> @reporte.NombreEmpleado </h4>
                 </div>
+                 
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -45,6 +49,35 @@
                 </div>
                 <div class="mt-1">
                     <h6 class="card-subtitle text-white">@reporte.RutEmpleado</h6>   
+                </div>
+                <div class="float-right ml-1">
+                    <div class="btn-group center">
+
+                        <form asp-controller="ReporteAsistencia" method="post" asp-action="Excel" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-success"><i class="la la-file-excel-o"></i></button>
+                        </form>
+                           <form asp-action="Word" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@reporte.inicio name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@reporte.fin name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-light"><i class="la la-file-pdf-o"></i></button>
+                        </form>
+                           <form asp-action="Pdf" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@reporte.inicio name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@reporte.fin name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-primary"><i class="la la-file-word-o"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card-content collapse show">

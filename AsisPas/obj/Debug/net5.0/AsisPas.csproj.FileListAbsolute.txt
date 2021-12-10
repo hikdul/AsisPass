@@ -202,3 +202,6 @@ C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Feriado\I
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\Feriado\Nuevo.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\ReporteAsistencia\Index.cshtml.g.cs
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\ReporteAsistencia\Generar.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\EPPlus.dll
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\System.Xml.XPath.XmlDocument.dll
