@@ -61,7 +61,7 @@
 
                             <button type="submit" class="btn btn-success"><i class="la la-file-excel-o"></i></button>
                         </form>
-                           <form asp-action="Word" >
+                           <form asp-action="Pdf" >
 
                             <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
                             <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@reporte.inicio name="Finicio" id="Finicio" />
@@ -69,7 +69,7 @@
 
                             <button type="submit" class="btn btn-light"><i class="la la-file-pdf-o"></i></button>
                         </form>
-                           <form asp-action="Pdf" >
+                           <form asp-action="Word" >
 
                             <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
                             <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@reporte.inicio name="Finicio" id="Finicio" />

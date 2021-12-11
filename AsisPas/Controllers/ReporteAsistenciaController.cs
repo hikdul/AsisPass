@@ -1,10 +1,14 @@
 ﻿using AsisPas.Data;
 using AsisPas.Entitys;
 using AsisPas.Reportes;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace AsisPas.Controllers
 {
@@ -147,6 +151,69 @@ namespace AsisPas.Controllers
 
 
         #endregion
+
+        #region pdf
+        /// <summary>
+        /// para exportar en pdf
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async System.Threading.Tasks.Task<FileResult> Pdf(ToPrint ins)
+        {
+            try
+            {
+                ReporteAsistencia resp = new();
+                await resp.Up(ins.Empleadoid,ins.Finicio,ins.Ffin,context);
+
+
+                var buffer = ReporteAsistencia.Pdf(resp);
+                return File(buffer, "application/pdf", "Reporte Cambio Turno" + "-" + ins.Finicio.ToString("dd/MM/yyyy") + "-al-" + ins.Ffin.ToString("dd/MM/yyyy")+ ".PDF");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Catch!!");
+                Console.WriteLine("Exception msn: {0}", ex.Message);
+                return File(new byte[0], "application/pdf", "Error.PDF");
+
+            }
+        }
+
+
+        #endregion
+
+
+        #region word
+        /// <summary>
+        /// para exportar en pdf
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async System.Threading.Tasks.Task<FileResult> Word(ToPrint ins)
+        {
+            try
+            {
+                ReporteAsistencia resp = new();
+                await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
+
+
+                var buffer = ReporteAsistencia.Word(resp);
+                return File(buffer, "application/vnd.openxmlformats-officedocument.wordprocessingml.document",  "REPORTE POR ASISTENCIAS -" + ins.Finicio.ToString("dd/MM/yyyy") + " al " + ins.Ffin.ToString("dd/MM/yyyy")+ ".Docx");
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Catch!!");
+                Console.WriteLine("Exception msn: {0}", ex.Message);
+                return File(new byte[0], "application/pdf", "Error.PDF");
+
+            }
+        }
+
+
+        #endregion
+
 
         #region cargar index
 

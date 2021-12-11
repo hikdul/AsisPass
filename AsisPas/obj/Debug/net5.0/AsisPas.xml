@@ -716,6 +716,20 @@
             <param name="ins"></param>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.ReporteAsistenciaController.Pdf(AsisPas.Reportes.ToPrint)">
+            <summary>
+            para exportar en pdf
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteAsistenciaController.Word(AsisPas.Reportes.ToPrint)">
+            <summary>
+            para exportar en pdf
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.SedesController">
             <summary>
             controller para sedes
@@ -3168,6 +3182,20 @@
         <member name="M:AsisPas.Reportes.ReporteAsistencia.Excel(AsisPas.Reportes.ReporteAsistencia)">
             <summary>
             para exportar un reporte en excel
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.ReporteAsistencia.Pdf(AsisPas.Reportes.ReporteAsistencia)">
+            <summary>
+            para exportar un reporte en pdf
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.ReporteAsistencia.Word(AsisPas.Reportes.ReporteAsistencia)">
+            <summary>
+            para exportar un documento en word
             </summary>
             <param name="reporte"></param>
             <returns></returns>
