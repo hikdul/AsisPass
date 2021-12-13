@@ -24,5 +24,11 @@ namespace AsisPas.Reportes.CambiosTurno
         /// Horario que representa el periodo
         /// </summary>
         public Horario Horario{ get; set; }
+
+
+        public modificaciones()
+        {
+                this.Horario = new Horario();
+        }
     }
 }

@@ -11,5 +11,12 @@ namespace AsisPas.Reportes.Domingos
         /// listado de dias
         /// </summary>
         public List<DiaDomingos> Diario { get; set; }
+        /// <summary>
+        /// conltructor
+        /// </summary>
+        public MensualDomingos()
+        {
+            this.Diario = new();
+        }
     }
 }

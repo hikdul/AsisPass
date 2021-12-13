@@ -43,9 +43,17 @@ namespace AsisPas.Reportes
                 // lleno mis fechas
                await UpHead(idEmpleado, inicio, fin, context);    
 
-                AdmoHorario ah = await context.AdmoHorarios
+                
+                var ahs = await context.AdmoHorarios
                     .Include(x => x.Horario)
-                    .FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado && x.inicio >= inicio && x.fin <= fin);
+                    .Where(x => x.Empleadoid == idEmpleado)
+                    .ToListAsync();
+
+                AdmoHorario ah = ahs
+                    .Where(x => x.inicio <= inicio && x.fin >= fin)
+                    .FirstOrDefault();
+
+
                 List<Feriado> feriados = await Feriado.listado(context);
                 List<DiasAsistencia> dias = new();
 
@@ -65,7 +73,7 @@ namespace AsisPas.Reportes
                             }));
                         else
                         {
-                            if (ah.fin > i)
+                            if (ah.fin < i)
                             {
                                     ah = await context.AdmoHorarios
                                 .Include(x => x.Horario)
@@ -75,8 +83,11 @@ namespace AsisPas.Reportes
 
                             var ri = await context.Marcaciones.Where(x =>
                             x.Empleadoid == idEmpleado 
-                            && x.marca.ToString("dd/MM/yyyy") == istr 
-                            && x.TipoIngreso == 0 )
+                            && x.TipoIngreso == 0
+                            && x.marca.Year == i.Year
+                            && x.marca.Month == i.Month
+                            && x.marca.Day == i.Day
+                            )
                                 .FirstOrDefaultAsync();
                             var per = await context.Permisos.Where(x =>
                             x.Empleadoid == idEmpleado
@@ -90,7 +101,7 @@ namespace AsisPas.Reportes
                     }
                 }
 
-
+                this.Recorrido = dias;
 
             }
             catch (Exception ex)
@@ -286,7 +297,10 @@ namespace AsisPas.Reportes
                             C0.Add(new Paragraph(item.fecha));
                             C1.Add(new Paragraph(item.Asistio));
                             C2.Add(new Paragraph(item.Observacion));
-                        }
+                            Tabla.AddCell(C0);
+                            Tabla.AddCell(C1);
+                            Tabla.AddCell(C2);
+                            }
                         doc.Add(white);
                         doc.Add(Tabla);
 

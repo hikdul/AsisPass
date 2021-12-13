@@ -21,5 +21,12 @@
         /// decripcion del cambio
         /// </summary>
         public string Desc { get; set; }
+
+
+        public DiaCambio()
+        {
+            this.Anterior = new modificaciones();
+            this.nuevo = new modificaciones();
+        }
     }
 }

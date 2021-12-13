@@ -1,0 +1,481 @@
+﻿@using AsisPas.Reportes;
+@model Finder
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Reporte Por Asistencia";
+    ViewBag.ReporteDomActive = "active";
+    ViewBag.ReporteMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+    List<ElementosBusqueda> empleados = ViewBag.Empleados;
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-red text-white">
+                <div class="d-flex align-items-center">
+                   
+                    <h4 class="card-title text-white"> @ViewBag.Encabezado</h4>
+                </div>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    @if (mensaje != " " && mensaje != "" && mensaje != null)  
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Mensaje: </strong> @mensaje
+                        </div>
+                    }
+
+                </div>
+                <div class="pb-4 pr-4 pl-4">
+                <form asp-action="Generar" name="form" method="post">
+
+
+                    <div class="card-header text-center">
+                        <h3 class="card-subtitle">
+                            Periodo de busqueda
+                        </h3>
+                    </div>
+                     <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="inicio" class="control-label"></label>
+                            <input type="date" asp-for="inicio" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="inicio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="fin" class="control-label"></label>
+                            <input type="date" asp-for="fin" class="form-control text-to-upper-alau" />
+                            <span asp-validation-for="fin" class="text-danger"></span>
+                        </div>
+                     </div>
+
+                      <div class="card-header text-center">
+                        <h3 class="card-subtitle">
+                            Parametros De busqueda
+                        </h3>
+                    </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="faena" id="faena" class="control-label">Faena</label>
+                            <select for="faena" id="BuscarFaena"  class="form-control" asp-items="@ViewBag.Faenas"></select>
+                        </div>
+                         
+                         <div class="form-group col-md-6">
+                            <label for="turno" id="turno" class="control-label">Turno</label>
+                            <select for="turno" id="BuscarTurno"  class="form-control" asp-items="@ViewBag.Turnos"></select>
+                        </div>
+
+                     </div>
+                         <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="nombre"  class="control-label">Nombre</label>
+                            <input type="text" id="BusacarNombre"  class="form-control" name="nombre"  />
+                            
+                        </div>
+                          <div class="form-group col-md-4">
+                            <label for="apellido" id="apellido" class="control-label">Apellido</label>
+                            <input type="text"  class="form-control" name="apellido" id="BuscarApellido" />
+                            
+                        </div>
+                          <div class="form-group col-md-4">
+                            <label for="rut" id="rut" class="control-label">RUT</label>
+                            <input type="text"  class="form-control" name="rut" id="BuscarRut" />
+                            
+                        </div>
+                     </div>
+                    <div class="text-center">
+                    <select class="hidden" asp-for="Empleadoids" id="Empleadoids"></select>
+                        <input type="submit" value="Crear" class="btn btn-danger" />
+                    </div>
+                 </form>
+                </div>
+                 <div class="card-body">
+                   <div class="card-header text-center">
+                        <h4 class="card-subtitle">
+                            Seleccion De Empleados
+                        </h4>
+                    </div>
+                    <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                        <input class="form-control" type="checkbox" id="SeleccionarTodos" />
+                                </th>
+                                <th scope="col">
+                                    Nombre
+                                </th>
+                                <th scope="col">
+                                    Apellido
+                                </th>
+                                <th scope="col">
+                                    RUT
+                                </th>
+                                <th scope="col">
+                                    Faena
+                                </th>
+                                <th scope="col">
+                                    Horario
+                                </th>
+                                <th scope="col">
+                                    Primer Registro
+                                </th>
+                                <th scope="col">
+                                    <i class="la la-gears" ></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="DataTable">
+                            @if (empleados  != null)
+                                @foreach (var item in empleados)
+                                {
+                                    <tr class="line--hover">
+                                        <td hidden class="Bids">@item.id</td>
+                                        <td hidden class="Bfaenasids">@item.Faenaid</td>
+                                        <td hidden class="Bturnosids">@item.Turnoid</td>
+                                        <td scope="row" class="text-center">
+                                           <input type="checkbox" class="check form-check" />
+                                        </td>
+                                        <td class="Bnombres" scope="row">
+                                            @Html.DisplayFor(modelItem => item.nombres)
+                                        </td>
+                                        <td class="Bapellidos"  scope="row">
+                                            @Html.DisplayFor(modelItem => item.Apellidos)
+                                        </td>
+                                        <td  class="Bruts"  scope="row">
+                                            @Html.DisplayFor(modelItem => item.Rut)
+                                        </td>
+                                        <td  class="Bfaenas"  scope="row">
+                                            @Html.DisplayFor(modelItem => item.Faena)
+                                        </td>
+                                        <td  class="Bturnos"  scope="row">
+                                            @Html.DisplayFor(modelItem => item.Turno)
+                                        </td>
+                                         <td  class="Bprimer"  scope="row">
+                                            @item.PrimerRegistro.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                            <div class="btn-group">
+                                                <button onclick="RepInd(@item.id)" class="btn btn-primary" > <i class="la la-book"></i></button>
+                                            </div> 
+                                       </td>
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+   
+
+    //inicializacion de variables
+    //para jugar con los check
+    let listTotal = []
+    let listaEnVista = []
+    let ListId = document.getElementsByClassName("Bids");
+    let ListChecked = document.getElementsByClassName("check");
+    let ListEmploy = document.getElementById('Empleadoids');
+    let SeleccionarTodos = document.getElementById("SeleccionarTodos");
+    // para llenar mis variables y generar las busquedas
+    let nombres = document.getElementsByClassName('Bnombres')
+    let apellidos = document.getElementsByClassName('Bapellidos')
+    let ruts = document.getElementsByClassName('Bruts')
+    let faenas = document.getElementsByClassName('Bfaenas')
+    let turnos = document.getElementsByClassName('Bturnos')
+    let turnosids = document.getElementsByClassName('Bturnosids')
+    let faenasids = document.getElementsByClassName('Bfaenasids')
+    let primerosReg = document.getElementsByClassName('Bprimer')
+    // para generar mis busquedas
+    let TextoEnTabla = document.getElementById('DataTable')
+    let BusacarNombre = document.getElementById('BusacarNombre')
+    let BuscarApellido = document.getElementById('BuscarApellido')
+    let BuscarRut = document.getElementById('BuscarRut')
+    let BuscarFaena = document.getElementById('BuscarFaena')
+    let BuscarTurno = document.getElementById('BuscarTurno')
+    //para que genere el evento a cada check
+        const CheckboxApply = () => {
+
+        Checkbox = document.querySelectorAll("#DataTable [type='checkbox']");
+        for (var i = 0; i < Checkbox.length; i++) {
+            Checkbox[i].addEventListener('change', (event) => {
+                if (event.currentTarget.checked) {
+                     llenarIdsEmpleados()
+                } else {
+                     llenarIdsEmpleados()
+                }
+            });
+        }
+    }
+
+   
+
+   
+
+
+    // para que me llene el <select de empleados
+    const llenarIdsEmpleados = () => {
+        limpiarIdsEmpleados()
+        for (let i = 0; i < ListId.length; i++) {
+             if(ListChecked[i].checked){
+                var option = document.createElement("option");
+                option.text = ListId[i].innerText;
+                option.value = ListId[i].innerText;
+                option.selected = true;
+                ListEmploy.add(option);
+            }
+        }
+    }
+    /// me quita todos los elementos del select
+    const limpiarIdsEmpleados = () => {
+        for (let i = ListEmploy.options.length; i >= 0; i--) {
+          ListEmploy.remove(i);
+        }
+    };
+ 
+    //para usa el seleccionar todos
+    SeleccionarTodos.addEventListener('change', () =>{
+        for (let check of ListChecked) {
+            check.checked = SeleccionarTodos.checked 
+        }
+        llenarIdsEmpleados();
+    })
+
+    
+
+    /// ### script para busquedas
+  
+//console.log(ListId)
+//console.log(ListChecked)
+//console.log(nombres)
+//console.log(apellidos)
+//console.log(faenas)
+//console.log(turnos)
+//console.log(turnoidss)
+//console.log(faenaidss)
+
+    const llenarListaTotal = () => {
+        for(let i= 0 ; i < ListId.length; i++ ){
+            listTotal.push({
+                id: ListId[i].innerText,
+                checked: ListChecked[i].checked,
+                nombre: nombres[i].innerText,
+                apellido: apellidos[i].innerText,
+                rut: ruts[i].innerText,
+                faena: faenas[i].innerText,
+                turno: turnos[i].innerText,
+                turnoids: turnosids[i].innerText,
+                faenaids: faenasids[i].innerText,
+                fecha: primerosReg[i].innerText
+            })
+          
+        }
+    }
+ 
+
+    
+    const elementoView = (elemento) =>{ return (`
+               <tr class="line--hover">
+                    <td hidden class="Bids">${elemento.id}</td>
+                    <td hidden class="Bfaenasids">${elemento.faenaids}</td>
+                    <td hidden class="Bturnosids">${elemento.turnoids}</td>
+                    <td scope="row" class="text-center">
+                       <input ${elemento.checked ? checked : '' } type="checkbox" class="check form-check" />
+                    </td>
+                    <td class="Bnombres" scope="row">
+                        ${elemento.nombre}
+                    </td>
+                    <td class="Bapellidos"  scope="row">
+                        ${elemento.apellido}
+                    </td>
+                    <td  class="Bruts"  scope="row">
+                        ${elemento.rut}
+                    </td>
+                    <td  class="Bfaenas"  scope="row">
+                       ${elemento.faena}
+                    </td>
+                    <td  class="Bturnos"  scope="row">
+                        ${elemento.turno}
+                    </td>
+                     <td  class="Bturnos"  scope="row">
+                        ${elemento.fecha}
+                    </td>
+                    <td scope="row">
+                      <button onclick="RepInd(${elemento.id})" class="btn btn-primary" > <i class="la la-book"></i></button>
+                    </td>
+                </tr>
+            `
+    
+    )}
+
+
+    const llenarVisual = temporal => {
+    
+        if(temporal.length < 1)
+            listaEnVista = listTotal
+        else
+            listaEnVista = temporal
+
+        let textoParaVista = "";
+        for (let valor of listaEnVista)
+            textoParaVista += elementoView(valor)
+        
+       TextoEnTabla.innerHTML =''
+       TextoEnTabla.innerHTML =textoParaVista
+       CheckboxApply()
+
+    }
+
+     const llenarVisualSelect = temporal => {
+    
+
+        let textoParaVista = "";
+        for (let valor of temporal)
+            textoParaVista += elementoView(valor)
+        
+       TextoEnTabla.innerHTML =''
+       TextoEnTabla.innerHTML =textoParaVista
+       CheckboxApply()
+
+    }
+  
+
+    //buscadores individuales
+
+    BusacarNombre.addEventListener('keyup',() =>{
+        temporal = []
+        for (let valor of listTotal) {
+            if (valor["nombre"].toUpperCase().indexOf(BusacarNombre.value.toUpperCase()) != -1)
+                temporal.push(valor);
+        }
+
+        llenarVisual(temporal)
+
+       
+    })
+    
+    BuscarApellido.addEventListener('keyup',() =>{
+        temporal = []
+        for (let valor of listTotal) {
+            if (valor["apellido"].toUpperCase().indexOf(BuscarApellido.value.toUpperCase()) != -1)
+                temporal.push(valor);
+        }
+
+        llenarVisual(temporal)
+
+        
+    })
+
+     BuscarRut.addEventListener('keyup',() =>{
+        temporal = []
+        for (let valor of listTotal) {
+            if (valor["rut"].toUpperCase().indexOf(BuscarRut.value.toUpperCase()) != -1)
+                temporal.push(valor);
+        }
+
+        llenarVisual(temporal)
+
+        
+    })
+
+    BuscarFaena.addEventListener('change',() =>{
+        
+        
+        temporal = []
+        if(BuscarFaena.value == '-1')
+            temporal = listTotal
+        else{
+          for (let valor of listTotal) {
+              if (valor["faenaids"] == BuscarFaena.value)
+                  temporal.push(valor);
+        }
+        }
+            llenarVisualSelect(temporal)
+    })
+
+     BuscarTurno.addEventListener('change',() =>{
+        
+       
+        temporal = []
+        if(BuscarTurno.value == '-1')
+            temporal = listTotal
+        else{
+          for (let valor of listTotal) {
+              if (valor["faenaids"] == BuscarTurno.value)
+                  temporal.push(valor);
+        }
+        }
+            llenarVisualSelect(temporal)
+    })
+
+
+    //para llenar los datos de mi lista
+    llenarListaTotal()
+   
+    //console.log(elementoView(listTotal[i]))
+    //inicializacion de funciones
+    CheckboxApply();    
+
+
+    const  RepInd = (id) => {
+        limpiarIdsEmpleados()
+        var option = document.createElement("option");
+        option.text = id;
+        option.value = id;
+        option.selected = true;
+        ListEmploy.add(option);
+        document.form.submit();
+    }
+
+    const RepIndEx = id => {
+        console.log(id)
+        let form = document.createElement("form");
+        form.setAttribute('method',"post");
+        form.setAttribute('action',"ReporteAsistencia/Excel");
+        
+        let i = document.createElement("input"); //input element, text
+        i.setAttribute('type',"date");
+        i.setAttribute('name',"inicio");
+        i.value = document.getElementById('inicio').value
+
+        
+        let fi = document.createElement("input"); //input element, text
+        fi.setAttribute('type',"date");
+        fi.setAttribute('name',"fin");
+        fi.value = document.getElementById('fin').value
+        
+        let us = document.createElement("input"); //input element, text
+        us.setAttribute('type',"text");
+        us.setAttribute('name',"Empleadoid");
+        us.value = document.getElementById('fin').value
+
+        
+        form.appendChild(i);
+        form.appendChild(fi);
+        form.appendChild(us);
+
+        form.submit();
+    }
+
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

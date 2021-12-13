@@ -43,16 +43,18 @@ namespace AsisPas.Controllers.API
             {
                 // validamos puerta de ingreso
                 var gate = await context.Gates
+                    .Include(x => x.Sede)
                     .Where(x => x.code == ins.GateCode)
                     .FirstOrDefaultAsync();
                 if(gate == null || gate.act == false)
                     return BadRequest("El Codigo de ingreso no es valido");
-                // validamos usuario
-                var usuario = await context.Empleados
-                    .Include(x => x.user)
-                    .Where(x => x.user.Rut == ins.Rut)
-                    .FirstOrDefaultAsync();
-                if(usuario == null || usuario.act == false)
+                // validamos usuario -- esta busqueda no me esta haciendo nada
+                var usuarios = await context.Empleados
+                    .Include(x => x.user).ToListAsync();
+                    
+                Empleado usuario = usuarios.Where(x => x.user.Rut == ins.Rut)
+                    .FirstOrDefault();
+                if (usuario == null || usuario.act == false)
                     return BadRequest("El Usuario no tiene Acceso");
                 // ahora validamos nuestro tipo de ingreso
                 if(ins.TipoIngreso != 5)
@@ -60,7 +62,7 @@ namespace AsisPas.Controllers.API
                     var ti = await context.Marcaciones
                         .Where(x => x.Empleadoid == usuario.id && x.TipoIngreso == ins.TipoIngreso)
                         .FirstOrDefaultAsync();
-                    if(ti == null)
+                    if(ti != null)
                         return BadRequest("El Usuario Ya Tiene una marca para esta marca");
                 }
 

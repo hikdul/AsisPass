@@ -1,0 +1,259 @@
+﻿@using AsisPas.Reportes.Domingos
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Reporte De Domingos Y Feriados";
+    ViewBag.ReporteDomActive = "active";
+    ViewBag.ReporteMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+    List<ReporteDomingosYFeriados> Reportes = ViewBag.Reportes; 
+    
+
+
+}
+
+ @if (mensaje != " " && mensaje != "" && mensaje != null)  
+ {
+     <div class="card-body">
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+             <strong>Mensaje: </strong> @mensaje
+         </div>
+     </div>
+ }
+  @if (Reportes == null || Reportes.Count() < 1)  
+ {
+     <div class="card-body">
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+             <strong>Mensaje: </strong> No Hay Datos en este Momento
+         </div>
+     </div>
+ }
+
+
+@foreach(var reporte in Reportes)
+{
+    <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title text-white"> @reporte.NombreEmpleado </h4>
+                </div>
+                 
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+                <div class="mt-1">
+                    <h6 class="card-subtitle text-white">@reporte.RutEmpleado</h6>   
+                </div>
+                <div class="float-right ml-1">
+                    <div class="btn-group center">
+
+                        <form method="post" asp-action="Excel" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-success"><i class="la la-file-excel-o"></i></button>
+                        </form>
+                           <form asp-action="Pdf" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-light"><i class="la la-file-pdf-o"></i></button>
+                        </form>
+                           <form asp-action="Word" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-primary"><i class="la la-file-word-o"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+             <div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item">
+                         Empresa: <strong> @reporte.NombreEmpresa</strong>
+                         <br/>
+                         RUT: <strong> @reporte.RutEmpresa</strong>
+                     </li>
+                     <li class="list-group-item">
+                        Lugar Pretacion Servicio: @reporte.NombreSede
+                         <br/>
+                        Direccion: @reporte.DireccionDelaSede
+                     </li>
+                     <li class="list-group-item">
+                        Turno: @reporte.NombreHorario
+                     </li>
+                     <li class="list-group-item">
+                        Periodo: @reporte.inicio.ToString("dd/MM/yyyy") al @reporte.fin.ToString("dd/MM/yyyy")
+                     </li>
+                     
+                     <li class="list-group-item">
+                        Domingos Del Periodo: @reporte.TotalDomingosPeriodo
+                        <br/>
+                        Domingos Laborados: @reporte.TotalDomingos
+                     </li>
+                     <li class="list-group-item">
+                        feraiados Del Periodo: @reporte.TotalFeriadosPeriodo
+                        <br/>
+                        Feriados Laborados: @reporte.TotalFeriadosLaborados
+                     </li>
+                 </ul>
+             </div> 
+
+
+              <div class="mt-2">
+                 <div class="table-responsive pb-4 pr-4 pl-4">
+                     <div class="mt-1 card-subtitle text-center">
+                         <h5>Totales Anuales</h5>
+                     </div>
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Inicio
+                                </th>
+                                <th scope="col">
+                                    fin
+                                </th>
+                                <th scope="col">
+                                    Domingos en periodo
+                                </th>
+                                <th scope="col">
+                                    Domingos Laborados
+                                </th>
+                                <th scope="col">
+                                    Feriados en periodo
+                                </th>
+                                <th scope="col">
+                                    Feriados Laborados
+                                </th>
+                                 <th scope="col">
+                                    <i class="la la-gears"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(reporte.totalesPorAno != null && reporte.totalesPorAno.Count > 0)
+                                @foreach (var item in reporte.totalesPorAno)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                           @item.inicio.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                           @item.fin.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                           @item.totalDomingosenPeriodo
+                                        </td>
+                                        <td scope="row">
+                                           @item.totalDomingos
+                                        </td>
+                                        <td scope="row">
+                                           @item.totalFeriadosenPeriodo
+                                        </td>
+                                        <td scope="row">
+                                           @item.totalFeriados
+                                        </td>
+                                        <td>
+                                             <a asp-action="verObs"  alt="verPermiso" class="la la-see text-success">  </a>
+                                        </td>
+                                    </tr>
+                                }
+                       </tbody>
+                   </table>
+                </div>
+            </div>
+            
+                <div class="mt-2">
+                 <div class="table-responsive pb-4 pr-4 pl-4">
+                     <div class="mt-1 card-subtitle text-center">
+                         <h5>Totales Mensuales</h5>
+                     </div>
+
+                      @if(reporte.RegitroMensual != null && reporte.RegitroMensual.Count > 0)
+                        @foreach (var mes in reporte.RegitroMensual)
+                        {
+                           <ul class="list-group list-group-flush">
+                             <li class="list-group-item">
+                             Inicio Periodo: <strong> @mes.inicio.ToString("dd/MM/yyyy")</strong>
+                             <br/>
+                             Fin Periodo: <strong> @mes.fin.ToString("dd/MM/yyyy")</strong>
+                             </li>
+                             <li class="list-group-item">
+                                Domingos Del Periodo: @mes.totalDomingosenPeriodo
+                                <br/>
+                                Domingos Laborados: @mes.totalDomingos
+                             </li>
+                             <li class="list-group-item">
+                                feraiados Del Periodo: @mes.totalFeriadosenPeriodo
+                                <br/>
+                                Feriados Laborados: @mes.totalFeriados
+                             </li>
+                            </ul>
+
+                 <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Fecha
+                                </th>
+                                <th scope="col">
+                                    Asistio
+                                </th>
+                                <th scope="col">
+                                    Observacion
+                                </th>
+                                 <th scope="col">
+                                    <i class="la la-gears"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (mes.Diario != null && mes.Diario.Count > 0)
+                                @foreach (var diario in mes.Diario) 
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                           @diario.fecha.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                           @diario.Asistio
+                                        </td>
+                                        <td scope="row">
+                                           @diario.Observacion
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
+                       </tbody>
+                   </table>
+                </div>
+
+                        }
+            </div>
+            </div>
+           
+        </div>
+            <div class="card-footer">
+                <h6 class="card-subtitle"> Fecha Solicitud Reporte: @reporte.FechaGenerado.ToString("dd/MM/yyyy") </h6>
+            </div>
+    </div>
+    </div>
+    </div>
+
+}

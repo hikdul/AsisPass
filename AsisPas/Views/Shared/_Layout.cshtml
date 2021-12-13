@@ -97,10 +97,23 @@
                              Asistencia
                          </a>
                      </li>
-                    
+                    <li class="is-shown @ViewBag.ReporteDomActive">
+                         <a class="menu-item" asp-area="" asp-controller="ReporteDomigosYFeriados" asp-action="Index">
+                             <i class="la la-building"></i>
+                             Domingos Y Feriados
+                         </a>
+                     </li>
+                     <li class="is-shown @ViewBag.CambioTActive">
+                         <a class="menu-item" asp-area="" asp-controller="ReporteCambioDeTurno" asp-action="Index">
+                             <i class="la la-building"></i>
+                             Cambios De Turno
+                         </a>
+                     </li>
                 </ul>
-           </li>
+          
      
+
+            
           <!--Empresa-->
 
           <li class="nav-item has-sub @ViewBag.EmpresaMenu">

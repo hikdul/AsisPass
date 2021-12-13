@@ -230,3 +230,7 @@ C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\runtimes\osx\native\l
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\runtimes\win-arm64\native\libSkiaSharp.dll
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\hikdu\source\Net\AsisPas\AsisPas\bin\Debug\net5.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\ReporteDomigosYFeriados\Index.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\ReporteDomigosYFeriados\Generar.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\ReporteCambioDeTurno\Generar.cshtml.g.cs
+C:\Users\hikdu\source\Net\AsisPas\AsisPas\obj\Debug\net5.0\Razor\Views\ReporteCambioDeTurno\Index.cshtml.g.cs
