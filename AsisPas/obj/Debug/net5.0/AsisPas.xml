@@ -842,6 +842,51 @@
             <param name="ins"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.ReporteJornadaController">
+            <summary>
+            controlador para los reportes por jornada
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteJornadaController.#ctor(AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteJornadaController.Index">
+            <summary>
+            pagino principal
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteJornadaController.Generar(AsisPas.Reportes.Finder)">
+            <summary>
+            para generar el listado de reportes
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteJornadaController.Excel(AsisPas.Reportes.ToPrint)">
+            <summary>
+             para retornar el reporte en excel
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteJornadaController.Pdf(AsisPas.Reportes.ToPrint)">
+            <summary>
+            para exportar en pdf
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.ReporteJornadaController.Word(AsisPas.Reportes.ToPrint)">
+            <summary>
+            para exportar en pdf
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.SedesController">
             <summary>
             controller para sedes
@@ -3881,6 +3926,11 @@
             verifica el total del periodo
             </summary>
         </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornada.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
         <member name="M:AsisPas.Reportes.Jornada.ReportePorJornada.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
             <summary>
             para llenar los datos del reporte
@@ -3889,6 +3939,27 @@
             <param name="inicio"></param>
             <param name="fin"></param>
             <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornada.Excel(AsisPas.Reportes.Jornada.ReportePorJornada)">
+            <summary>
+            para exportar un reporte en excel
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornada.Pdf(AsisPas.Reportes.Jornada.ReportePorJornada)">
+            <summary>
+            para exportar un reporte en pdf
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornada.Word(AsisPas.Reportes.Jornada.ReportePorJornada)">
+            <summary>
+            para exportar un documento en word
+            </summary>
+            <param name="reporte"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Reportes.Jornada.TotalesJornada">

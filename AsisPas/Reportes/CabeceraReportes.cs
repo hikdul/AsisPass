@@ -76,7 +76,11 @@ namespace AsisPas.Reportes
             try
             {
                 // ### LLENO LA CABECERA
-                int sede = 0;
+                var marca = await context.Marcaciones
+                    .Where(x => x.Empleadoid == idEmpleado).OrderByDescending(x => x.marca)
+                    .FirstOrDefaultAsync();
+
+                int sede = marca == null ? 0 : marca.Sedeid;
                 // lleno mis fechas
                 this.FechaGenerado = DateTime.Now;
                 this.inicio = inicio;

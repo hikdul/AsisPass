@@ -64,6 +64,8 @@ namespace AsisPas.Reportes
         /// <returns></returns>
         public static double ObtenerTotalSg(DateTime inicio, DateTime fin, DateTime Dinicio, DateTime Dfin, bool mismodia = true)
         {
+            
+
             if (mismodia)
             {
                 var totalJornada = fin.Subtract(inicio);

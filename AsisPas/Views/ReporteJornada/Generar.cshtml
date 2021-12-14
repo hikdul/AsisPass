@@ -1,0 +1,227 @@
+﻿@using AsisPas.Reportes.Jornada
+
+
+
+
+@{
+    ViewBag.Encabezado = ViewData["Title"] = "Reporte Por Jornada";
+    ViewBag.ReporteJornadaActive = "active";
+    ViewBag.ReporteMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+    List<ReportePorJornada> Reportes = ViewBag.Reportes; 
+    
+
+
+}
+
+ @if (mensaje != " " && mensaje != "" && mensaje != null)  
+ {
+     <div class="card-body">
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+             <strong>Mensaje: </strong> @mensaje
+         </div>
+     </div>
+ }
+  @if (Reportes == null || Reportes.Count() < 1)  
+ {
+     <div class="card-body">
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+             <strong>Mensaje: </strong> No Hay Datos en este Momento
+         </div>
+     </div>
+ }
+
+
+@foreach(var reporte in Reportes)
+{
+    <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title text-white"> @reporte.NombreEmpleado </h4>
+                </div>
+                 
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+                <div class="mt-1">
+                    <h6 class="card-subtitle text-white">@reporte.RutEmpleado</h6>   
+                </div>
+                <div class="float-right ml-1">
+                    <div class="btn-group center">
+
+                        <form method="post" asp-action="Excel" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-success"><i class="la la-file-excel-o"></i></button>
+                        </form>
+                           <form method="post" asp-action="Pdf" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-light"><i class="la la-file-pdf-o"></i></button>
+                        </form>
+                           <form method="post" asp-action="Word" >
+
+                            <input hidden type="text" id="Empleadoid" name="Empleadoid" value=@reporte.idEmpleado>
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping1" value=@ViewBag.fechai name="Finicio" id="Finicio" />
+                            <input hidden class="form-control" type="date" aria-describedby="addon-wrapping2" value=@ViewBag.fechaf name="Ffin" id="Ffin" />
+
+                            <button type="submit" class="btn btn-primary"><i class="la la-file-word-o"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+             <div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item">
+                         Empresa: <strong> @reporte.NombreEmpresa</strong>
+                         <br/>
+                         RUT: <strong> @reporte.RutEmpresa</strong>
+                     </li>
+                     <li class="list-group-item">
+                        Lugar Pretacion Servicio: @reporte.NombreSede
+                         <br/>
+                        Direccion: @reporte.DireccionDelaSede
+                     </li>
+                     <li class="list-group-item">
+                        Turno: @reporte.NombreHorario
+                     </li>
+                     <li class="list-group-item">
+                        Periodo: @reporte.inicio.ToString("dd/MM/yyyy") al @reporte.fin.ToString("dd/MM/yyyy")
+                     </li>
+                    <li class="list-group-item">
+                        Total Tiempo Laborado En Periodo: @reporte.TotalPeriodo
+                     </li>                     
+                 </ul>
+             </div> 
+             <div class="mt-2">
+                 <h6 class="card-card-subtitle text-center">Totales Semanales</h6>
+                 <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    inicio
+                                </th>
+                                <th scope="col">
+                                    fin
+                                </th>
+                                <th scope="col">
+                                    tiempo
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(reporte.TotalesSemanales != null && reporte.TotalesSemanales.Count > 0)
+                                @foreach (var item in reporte.TotalesSemanales)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                            @item.inicio.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                            @item.fin.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                            @item.tiempo.toStr();
+                                        </td>
+                                        
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+
+             </div>
+
+               <div class="mt-2">
+                 <h6 class="card-card-subtitle text-center">Estudios por dias</h6>
+                 <div class="table-responsive pb-4 pr-4 pl-4">
+                    <table id="TableAlau" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Fecha
+                                </th>
+                                <th scope="col">
+                                    Marcas Pautadas
+
+                                </th>
+                                <th scope="col">
+                                    Descanso Pautado
+                                </th>
+                                <th scope="col">
+                                    Marcas 
+
+                                </th>
+                                <th scope="col">
+                                    Descanso 
+                                </th>
+                                
+                                <th scope="col">
+                                    Tiempo Laborado
+                                </th>
+                                 <th scope="col">
+                                    <i class="la la-gears"></i>
+                                </th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                            @if(reporte.Dias != null && reporte.Dias.Count > 0)
+                                @foreach (var item in reporte.Dias)
+                                {
+                                    <tr class="line--hover">
+                                        <td scope="row">
+                                            @item.fecha.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td scope="row">
+                                             @item.horario.InicioJornada - @item.horario.FinJornada
+                                        </td>
+                                        <td scope="row">
+                                             @item.horario.InicioDescanzo - @item.horario.FinDescazo
+                                        </td>
+                                        <td scope="row">
+                                              @item.marcas.InicioJornada - @item.marcas.FinJornada
+                                        </td>
+                                        <td scope="row">
+                                             @item.marcas.InicioDescanzo - @item.marcas.FinDescazo
+                                        </td>
+                                        <td>
+                                            @item.tiempoLaborado
+                                        </td>
+                                         <td>
+                                            
+                                        </td>
+                                    </tr>
+
+                                }
+                        </tbody>
+                    </table>
+                </div>
+
+             </div>
+             
+            </div>
+            <div class="card-footer">
+                <h6 class="card-subtitle"> Fecha Solicitud Reporte: @reporte.FechaGenerado.ToString("dd/MM/yyyy") </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

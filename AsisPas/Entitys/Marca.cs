@@ -234,8 +234,12 @@ namespace AsisPas.Entitys
         {
             try
             {
-                var marcas = await context.Marcaciones.Where(x => x.Empleadoid == idEmpleado
-                && x.marca.ToString("dd/MM/yyyy") == fecha.ToString("dd/MM/yyyy")).ToListAsync();
+                var marcas = await context.Marcaciones
+                    .Where(x => x.Empleadoid == idEmpleado
+                    && x.marca.Year == fecha.Year
+                    && x.marca.Month == fecha.Month
+                    && x.marca.Day == fecha.Day)
+                    .ToListAsync();
                 var ini = marcas.Where(x => x.TipoIngreso == 0).FirstOrDefault();
                 var end = marcas.Where(x => x.TipoIngreso == 3).FirstOrDefault();
                 var iniD = marcas.Where(x => x.TipoIngreso == 1).FirstOrDefault();
