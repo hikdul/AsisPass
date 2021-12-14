@@ -79,7 +79,7 @@ namespace AsisPas.Reportes.Jornada
                         inicioSem = i;
                     
                     var Haux = ah.Where(x => x.inicio<= i && x.fin >= i).ToList();
-                    var Horario = Haux == null || Haux.Count < 1 ? null : ah[0].Horario;
+                    var Horario = Haux == null || Haux.Count < 1 ? null : Haux[0].Horario;
 
 
 

@@ -20,17 +20,22 @@ namespace AsisPas.Reportes
         /// cantidad de segundos
         /// </summary>
         public int seg { get; set; }
+        /// <summary>
+        /// el tiempo total en segundos
+        /// </summary>
+        public double TiempoEnSegundos { get; set; }
         #endregion
 
 
         #region ctor
 
-            /// <summary>
-            /// constructor, pasandole el total de segundos
-            /// </summary>
-            /// <param name="TiempoEnSegundos"></param>
+        /// <summary>
+        /// constructor, pasandole el total de segundos
+        /// </summary>
+        /// <param name="TiempoEnSegundos"></param>
         public RTime(double TiempoEnSegundos)
         {
+            this.TiempoEnSegundos = TiempoEnSegundos;
             this.Hora = (int)(TiempoEnSegundos / 3600);
             this.min = (int)(TiempoEnSegundos - (this.Hora * 3600)) / 60;
             this.seg = (int)( TiempoEnSegundos - ((this.Hora * 3600) + (this.min * 60)));

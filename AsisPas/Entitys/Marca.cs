@@ -258,8 +258,46 @@ namespace AsisPas.Entitys
         }
 
 
-            #endregion
-     
+        #endregion
+
+        #region diferenicial de horas con horario
+
+        /// <summary>
+        /// retorna la diferencia entre la marca y una hora generada
+        /// </summary>
+        /// <param name="marca"></param>
+        /// <param name="hora"></param>
+        /// <returns></returns>
+        public static double diferencialConHora(DateTime marca, string hora)
+        {
+            try
+            {
+                int y = marca.Year;
+                int M = marca.Month;
+                int d = marca.Day;
+
+                var split = hora.Split(':');
+
+                int h = split[0] == null ? 0 : Int32.Parse(split[0]);
+                int m = split[1] == null ? 0 : Int32.Parse(split[1]);
+                int s = split.Count() < 3  ? 0 : Int32.Parse(split[2]);
+
+                var Hora = new DateTime(y, M, d, h, m, 0);
+
+                return marca.Subtract(Hora).TotalSeconds;
+
+
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+
+        }
+
+
+        #endregion
+
     }
 
 

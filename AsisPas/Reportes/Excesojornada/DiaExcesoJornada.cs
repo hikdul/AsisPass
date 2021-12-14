@@ -8,6 +8,8 @@ namespace AsisPas.Reportes.Excesojornada
     /// </summary>
     public class DiaExcesoJornada
     {
+        #region propiedades
+
         /// <summary>
         /// fecha
         /// </summary>
@@ -23,7 +25,38 @@ namespace AsisPas.Reportes.Excesojornada
         /// <summary>
         /// tiempo de exceso
         /// </summary>
-        public horas calculos { get; set; }
+        public RTime Exceso { get; set; }
+        /// <summary>
+        /// tiempo de atrazo
+        /// </summary>
+        public RTime Atrazos { get; set; }
+        /// <summary>
+        /// si este dia es laboral segun horario
+        /// </summary>
+        public bool DiaLaboral { get; set; }
+        /// <summary>
+        /// en caso de ser necesario
+        /// </summary>
+        public string mensaje { get; set; } = "";
+
+        #endregion
+
+
+        #region constructor
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public DiaExcesoJornada()
+        {
+            this.Horario = new horas();
+            this.Marcas = new horas();
+            this.Exceso = new(0);
+            this.Atrazos = new(0);
+        }
+
+
+        #endregion
 
     }
 }

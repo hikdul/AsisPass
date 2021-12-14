@@ -307,5 +307,58 @@ namespace AsisPas.Entitys
         }
         #endregion
 
+        #region calcular tiempo entre horas del horario
+        /// <summary>
+        /// retorna el tiempo en segundos de un horario
+        /// </summary>
+        /// <param name="horario"></param>
+        /// <returns></returns>
+        public static double tiempoEnSegundos(Horario horario)
+        {
+            try
+            {
+                DateTime date = new DateTime(1990, 3, 22);
+
+                var hi = ComvertirHoraAFecha(horario.hi, date);
+                var hf = ComvertirHoraAFecha(horario.hf, date);
+                var hbi = ComvertirHoraAFecha(horario.hbi, date);
+                var hbf = ComvertirHoraAFecha(horario.hbf, date);
+
+
+                return ((hi - hf) -(hbi - hbf)).TotalSeconds;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// para comvertir una hora a una fecha
+        /// </summary>
+        /// <param name="hora"></param>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        public static DateTime ComvertirHoraAFecha(string hora, DateTime fecha)
+        {
+
+            int y = fecha.Year;
+            int M = fecha.Month;
+            int d = fecha.Day;
+
+            var split = hora.Split(':');
+
+            int h = split[0]== null ? 0 :Int32.Parse(split[0])  ;
+            int m = split[1]== null ? 0 :Int32.Parse(split[1])  ;
+            int s = split[2]== null ? 0 : Int32.Parse(split[2]);
+
+            return new DateTime(y, M, d, h, m, s);
+
+        }
+
+        #endregion
+
     }
 }
