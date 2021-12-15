@@ -60,10 +60,73 @@ namespace AsisPas.Controllers
         /// aqui devuelve los datos de usuario en base a mi correo electronico
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        public async System.Threading.Tasks.Task<IActionResult> Index()
         {
+            Usuario usuario;
+
+            if (User.IsInRole("SuperAdmin"))
+                    usuario = new() {
+                        Apellidos= "Administrador",
+                        Nombres = "Super",
+                        telefono = "secrect",
+                        Email = "secrect",
+                        Rut = "secrect",
+                        
+                    };
+            else
+                usuario = await context.Usuarios.Where(x => x.Email == User.Identity.Name).FirstOrDefaultAsync();
+
+            if (usuario == null)
+                RedirectToAction("logout");
+            ViewBag.usuario = usuario;
 
             return View();
+        }
+
+        /// <summary>
+        /// vista para cambiar de contraseña
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult ChangePsw()
+        {
+            return View();
+        }
+        /// <summary>
+        /// aqui esta a chicha!!! 
+        /// </summary>
+        /// <param name="ins"></param>
+        /// <returns></returns>
+        public async System.Threading.Tasks.Task<IActionResult> Cambiar(CambioContraseña ins)
+        {
+            try
+            {
+
+                if (ins.validate())
+                {
+                    var Us = await userManager.GetUserAsync(User);
+                    if (Us == null)
+                    {
+                        ViewBag.Err = "Los Datos suministrados no son validos";
+                        return View("logout");
+                    }
+
+
+                    var changePasswordResult = await userManager.ChangePasswordAsync(Us, ins.Anterior, ins.nueva);
+
+                    await signInManager.RefreshSignInAsync(Us);
+
+                    ViewBag.Err = "Contraseña Cambiada Exitosamente...";
+                    return View("ChangePsw");
+                }
+                ViewBag.Err = "Los Datos suministrados no son validos por favor verifiquelos.";
+                return View("ChangePsw");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ViewBag.Err = "Upps... Algo salio mal, Por Favor Intente mas tarde";
+                return View("ChangePsw");
+            }
         }
 
         #endregion

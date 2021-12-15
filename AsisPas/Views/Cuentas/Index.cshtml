@@ -1,10 +1,55 @@
-﻿
+﻿@using AsisPas.Entitys
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Encabezado = ViewData["Title"] = "Datos De La Cuenta";
+    ViewBag.DatosPersonalesActive = "active";
+    ViewBag.CuentasMenu = "open";
+    ViewBag.ActiveEncabezado = true;
+    string mensaje = ViewBag.Err;
+    Usuario user = ViewBag.usuario; 
 }
 
-<h1>Aqui van los datos de usuarios</h1>
-
-
-<a asp-action="logout" class="btn btn-danger">Salir</a>
-
+<div class="row">
+    <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title"> Datos De @user.Email </h1>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+                    <div class="row">
+                        
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item">
+                            <i class="text-mutted"> Nombres: </i>
+                            <strong>@user.Nombres</strong>
+                        </li>                    
+                        <li class="list-group-item">
+                            <i class="text-mutted"> Apellidos: </i>
+                            <strong>@user.Apellidos</strong>
+                        </li>                    
+                        <li class="list-group-item">
+                            <i class="text-mutted"> RUT: </i>
+                            <strong>@user.Rut</strong>
+                        </li>                    
+                        <li class="list-group-item">
+                            <i class="text-mutted"> Correo: </i>
+                            <strong>@user.Email</strong>
+                        </li>                    
+                        <li class="list-group-item">
+                            <i class="text-mutted"> Telefono: </i>
+                            <strong>@user.telefono</strong>
+                        </li>                    
+                     <li class="list-group-item">
+                            <i class="text-mutted"> Hash Actual: </i>
+                            <strong>@user.Hash</strong>
+                        </li>    
+                    </ul>
+                       
+                    </div>
+                <div class="card-footer form-group text-center m-0">
+                    <a asp-action="logout" class="btn btn-outline-danger">Salir</a>
+                </div>
+               </div>
+            </div>
+    </div>
+</div>

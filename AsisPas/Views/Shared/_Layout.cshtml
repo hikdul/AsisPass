@@ -50,17 +50,9 @@
                             </ul>
                             <ul class="nav navbar-nav float-right">
                                 <li class="dropdown dropdown-user nav-item">
-                                    <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                    <a class="nav-link" asp-controller="cuentas" asp-action="index" >
                                         <p class="text-danger">@User.Identity.Name</p>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <div class="arrow_box_right">
-                                        </div>
-                                        <a class="dropdown-item" href="#"><i class="ft-user"></i> Perfil@correo.com</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><i class="ft-power"></i> Salir</a>
-                                    </div>
-
                                 </li>
                             </ul>
                         </div>
@@ -285,8 +277,41 @@
                 </ul>
                   
            </li>
-          <!--otro-->
-         
+
+
+
+
+          <!--Ususario-->
+           <li class="nav-item has-sub @ViewBag.CuentasMenu">
+                 <a class="alert-dark" href="#">
+                     <i class="la la-users text-dark"></i>
+                     <span class="menu-title" data-i18n="">Mi Cuenta</span>
+                 </a>
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.DatosPersonalesActive">
+                         <a class="menu-item" asp-area="" asp-controller="cuentas" asp-action="Index">
+                             <i class="la la-building"></i>
+                             Mi Cuenta
+                         </a>
+                     </li>
+                      <li class="is-shown @ViewBag.pswActive">
+                         <a class="menu-item" asp-area="" asp-controller="cuentas" asp-action="ChangePsw">
+                             <i class="la la-building"></i>
+                             Cambiar Contraseña
+                         </a>
+                     </li>
+                      <li class="is-shown @ViewBag.nada">
+                         <a class="menu-item" asp-area="" asp-controller="cuentas" asp-action="logout">
+                             <i class="la la-building"></i>
+                             Salir
+                         </a>
+                     </li>
+                </ul>
+                  
+           </li>
+
+
+
         </ul>
 
                 @{
@@ -298,7 +323,7 @@
                     if (User.IsInRole("Fiscal")) ScreemRole = "Fiscal";
                 }
 
-      </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank">@ScreemRole</a>
+      </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" asp-controller="cuentas" asp-action="index">@ScreemRole</a>
       <div class="navigation-background"></div>
     </div>
 

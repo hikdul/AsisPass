@@ -320,6 +320,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Controllers.CuentasController.ChangePsw">
+            <summary>
+            vista para cambiar de contraseña
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Controllers.CuentasController.Cambiar(AsisPas.DTO.CambioContraseña)">
+            <summary>
+            aqui esta a chicha!!! 
+            </summary>
+            <param name="ins"></param>
+            <returns></returns>
+        </member>
         <member name="M:AsisPas.Controllers.CuentasController.login">
             <summary>
             vista para ingresar al sistema
@@ -1624,6 +1637,32 @@
             <summary>
             fin del periodo de busquedo
             </summary>
+        </member>
+        <member name="T:AsisPas.DTO.CambioContraseña">
+            <summary>
+            para enviar los datos para cambiar la contraseña
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambioContraseña.Anterior">
+            <summary>
+            psw actual
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambioContraseña.nueva">
+            <summary>
+            nueva
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.CambioContraseña.nueva2">
+            <summary>
+            verificar nueva
+            </summary>
+        </member>
+        <member name="M:AsisPas.DTO.CambioContraseña.validate">
+            <summary>
+            para validar
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:AsisPas.DTO.CambiosDTO_in">
             <summary>
@@ -3349,6 +3388,24 @@
             <summary>
             genera una clave aleatoria 
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Program">
+            <summary>
+            program class
+            </summary>
+        </member>
+        <member name="M:AsisPas.Program.Main(System.String[])">
+            <summary>
+            main function
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:AsisPas.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            host builder
+            </summary>
+            <param name="args"></param>
             <returns></returns>
         </member>
         <member name="T:AsisPas.Reportes.DiasAsistencia">
