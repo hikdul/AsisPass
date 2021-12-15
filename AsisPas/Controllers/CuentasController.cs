@@ -152,6 +152,7 @@ namespace AsisPas.Controllers
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
+        [AllowAnonymous]
 
         public async System.Threading.Tasks.Task<ActionResult> Singin(UserLogin userInfo)
         {
