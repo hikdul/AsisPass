@@ -120,37 +120,42 @@
             
           <!--Empresa-->
 
-          <li class="nav-item has-sub @ViewBag.EmpresaMenu">
-                 <a class="alert-dark" href="#">
+            @if (!User.IsInRole("Empleado"))
+            {
+                            <li class="nav-item has-sub @ViewBag.EmpresaMenu">
+                                <a class="alert-dark" href="#">
                      <i class="la la-dot-circle-o text-dark"></i>
                      <span class="menu-title" data-i18n="">Empresas</span>
                  </a>
                  <ul class="menu-content">
-                     <li class="is-shown @ViewBag.EmpresaListActive">
-                         <a class="menu-item" asp-area="" asp-controller="Empresa" asp-action="Index">
-                             <i class="la la-building"></i>
-                             Empresas
-                         </a>
-                     </li>
+                      @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                      {
+                          <li class="is-shown @ViewBag.EmpresaListActive">
+                              <a class="menu-item" asp-area="" asp-controller="Empresa" asp-action="Index">
+                                  <i class="la la-building"></i>
+                                  Empresas
+                              </a>
+                          </li>
+                          <li class="is-shown @ViewBag.GateListActive">
+                              <a class="menu-item" asp-area="" asp-controller="Gates" asp-action="Index">
+                                  <i class="la la-object-group"></i>
+                                  Gates
+                              </a>
+                          </li>
+                      }
                      <li class="is-shown @ViewBag.SedeListActive">
                          <a class="menu-item" asp-area="" asp-controller="Sedes" asp-action="Index">
                              <i class="la la-object-group"></i>
                              Sedes
                          </a>
                      </li>
-                      <li class="is-shown @ViewBag.GateListActive">
-                         <a class="menu-item" asp-area="" asp-controller="Gates" asp-action="Index">
-                             <i class="la la-object-group"></i>
-                             Gates
-                         </a>
-                     </li>
-                </ul>
+                 </ul>
            </li>
-
+           }
          
             
           <!--Horarios-->
-                    <li class="nav-item has-sub @ViewBag.HorarioMenu">
+            <li class="nav-item has-sub @ViewBag.HorarioMenu">
                  <a class="alert-dark" href="#">
                      <i class="la la-calendar text-dark"></i>
                      <span class="menu-title" data-i18n="">Horarios</span>
@@ -162,13 +167,16 @@
                              Horarios
                          </a>
                      </li>
-                      <li class="is-shown @ViewBag.AsignacionHistoryActive">
-                         <a class="menu-item" asp-area="" asp-controller="AdministradorHorarios" asp-action="Index">
-                             <i class="la la-hourglass-half"></i>
-                             Asignar
-                         </a>
-                     </li>
-                     <li class="is-shown @ViewBag.HorarioHistoryActive">
+                       @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Empresa"))
+                        {
+                            <li class="is-shown @ViewBag.AsignacionHistoryActive">
+                                <a class="menu-item" asp-area="" asp-controller="AdministradorHorarios" asp-action="Index">
+                                    <i class="la la-hourglass-half"></i>
+                                    Asignar
+                                </a>
+                            </li>
+                         }
+                                <li class="is-shown @ViewBag.HorarioHistoryActive">
                          <a class="menu-item" asp-area="" asp-controller="AdministradorHorarios" asp-action="Historico">
                              <i class="la la-calendar-check-o"></i>
                              Historico
@@ -179,11 +187,16 @@
 
               
           <!--Usuarios-->
-                    <li class="nav-item has-sub @ViewBag.UsuarioMenu">
-                 <a class="alert-dark" href="#">
+           @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Empresa"))
+            {
+
+             <li class="nav-item has-sub @ViewBag.UsuarioMenu">
+                                <a class="alert-dark" href="#">
                      <i class="la la-users text-dark"></i>
                      <span class="menu-title" data-i18n="">Usuarios</span>
                  </a>
+                  @if(User.IsInRole("SuperAdmin") || User.IsInRole("Admin") )
+                  {
                   <ul class="menu-content">
                      <li class="is-shown @ViewBag.SistListActive">
                          <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="AdmoSistema">
@@ -200,14 +213,9 @@
                          </a>
                      </li>
                 </ul>
-                  <ul class="menu-content">
-                     <li class="is-shown @ViewBag.FiscalListActive">
-                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="Fiscalizadores">
-                             <i class="la la-building"></i>
-                             Fiscalizadores
-                         </a>
-                     </li>
-                </ul>
+                }
+                 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Empresa"))
+                     {
                  <ul class="menu-content">
                      <li class="is-shown @ViewBag.EmpListActive">
                          <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="Empleados">
@@ -216,9 +224,17 @@
                          </a>
                      </li>
                 </ul>
-                
+                  <ul class="menu-content">
+                     <li class="is-shown @ViewBag.FiscalListActive">
+                         <a class="menu-item" asp-area="" asp-controller="Cuentas" asp-action="Fiscalizadores">
+                             <i class="la la-building"></i>
+                             Fiscalizadores
+                         </a>
+                     </li>
+                </ul>
+                }
            </li>
-
+           }
           <!--Marcaciones-->
 
                 <li class="nav-item has-sub @ViewBag.MarcasMenu">
@@ -234,22 +250,23 @@
                          </a>
                      </li>
                 </ul>
-                  <ul class="menu-content">
-                     <li class="is-shown @ViewBag.CambiosActive">
-                         <a class="menu-item" asp-area="" asp-controller="Cambios" asp-action="Index">
-                             <i class="la la-building"></i>
-                             Cambios
-                         </a>
-                     </li>
-                </ul>
-                <ul class="menu-content">
+                
+                     <ul class="menu-content">
+                         <li class="is-shown @ViewBag.CambiosActive">
+                             <a class="menu-item" asp-area="" asp-controller="Cambios" asp-action="Index">
+                                 <i class="la la-building"></i>
+                                 Cambios
+                             </a>
+                         </li>
+                     </ul>
+                 <ul class="menu-content">
                      <li class="is-shown @ViewBag.IncidenciasActive">
                          <a class="menu-item" asp-area="" asp-controller="Incidencias" asp-action="Index">
                              <i class="la la-building"></i>
                              Incidencias
                          </a>
                      </li>
-                </ul>   
+                </ul>
                   <ul class="menu-content">
                      <li class="is-shown @ViewBag.IncidenciasActive">
                          <a class="menu-item" asp-area="" asp-controller="Permisos" asp-action="Index">

@@ -2,6 +2,7 @@
 using AsisPas.Entitys;
 using AsisPas.Reportes;
 using AsisPas.Reportes.CambiosTurno;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OfficeOpenXml;
@@ -14,6 +15,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// constructor
     /// </summary>
+    [Authorize]
     public class ReporteCambioDeTurnoController : Controller
     {
         #region ctor

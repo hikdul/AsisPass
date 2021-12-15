@@ -2,6 +2,7 @@
 using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -10,6 +11,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// controlador de vistas de incidencias
     /// </summary>
+    [Authorize]
     public class IncidenciasController : Controller
     {
         #region ctor

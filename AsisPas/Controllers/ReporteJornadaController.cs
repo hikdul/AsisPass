@@ -2,6 +2,7 @@
 using AsisPas.Entitys;
 using AsisPas.Reportes;
 using AsisPas.Reportes.Jornada;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,6 +13,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// controlador para los reportes por jornada
     /// </summary>
+    [Authorize]
     public class ReporteJornadaController : Controller
     {
         #region constructor

@@ -1,4 +1,5 @@
 ﻿using AsisPas.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// home controller
     /// </summary>
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

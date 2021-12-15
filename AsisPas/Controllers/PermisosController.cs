@@ -2,6 +2,7 @@
 using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,6 +13,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// para generar los permisos y/o vacaciones
     /// </summary>
+    [Authorize]
     public class PermisosController : Controller
     {
         #region ctor

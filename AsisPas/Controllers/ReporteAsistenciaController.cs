@@ -4,6 +4,7 @@ using AsisPas.Reportes;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -15,6 +16,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// controlado para generar reportes por asistencia
     /// </summary>
+    [Authorize]
     public class ReporteAsistenciaController : Controller
     {
         #region ctor

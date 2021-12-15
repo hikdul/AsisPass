@@ -2,6 +2,7 @@
 using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// para administrar los puntos de acceso
     /// </summary>
+    [Authorize]
     public class GatesController : Controller
     {
         #region ctor

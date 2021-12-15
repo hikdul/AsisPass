@@ -2,6 +2,7 @@
 using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,6 +14,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// para manipular los datos del controlador de horarios
     /// </summary>
+    [Authorize]
     public class AdministradorHorariosController : Controller
     {
 

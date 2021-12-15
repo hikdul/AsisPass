@@ -2,6 +2,7 @@
 using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsisPas.Controllers
@@ -9,6 +10,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// Feriados
     /// </summary>
+    [Authorize]
     public class FeriadoController : Controller
     {
         #region ctor

@@ -75,6 +75,17 @@ namespace AsisPas
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            //=== Para configurar las cookies de mi aplicacion
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/cuentas/Login";
+                options.Cookie.Name = "YourAppCookieName";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                options.LoginPath = "/cuentas/Login";
+                options.LogoutPath = "/cuentas/Login";
+                options.SlidingExpiration = true;
+            });
             //=== add cors politice free
             services.AddCors(options =>
             {

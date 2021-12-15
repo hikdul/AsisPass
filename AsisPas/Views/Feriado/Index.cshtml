@@ -13,11 +13,12 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                   
+                    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin") )
+                    {
                         <a asp-controller="Feriado" asp-action="Nuevo" alt="Crear Nuevo" class="btn btn-danger btn-add-alau ml-3 mr-2">
                             <i class="ft-plus font-medium-5"></i>
                         </a>
-                   
+                   } 
                     <h4 class="card-title"> @ViewBag.Encabezado</h4>
                 </div>
                 <div class="heading-elements">
@@ -77,8 +78,11 @@
                                             }
                                         </td>
                                         <td>
-                                             <a asp-action="Editar" asp-route-id="@item.id" alt="Editar" class="la la-edit text-dark">  </a>
-                                             <a asp-action="Eliminar" asp-route-id="@item.id" alt="Eliminar" class="la la-remove text-danger">  </a>
+                                         @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Empresa"))
+                                        {
+                                            <a asp-action="Editar" asp-route-id="@item.id" alt="Editar" class="la la-edit text-dark">  </a>
+                                            <a asp-action="Eliminar" asp-route-id="@item.id" alt="Eliminar" class="la la-remove text-danger">  </a>
+                                        }
                                         </td>
                                     </tr>
 
