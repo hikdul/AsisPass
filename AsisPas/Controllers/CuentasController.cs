@@ -2,6 +2,7 @@
 using AsisPas.DTO;
 using AsisPas.Entitys;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace AsisPas.Controllers
     /// <summary>
     /// controlador para la manipulacion de cuentas a nivel visual
     /// </summary>
+    [Authorize]
     public class CuentasController : Controller
     {
         private readonly SignInManager<IdentityUser> signInManager;
@@ -136,6 +138,7 @@ namespace AsisPas.Controllers
         /// vista para ingresar al sistema
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public async System.Threading.Tasks.Task<ActionResult> login()
         {
             HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");

@@ -2,10 +2,10 @@
 ./AsisPas/bin/*
 ./AsisPas/obj/*
 ./AsisPas/Properties/*
-.vs/
+.vs/*
 ./ScriptAsDatabase/conecctionStrigAWS.txt
-AsisPas/bin/
-AsisPas/obj/
+AsisPas/bin/*
+AsisPas/obj/*
 AsisPas/Properties/*
 AsisPas/wwwroot/documentos/descargables
 AsisPas/wwwroot/documentos/pdf
