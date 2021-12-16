@@ -61,7 +61,11 @@ namespace AsisPas.Reportes.Jornada
             try
             {
                 // lleno mis fechas
-                await UpHead(idEmpleado, inicio, fin, context);
+                var first = await context.Marcaciones.FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado);
+                await UpHead(idEmpleado, inicio, fin,first, context);
+                if(first.marca > inicio)
+                    inicio = first.marca;
+
 
                 var ah = await context.AdmoHorarios
                     .Include(x => x.Horario)
@@ -72,7 +76,9 @@ namespace AsisPas.Reportes.Jornada
                 double contSem = 0;
                 double contPer = 0;
 
-                //completar el paseo para llenar el reporte... les extras incidencias, cambios y demas los agrego al final.
+                if (first == null || first.id < 1)
+                    this.Mensaje = "El Empleado aun no posee marcas en el periodo indicado, por tanto no se puede hocer el estudio.";
+                else
                 for (DateTime i = inicio; i <= fin; i = i.AddDays(1))
                 {
                     if (i == inicio)
@@ -81,64 +87,126 @@ namespace AsisPas.Reportes.Jornada
                     var Haux = ah.Where(x => x.inicio<= i && x.fin >= i).ToList();
                     var Horario = Haux == null || Haux.Count < 1 ? null : Haux[0].Horario;
 
-
-
                     if(Horario != null && Horario.id > 0)
                     {
-                        if (Horario.DiaLaboral((int)i.DayOfWeek))
-                        {
-                            var marcas = await Marca.MarcasDiaYUsuario(idEmpleado, i, context);
-
-                            var inicioTur = marcas.First(x => x.TipoIngreso == 0).marca;
-                            var finTur = marcas.First(x => x.TipoIngreso == 3).marca;
-                            var inicioDes = marcas.First(x => x.TipoIngreso == 1).marca;
-                            var findes = marcas.First(x => x.TipoIngreso == 2).marca;
-
-
-                            double tiempoHoy = RTime.ObtenerTotalSg(inicioTur,finTur,inicioDes,findes);
-
-                            contSem += tiempoHoy;
-                            contPer += tiempoHoy;
-
-                            Dias.Add(new()
+                            if (Horario.DiaLaboral((int)i.DayOfWeek))
                             {
-                                fecha = i,
-                                horario = new()
+                                var marcas = await Marca.MarcasDiaYUsuario(idEmpleado, i, context);
+
+                                if (marcas == null || marcas.Count < 4)
                                 {
-                                    FinDescazo = Horario.hbf,
-                                    FinJornada = Horario.hf,
-                                    InicioDescanzo = Horario.hbi,
-                                    InicioJornada = Horario.hi,
-                                },
-                                marcas = new()
+                                    Dias.Add(new()
+                                    {
+                                        fecha = i,
+                                        horario = new()
+                                        {
+                                            FinDescazo = Horario.hbf,
+                                            FinJornada = Horario.hf,
+                                            InicioDescanzo = Horario.hbi,
+                                            InicioJornada = Horario.hi,
+                                        },
+                                        marcas = null,
+                                        tiempoLaborado = new RTime(0).toStr()
+                                    });
+                                }
+                                else
                                 {
-                                    InicioJornada = inicioTur.ToString("HH:mm:ss"),
-                                    FinJornada =     finTur.ToString("HH:mm:ss"),
-                                    InicioDescanzo = inicioDes.ToString("HH:mm:ss"),
-                                    FinDescazo =     findes.ToString("HH:mm:ss"),
-                                },
-                                tiempoLaborado = new RTime(tiempoHoy).toStr()
-                            });
 
 
-                            if((int)i.DayOfWeek == 6 && i != fin)
-                            {
-                                var band = contSem;
-                                this.TotalesSemanales.Add(new(inicioSem, i, band));
-                                contSem = 0;
-                                inicioSem = i.AddDays(1);
+
+                                    DateTime inicioTur;
+                                    DateTime finTur ;
+                                    DateTime inicioDes ;
+                                    DateTime findes ;
+
+                                    try
+                                    {
+                                        inicioTur = marcas.FirstOrDefault(x => x.TipoIngreso == 0).marca;
+                                        finTur = marcas.FirstOrDefault(x => x.TipoIngreso == 3).marca;
+                                        inicioDes = marcas.FirstOrDefault(x => x.TipoIngreso == 1).marca;
+                                        findes = marcas.FirstOrDefault(x => x.TipoIngreso == 2).marca;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex.Message);  
+                                        inicioTur = new();
+                                        finTur = new();
+                                        inicioDes = new();
+                                        findes = new();
+                                    }
+
+                                 
+
+                                    if (inicioTur.ToString("dd/MM/yyyy") == "01/01/0001" || finTur.ToString("dd/MM/yyyy") == "01/01/0001" || inicioDes.ToString("dd/MM/yyyy") == "01/01/0001" || findes.ToString("dd/MM/yyyy") == "01/01/0001")
+                                    {
+                                        //esta parte la voy a ignorar pero la dejare aqui por si la necesito
+                                        //Dias.Add(new()
+                                        //{
+                                        //    fecha = i,
+                                        //    horario = new()
+                                        //    {
+                                        //        FinDescazo = Horario.hbf,
+                                        //        FinJornada = Horario.hf,
+                                        //        InicioDescanzo = Horario.hbi,
+                                        //        InicioJornada = Horario.hi,
+                                        //    },
+                                        //    marcas = null,
+                                        //    tiempoLaborado = new RTime(0).toStr()
+                                        //});
+                                    }
+                                    else
+                                    {
+
+                                        double tiempoHoy = RTime.ObtenerTotalSg(inicioTur, finTur, inicioDes, findes);
+
+                                        contSem += tiempoHoy;
+                                        contPer += tiempoHoy;
+
+                                        Dias.Add(new()
+                                        {
+                                            fecha = i,
+                                            horario = new()
+                                            {
+                                                FinDescazo = Horario.hbf,
+                                                FinJornada = Horario.hf,
+                                                InicioDescanzo = Horario.hbi,
+                                                InicioJornada = Horario.hi,
+                                            },
+                                            marcas = new()
+                                            {
+                                                InicioJornada = inicioTur.ToString("HH:mm:ss"),
+                                                FinJornada = finTur.ToString("HH:mm:ss"),
+                                                InicioDescanzo = inicioDes.ToString("HH:mm:ss"),
+                                                FinDescazo = findes.ToString("HH:mm:ss"),
+                                            },
+                                            tiempoLaborado = new RTime(tiempoHoy).toStr()
+                                        });
+
+
+                                   
+
+                                    }
+                                }
                             }
-                            if(i == fin)
-                            {
-                                this.TotalesSemanales.Add(new(inicioSem, i, contSem));
-                                RTime flag = new(contPer);
-                                this.TotalPeriodo = flag.toStr();
-                            }
-
-                        }
                     }
 
-                }
+                        if ((int)i.DayOfWeek == 6 && i != fin)
+                        {
+                            var band = contSem;
+                            this.TotalesSemanales.Add(new(inicioSem, i, band));
+                            contSem = 0;
+                            inicioSem = i.AddDays(1);
+                        }
+                        if (i == fin)
+                        {
+                            this.TotalesSemanales.Add(new(inicioSem, i, contSem));
+                            RTime flag = new(contPer);
+                            this.TotalPeriodo = flag.toStr();
+                        }
+
+                    }
+                if (Dias.Count < 1)
+                    this.Mensaje = "No Hay Horario Asignado, o el Empleado no se encontraba laborando en la empresa papa este periodo";
             }
             catch (Exception ex)
             {

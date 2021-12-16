@@ -41,8 +41,10 @@ namespace AsisPas.Reportes
             try
             {
                 // lleno mis fechas
-               await UpHead(idEmpleado, inicio, fin, context);    
-
+                var first = await context.Marcaciones.FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado);
+                await UpHead(idEmpleado, inicio, fin,first, context);
+                if (first != null && first.marca > inicio)
+                    inicio = first.marca;
                 
                 var ahs = await context.AdmoHorarios
                     .Include(x => x.Horario)
@@ -61,42 +63,74 @@ namespace AsisPas.Reportes
                 {
                     var istr = i.ToString("dd/MM/yyyy");
                     var fer = feriados.FirstOrDefault(x => x.fecha.ToString("dd/MM/yyyy") == istr);
-                    var laboral = ah.Horario.DiaLaboral((int)i.DayOfWeek);
 
-                    if (laboral && (fer == null || fer.id < 1))
+
+                    if (ah != null && ah.id > 0)
                     {
-                        if (ah == null)
+                        var laboral = ah.Horario.DiaLaboral((int)i.DayOfWeek);
+
+                        if (laboral && (fer == null || fer.id < 1))
+                        {
+                            if (ah == null)
+                                dias.Add(new(i, false, new()
+                                {
+                                    id = -1,
+                                    Desc = "El Usuario no estaba contratado o no hay registros para este dia"
+                                }));
+                            else
+                            {
+                                if (ah.fin < i)
+                                {
+                                    ah = await context.AdmoHorarios
+                                .Include(x => x.Horario)
+                                .FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado && x.inicio >= i && x.fin <= i);
+
+                                }
+                                
+
+                                    var ri = await context.Marcaciones.Where(x =>
+                                    x.Empleadoid == idEmpleado
+                                    && x.TipoIngreso == 0
+                                    && x.marca.Year == i.Year
+                                    && x.marca.Month == i.Month
+                                    && x.marca.Day == i.Day
+                                    ).FirstOrDefaultAsync();
+
+                                    var per = await context.Permisos.Where(x =>
+                                    x.Empleadoid == idEmpleado
+                                    && x.inicio <= i && x.fin >= i).FirstOrDefaultAsync();
+
+                                    dias.Add(new(i, (ri != null && ri.id > 1), per));
+                                
+                            }
+
+
+                        }
+                    }
+                    else
+                    {
+                        var marquita = await context.Marcaciones.Where(x =>
+                               x.Empleadoid == idEmpleado
+                               && x.TipoIngreso == 0
+                               && x.marca.Year == i.Year
+                               && x.marca.Month == i.Month
+                               && x.marca.Day == i.Day
+                               ).FirstOrDefaultAsync();
+
+                        var per = await context.Permisos.Where(x =>
+                               x.Empleadoid == idEmpleado
+                               && x.inicio <= i && x.fin >= i).FirstOrDefaultAsync();
+
+                        if (marquita != null && marquita.id > 0)
+                        {
+                            dias.Add(new(i, (marquita != null || marquita.id < 1), per));
+                        }
+                         else
                             dias.Add(new(i, false, new()
                             {
                                 id = -1,
                                 Desc = "El Usuario no estaba contratado o no hay registros para este dia"
                             }));
-                        else
-                        {
-                            if (ah.fin < i)
-                            {
-                                    ah = await context.AdmoHorarios
-                                .Include(x => x.Horario)
-                                .FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado && x.inicio >= i && x.fin <= i);
-
-                            }
-
-                            var ri = await context.Marcaciones.Where(x =>
-                            x.Empleadoid == idEmpleado 
-                            && x.TipoIngreso == 0
-                            && x.marca.Year == i.Year
-                            && x.marca.Month == i.Month
-                            && x.marca.Day == i.Day
-                            )
-                                .FirstOrDefaultAsync();
-                            var per = await context.Permisos.Where(x =>
-                            x.Empleadoid == idEmpleado
-                            && x.inicio <= i && x.fin >= i).FirstOrDefaultAsync();
-
-                            dias.Add(new(i, (ri != null || ri.id < 1), per));
-
-                        }
-
 
                     }
                 }

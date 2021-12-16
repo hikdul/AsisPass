@@ -1,4 +1,5 @@
 ﻿using AsisPas.Data;
+using AsisPas.Entitys;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -69,9 +70,10 @@ namespace AsisPas.Reportes
         /// <param name="idEmpleado"></param>
         /// <param name="inicio"></param>
         /// <param name="fin"></param>
+        /// <param name="first"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public async System.Threading.Tasks.Task UpHead(int idEmpleado, DateTime inicio, DateTime fin, ApplicationDbContext context)
+        public async System.Threading.Tasks.Task UpHead(int idEmpleado, DateTime inicio, DateTime fin,Marca first, ApplicationDbContext context)
         {
             try
             {
@@ -79,6 +81,14 @@ namespace AsisPas.Reportes
                 var marca = await context.Marcaciones
                     .Where(x => x.Empleadoid == idEmpleado).OrderByDescending(x => x.marca)
                     .FirstOrDefaultAsync();
+               
+                if(first != null && first.marca > inicio)
+                {
+                  string ff = first.marca.ToString("dd/MM/yyyy");
+                  this.Mensaje = $"Todo estudio Anterior a la fecha {ff} fue ignorado, La razon es por que no hay registros anteriores a la fecha mencionada y es posible que el empleado no estuviera contratado aun.";
+                  inicio = first.marca;   
+                }
+
 
                 int sede = marca == null ? 0 : marca.Sedeid;
                 // lleno mis fechas
@@ -106,8 +116,8 @@ namespace AsisPas.Reportes
                 var fsede = await context.Sedes.FirstOrDefaultAsync(x => x.id == sede);
                 this.DireccionDelaSede = fsede == null || fsede.id < 1 ? "No Hay Sede Registrada" : fsede.Direccion;
                 this.NombreSede = fsede == null || fsede.id < 1 ? "No Hay Sede Registrada" : fsede.Nombre;
-                if (fah != null && fah.Count > 0 && fah[0].inicio < inicio)
-                    this.Mensaje = $"Para la fecha {inicio.ToString("dd/MM/yyyy")} No hay Registros... posiblemente el empleado aun no estaba contratado";
+                //if (fah != null && fah.Count > 0 && fah[0].inicio < inicio)
+                //    this.Mensaje = $"Para la fecha {inicio.ToString("dd/MM/yyyy")} No hay Registros... posiblemente el empleado aun no estaba contratado";
 
             }
             catch (Exception ex)

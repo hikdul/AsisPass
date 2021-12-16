@@ -80,6 +80,15 @@
             </div>
             <div class="card-content collapse show">
              <div>
+                @if(reporte.Mensaje != "")
+                        {
+                            <div class="card-body">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Mensaje: </strong> @reporte.Mensaje
+                                </div>
+                            </div>
+                        }
+                 
                  <ul class="list-group list-group-flush">
                      <li class="list-group-item">
                          Empresa: <strong> @reporte.NombreEmpresa</strong>
@@ -230,14 +239,24 @@
                                         <td scope="row">
                                             @item.Horario.InicioDescanzo - @item.Horario.FinDescazo
                                         </td>
+                                         @if (item.Marcas == null)
+                                         {
+                                              <td scope="row" colspan=2>
+                                                Marcas Incompletas
+                                             </td>
+                                        
+                                         }
+                                         else
+                                         {
+                                             <td scope="row">
+                                                 @item.Marcas.InicioJornada - @item.Marcas.FinJornada
+                                             </td>
+                                             <td scope="row">
+                                                 @item.Marcas.InicioDescanzo - @item.Marcas.FinDescazo
+                                             </td>
+                                         }
                                         <td scope="row">
-                                            @item.Marcas.InicioJornada - @item.Marcas.FinJornada
-                                        </td>
-                                        <td scope="row">
-                                            @item.Marcas.InicioDescanzo - @item.Marcas.FinDescazo
-                                        </td>
-                                        <td scope="row">
-                                            @item.Atrazos.toStr()
+                                          @item.Atrazos.toStr()
                                         </td>
                                         <td scope="row">
                                             @item.Exceso.toStr()

@@ -72,12 +72,14 @@ namespace AsisPas.Reportes
             this.Rut = empleado.user.Rut;
 
             var first = await context.Marcaciones.FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado);
-            var lastc = await context.Marcaciones
+            var last = await context.Marcaciones
                 .Include(x => x.Horario)
                 .Include(x => x.Sede)
-                .Where(x => x.Empleadoid == idEmpleado).ToListAsync();
+                .Where(x => x.Empleadoid == idEmpleado)
+                .OrderBy(x => x.marca)
+                .FirstOrDefaultAsync();
                 
-            var last = lastc == null || lastc.Count > 0 ? lastc[lastc.Count -1] : null;
+                
 
             if(first == null || last == null)
             {

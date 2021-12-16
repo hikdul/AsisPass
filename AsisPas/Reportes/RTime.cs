@@ -35,6 +35,9 @@ namespace AsisPas.Reportes
         /// <param name="TiempoEnSegundos"></param>
         public RTime(double TiempoEnSegundos)
         {
+            if (TiempoEnSegundos < 0)
+                TiempoEnSegundos = -TiempoEnSegundos;
+
             this.TiempoEnSegundos = TiempoEnSegundos;
             this.Hora = (int)(TiempoEnSegundos / 3600);
             this.min = (int)(TiempoEnSegundos - (this.Hora * 3600)) / 60;

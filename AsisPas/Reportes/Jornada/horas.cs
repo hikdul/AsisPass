@@ -49,10 +49,10 @@ namespace AsisPas.Reportes.Jornada
         /// <param name="finDes"></param>
         public horas(DateTime inicio, DateTime fin, DateTime inicioDes, DateTime finDes)
         {
-            this.InicioDescanzo = inicioDes.ToString("HH:mm:ss");
-            this.FinDescazo = finDes.ToString("HH:mm:ss");
             this.InicioJornada = inicio.ToString("HH:mm:ss");
             this.FinJornada = fin.ToString("HH:mm:ss");
+            this.InicioDescanzo = inicioDes.ToString("HH:mm:ss");
+            this.FinDescazo = finDes.ToString("HH:mm:ss");
         }
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace AsisPas.Reportes.Jornada
         /// <param name="horario"></param>
         public horas(Horario horario)
         {
-            this.InicioDescanzo = horario.hbi;
-            this.FinDescazo = horario.hbf;
             this.InicioJornada = horario.hi;
             this.FinJornada = horario.hf;
+            this.InicioDescanzo = horario.hbi;
+            this.FinDescazo = horario.hbf;
 
         }
 

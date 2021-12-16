@@ -81,7 +81,15 @@
             </div>
             <div class="card-content collapse show">
              <div>
-                 <ul class="list-group list-group-flush">
+                        @if(reporte.Mensaje != "")
+                        {
+                            <div class="card-body">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Mensaje: </strong> @reporte.Mensaje
+                                </div>
+                            </div>
+                        }
+                        <ul class="list-group list-group-flush">
                      <li class="list-group-item">
                          Empresa: <strong> @reporte.NombreEmpresa</strong>
                          <br/>

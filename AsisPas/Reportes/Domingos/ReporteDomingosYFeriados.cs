@@ -48,7 +48,7 @@ namespace AsisPas.Reportes.Domingos
         /// lleva el registro mes a mes
         /// </summary>
         public List<MensualDomingos> RegitroMensual { get; set; }
-
+  
 
         #endregion
 
@@ -79,7 +79,12 @@ namespace AsisPas.Reportes.Domingos
             try
             {
                 // ### LLENO LA CABECERA
-                await UpHead(idEmpleado, inicio, fin, context);
+                var first = await context.Marcaciones.FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado);
+                await UpHead(idEmpleado, inicio, fin,first, context);
+                if(first != null && first.marca  > inicio)
+                    inicio = first.marca;
+
+
 
                 // ## COMPLETO EL ROPORTE
                 int laboradosD = 0;
@@ -100,6 +105,15 @@ namespace AsisPas.Reportes.Domingos
                 int mesActual = 0;
                 int anoActual = 0;
                 List<DiaDomingos> diario = new();
+                
+
+                if (first != null && first.id > 0)
+                {
+                    if(first.marca < inicio)
+                    {
+                        inicio = first.marca;
+                    }
+                }
 
 
                 var feriados = await Feriado.listado(context);
@@ -190,13 +204,14 @@ namespace AsisPas.Reportes.Domingos
                         x.Empleadoid == idEmpleado
                         && x.marca.Year == i.Year
                         && x.marca.Month == i.Month
-                        && x.marca.Year == i.Year
+                        && x.marca.Day == i.Day
                         );
+                       // mi = mi.id < 1 ? null : mi;
                         var laboral = horario.DiaLaboral((int)i.DayOfWeek);
-                        laboradosD++;
-                        if(mi != null)
+                        if(mi != null && mi.id > 0)
                         {
                           
+                            laboradosD++;
                             anoD++;
                             mesD++;
                             diario.Add(new()
@@ -207,7 +222,7 @@ namespace AsisPas.Reportes.Domingos
                             });
                         }
 
-                        if(mi == null && laboral)
+                        if(mi == null  && laboral)
                         {
                             var permiso = await context.Permisos
                                 .Where(x => x.Empleadoid == idEmpleado && x.inicio <= i && x.fin >= i)
@@ -220,7 +235,7 @@ namespace AsisPas.Reportes.Domingos
                             });
                         }
 
-                        if (mi == null && !laboral)
+                        if (mi == null  && !laboral)
                         {
                             diario.Add(new()
                             {

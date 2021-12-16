@@ -275,6 +275,24 @@
             <param name="horario"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Controllers.API.PruebasController">
+            <summary>
+            controlador para generar datos falsos
+            </summary>
+        </member>
+        <member name="M:AsisPas.Controllers.API.PruebasController.#ctor(AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            ctor
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AsisPas.Controllers.API.PruebasController.Fake(AsisPas.DTO.AAFake)">
+            <summary>
+            funcion para generar los datos falsos... solo se ingresa como SA
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Controllers.CambiosController">
             <summary>
             para generar los cambios
@@ -1448,6 +1466,47 @@
             down
             </summary>
             <param name="migrationBuilder"></param>
+        </member>
+        <member name="T:AsisPas.DTO.AAFake">
+            <summary>
+            clase para ingresar datos falsos
+            ingresa admo horarios, marcas en periodos y vacaciones cada 12 meses
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.idEmpleado">
+            <summary>
+            id del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.idHorario">
+            <summary>
+            id del horario
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.idAdmoEmpresa">
+            <summary>
+            id del admo a cargo
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.idSede">
+            <summary>
+            id de la sede
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.inicio">
+            <summary>
+            desde que inicia
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.fin">
+            <summary>
+            cuando termina
+            </summary>
+        </member>
+        <member name="P:AsisPas.DTO.AAFake.razon">
+            <summary>
+            razon por la que se agrega el nuevo horario
+            </summary>
         </member>
         <member name="T:AsisPas.DTO.AdmoEmpresaDTO_in">
             <summary>
@@ -3547,13 +3606,14 @@
             mensaje es caso de querer avisar algo
             </summary>
         </member>
-        <member name="M:AsisPas.Reportes.CabeceraReportes.UpHead(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+        <member name="M:AsisPas.Reportes.CabeceraReportes.UpHead(System.Int32,System.DateTime,System.DateTime,AsisPas.Entitys.Marca,AsisPas.Data.ApplicationDbContext)">
             <summary>
             para llenar los datos de la cabecera
             </summary>
             <param name="idEmpleado"></param>
             <param name="inicio"></param>
             <param name="fin"></param>
+            <param name="first"></param>
             <param name="context"></param>
             <returns></returns>
         </member>
@@ -3621,6 +3681,16 @@
             <summary>
             constructor
             </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.CambiosTurno.ReporteCombioDeTurno.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            llena les datos del reporte
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
         </member>
         <member name="M:AsisPas.Reportes.CambiosTurno.ReporteCombioDeTurno.Excel(AsisPas.Reportes.CambiosTurno.ReporteCombioDeTurno)">
             <summary>

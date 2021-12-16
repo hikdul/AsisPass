@@ -78,7 +78,8 @@ namespace AsisPas.Reportes.Excesojornada
             try
             {
                 // lleno mis fechas
-                await UpHead(idEmpleado, inicio, fin, context);
+                var first = await context.Marcaciones.FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado);
+                await UpHead(idEmpleado, inicio, fin,first, context);
                 string msg = "";
                 double diaX = 0;
                 double semanaX = 0;

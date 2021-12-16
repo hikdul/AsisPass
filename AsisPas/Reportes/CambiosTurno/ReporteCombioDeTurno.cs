@@ -1,4 +1,5 @@
 ﻿using AsisPas.Data;
+using AsisPas.Entitys;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -35,19 +36,34 @@ namespace AsisPas.Reportes.CambiosTurno
         }
 
         #region llenar data
+        /// <summary>
+        /// llena les datos del reporte
+        /// </summary>
+        /// <param name="idEmpleado"></param>
+        /// <param name="inicio"></param>
+        /// <param name="fin"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async System.Threading.Tasks.Task Up(int idEmpleado, DateTime inicio, DateTime fin, ApplicationDbContext context)
         {
             try {
-                await UpHead(idEmpleado, inicio, fin, context);
+                var first = await context.Marcaciones.FirstOrDefaultAsync(x => x.Empleadoid == idEmpleado);
+                await UpHead(idEmpleado, inicio, fin,first, context);
+                if(first != null && first.marca > inicio)
+                    inicio = first.marca;
+
+                this.Mensaje = "";
 
                 var admos = await context.AdmoHorarios
-                    .Include(x => x.Horario)
-                    .Where(x =>
-                    ( (x.inicio >= inicio || x.fin <= inicio)
-                    || (x.inicio >= fin || x.inicio <= fin))
-                    && x.Empleadoid == idEmpleado
-                    )
-                    .ToListAsync();
+                   .Include(x => x.Horario)
+                   .Where(x => x.Empleadoid == idEmpleado && x.inicio > inicio
+                   ).ToListAsync();
+
+                if(admos == null || admos.Count == 0)
+                    admos = await context.AdmoHorarios
+                   .Include(x => x.Horario)
+                   .Where(x => x.Empleadoid == idEmpleado && x.fin > inicio
+                   ).ToListAsync();
 
 
 
@@ -58,46 +74,53 @@ namespace AsisPas.Reportes.CambiosTurno
 
                 var primer = primeros == null || primeros.Count < 1 ? null : primeros[primeros.Count - 1];
 
-
-                for (int i = 0; i < admos.Count; i++)
+                if (admos != null)
                 {
-                    modificaciones anterion = new();
-                    modificaciones actual = new();
-                    DiaCambio diaI = new();
-                    //primero el anterior
-                    if (i == 0)
+                    for (int i = 0; i < admos.Count; i++)
                     {
-                        if (primer == null || primer.id < 1)
-                            anterion = null;
+                        modificaciones anterion = new();
+                        modificaciones actual = new();
+                        DiaCambio diaI = new();
+                        //primero el anterior
+                        if (i == 0)
+                        {
+                            if (primer == null || primer.id < 1)
+                                anterion = null;
+                            else
+                            {
+                                anterion.inicio = primer.inicio;
+                                anterion.fin = primer.fin;
+                                anterion.Horario = primer.Horario;
+                                anterion.Modificacion = primer.fechaAsignacion;
+                            }
+                            actual.inicio = admos[i].inicio;
+                            actual.fin = admos[i].fin;
+                            actual.Horario = admos[i].Horario;
+                            actual.Modificacion = admos[i].fechaAsignacion;
+                        }
                         else
                         {
-                            anterion.inicio = primer.inicio;
-                            anterion.fin = primer.fin;
-                            anterion.Horario = primer.Horario;
-                            anterion.Modificacion = primer.fechaAsignacion;
+                            anterion.inicio = admos[i - 1].inicio;
+                            anterion.fin = admos[i - 1].fin;
+                            anterion.Horario = admos[i - 1].Horario;
+                            anterion.Modificacion = admos[i - 1].fechaAsignacion;
+                            actual.inicio = admos[i].inicio;
+                            actual.fin = admos[i].fin;
+                            actual.Horario = admos[i].Horario;
+                            actual.Modificacion = admos[i].fechaAsignacion;
                         }
-                        actual.inicio = admos[i].inicio;
-                        actual.fin = admos[i].fin;
-                        actual.Horario = admos[i].Horario;
-                        actual.Modificacion = admos[i].fechaAsignacion;
-                    }
-                    else
-                    {
-                        anterion.inicio = admos[i-1].inicio;
-                        anterion.fin = admos[i-1].fin;
-                        anterion.Horario = admos[i-1].Horario;
-                        anterion.Modificacion = admos[i-1].fechaAsignacion;
-                        actual.inicio = admos[i].inicio;
-                        actual.fin = admos[i].fin;
-                        actual.Horario = admos[i].Horario;
-                        actual.Modificacion = admos[i].fechaAsignacion;
-                    }
 
                         diaI.Anterior = anterion;
                         diaI.nuevo = actual;
                         diaI.Desc = admos[i].Razon;
                         diaI.SolicitanteCambio = "Empleador";
-                    this.cambios.Add(diaI);
+                        this.cambios.Add(diaI);
+                    }
+                }
+                else
+                {
+                    this.Mensaje = "No Hay Asignaciones para la fechas designada";
+
                 }
             }catch (Exception ex) 
             {
