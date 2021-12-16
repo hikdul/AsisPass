@@ -121,10 +121,6 @@ namespace AsisPas.Reportes.Excesojornada
                                 periodoX += +tiempoHoy;
                             }
 
-                            if(marcas.Count < 3 && marcas.Count > 0)
-                            {
-                                msg = "Marcas Incompletas.";
-                            }
                         }
 
                     }
@@ -217,10 +213,7 @@ namespace AsisPas.Reportes.Excesojornada
                                     periodoZ = +tiempoHoy;
                                     msg = "Marcas Incompletas, Todo el tiempo se toma como retrazo...";
                                 }
-                                else
-                                {
-                                    msg = "Este Dia no Hay Asistencia";
-                                }
+                              
                             }
                         }
                         else
