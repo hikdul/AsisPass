@@ -1,4 +1,5 @@
 using AsisPas.Data;
+using AsisPas.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -58,9 +59,16 @@ namespace AsisPas
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
+            // para traer mi archivo de configuracion
             services.AddAutoMapper(typeof(Startup));
 
-           
+            // para introduci r los valores de mi smtp settings, y envie mis correos
+            services.Configure<SmtpConfig>(Configuration.GetSection("MailSetup"));
+            // aqui genero mi servicio, creo que deberia se ser transa..
+            // pero lo recomiendan singleton. claro en el ejempo el email se enviar 
+            // directamente desde un formulario. por tanto lo cambio a trans por eso!!>
+            services.AddSingleton<EmailSenderServices, EmailSenderServices>();
+
             //== para la autenticacion con JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(O =>
             {

@@ -118,12 +118,13 @@
           
      
                 
-            
+    @if(!User.IsInRole("Fiscal"))
+    {        
           <!--Empresa-->
 
             @if (!User.IsInRole("Empleado"))
             {
-                            <li class="nav-item has-sub @ViewBag.EmpresaMenu">
+                <li class="nav-item has-sub @ViewBag.EmpresaMenu">
                                 <a class="alert-dark" href="#">
                      <i class="la la-university text-dark"></i>
                      <span class="menu-title" data-i18n="">Empresas</span>
@@ -151,7 +152,7 @@
                          </a>
                      </li>
                  </ul>
-           </li>
+               </li>
            }
          
             
@@ -296,7 +297,7 @@
                   
            </li>
 
-
+}
 
 
           <!--Ususario-->

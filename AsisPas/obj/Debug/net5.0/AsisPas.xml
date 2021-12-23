@@ -3402,6 +3402,16 @@
             <param name="Out"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Helpers.Correos">
+            <summary>
+            donde en base al constructor se creara una nuevo claso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Helpers.Correos.Correo">
+            <summary>
+            cuerpo del correo en si
+            </summary>
+        </member>
         <member name="T:AsisPas.Helpers.IAct">
             <summary>
             activo
@@ -4030,6 +4040,73 @@
             <param name="reporte"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Reportes.Excesojornada.ReporteExcesosActual">
+            <summary>
+            este es el reporte por excesos segun el formato indicado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.ExcesoPeriodo">
+            <summary>
+            tiempo de exceso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.AtrazosPeriodo">
+            <summary>
+            tiempo de atrazos
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.DiferencialPeriodo">
+            <summary>
+            diferencial
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.AfavorEmpresa">
+            <summary>
+            true si es a favor de la empresa 
+            false si es a favor del empleado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.Semanales">
+            <summary>
+            totales por semanas
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.#ctor">
+            <summary>
+            empty ctor
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenor mi reporte por exceso de jornada
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.Excel(AsisPas.Reportes.Excesojornada.ReporteExcesosActual)">
+            <summary>
+            para exportar un reporte en excel
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.Pdf(AsisPas.Reportes.Excesojornada.ReporteExcesosActual)">
+            <summary>
+            para exportar un reporte en pdf
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesosActual.Word(AsisPas.Reportes.Excesojornada.ReporteExcesosActual)">
+            <summary>
+            para exportar un documento en word
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Reportes.Excesojornada.TotalesExcesoJornada">
             <summary>
             para almacenar la sumatoria de totales de exceso de jornada
@@ -4087,6 +4164,61 @@
             <param name="exceso"></param>
             <param name="retrazo"></param>
             <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal">
+            <summary>
+            lleva los datos semama a semana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.inicio">
+            <summary>
+            inicio de la semana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.fin">
+            <summary>
+            fin de la semana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.Exceso">
+            <summary>
+            tiempo de exceso
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.Atrazos">
+            <summary>
+            tiempo de atrazo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.Compensacion">
+            <summary>
+            calculo de la compensacion
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.AfavorEmpresa">
+            <summary>
+            si la compesacion es a favor de la empresa
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.Diarios">
+            <summary>
+            si este dia es laboral segun horario
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.#ctor">
+            <summary>
+            empty
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Excesojornada.TotalesExcesoJornadaSemanal.#ctor(System.DateTime,System.DateTime,System.Double,System.Double,System.Collections.Generic.List{AsisPas.Reportes.Excesojornada.DiaExcesoJornada})">
+            <summary>
+            ctor valido
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="exceso"></param>
+            <param name="atrazo"></param>
+            <param name="diarios"></param>
         </member>
         <member name="T:AsisPas.Reportes.Finder">
             <summary>
@@ -4363,6 +4495,108 @@
             valida los elementos
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:AsisPas.Services.EmailSenderServices">
+            <summary>
+            servicio que envia los correos electronicos
+            </summary>
+        </member>
+        <member name="M:AsisPas.Services.EmailSenderServices.#ctor(Microsoft.Extensions.Options.IOptions{AsisPas.Services.SmtpConfig})">
+            <summary>
+            contructor
+            </summary>
+            <param name="smtp"></param>
+        </member>
+        <member name="M:AsisPas.Services.EmailSenderServices.EmailSender(AsisPas.Services.MailData)">
+            <summary>
+            funcion para eviar el correo
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Services.EmailSenderServices.EmailSender(System.String,System.String,System.String)">
+            <summary>
+            other sender
+            </summary>
+            <param name="Body"></param>
+            <param name="fromEmail"></param>
+            <param name="Subject"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Services.IEmailSender">
+            <summary>
+            interface para enviar Email's
+            </summary>
+        </member>
+        <member name="M:AsisPas.Services.IEmailSender.EmailSender(AsisPas.Services.MailData)">
+            <summary>
+            metodo de enviar emials
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AsisPas.Services.MailData.Email">
+            <summary>
+            enmail de destino
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.MailData.Subject">
+            <summary>
+            subject 
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.MailData.Body">
+            <summary>
+            body o cuerppo
+            </summary>
+        </member>
+        <member name="M:AsisPas.Services.MailData.#ctor">
+            <summary>
+            default
+            </summary>
+        </member>
+        <member name="M:AsisPas.Services.MailData.#ctor(System.String,System.String,System.String)">
+            <summary>
+            complete
+            </summary>
+            <param name="Body"></param>
+            <param name="email"></param>
+            <param name="Subject"></param>
+        </member>
+        <member name="T:AsisPas.Services.SmtpConfig">
+            <summary>
+            para extraer la configuracion smtp para les emails
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.SmtpConfig.server">
+            <summary>
+            smtp.server
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.SmtpConfig.port">
+            <summary>
+            port for conec app
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.SmtpConfig.sendEmail">
+            <summary>
+            email from send
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.SmtpConfig.senderEmail">
+            <summary>
+            user or nick make
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.SmtpConfig.UserName">
+            <summary>
+            mail address
+            </summary>
+        </member>
+        <member name="P:AsisPas.Services.SmtpConfig.Password">
+            <summary>
+            pasdworn emial account
+            </summary>
         </member>
         <member name="T:AsisPas.Startup">
             <summary>

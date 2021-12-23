@@ -141,10 +141,10 @@ namespace AsisPas.Controllers
                 ViewBag.fechai = ins.inicio.ToString("yyyy-MM-dd");
                 ViewBag.fechaf = ins.fin.ToString("yyyy-MM-dd");
 
-                List<ReporteExcesoDeJornada> list = new();
+                List<ReporteExcesosActual> list = new();
                 foreach (var id in ins.Empleadoids)
                 {
-                    ReporteExcesoDeJornada flag = new();
+                    ReporteExcesosActual flag = new();
                     await flag.Up(id, ins.inicio, ins.fin, context);
                     list.Add(flag);
                 }
@@ -179,9 +179,9 @@ namespace AsisPas.Controllers
                 if (ins == null || ins.Empleadoid < 1)
                     return File(new byte[0], "application/vnd.ms-excel", "AlMenosSeleccioneUnEmpleado.xlsx");
 
-                ReporteExcesoDeJornada resp = new();
+                ReporteExcesosActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
-                var buffer = ReporteExcesoDeJornada.Excel(resp);
+                var buffer = ReporteExcesosActual.Excel(resp);
                 return File(buffer, "pplication/vnd.ms-excel", "Reporte Exceso Jornada" + "-" + ins.Finicio + "-al-" + ins.Ffin + ".xlsx");
 
             }
@@ -207,11 +207,11 @@ namespace AsisPas.Controllers
         {
             try
             {
-                ReporteExcesoDeJornada resp = new();
+                ReporteExcesosActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
 
 
-                var buffer = ReporteExcesoDeJornada.Pdf(resp);
+                var buffer = ReporteExcesosActual.Pdf(resp);
                 return File(buffer, "application/pdf", "Reporte Exceso Jornada" + "-" + ins.Finicio.ToString("dd/MM/yyyy") + "-al-" + ins.Ffin.ToString("dd/MM/yyyy") + ".PDF");
 
             }
@@ -238,11 +238,11 @@ namespace AsisPas.Controllers
         {
             try
             {
-                ReporteExcesoDeJornada resp = new();
+                ReporteExcesosActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
 
 
-                var buffer = ReporteExcesoDeJornada.Word(resp);
+                var buffer = ReporteExcesosActual.Word(resp);
                 return File(buffer, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Reporte Exceso Jornada -" + ins.Finicio.ToString("dd/MM/yyyy") + " al " + ins.Ffin.ToString("dd/MM/yyyy") + ".Docx");
 
 

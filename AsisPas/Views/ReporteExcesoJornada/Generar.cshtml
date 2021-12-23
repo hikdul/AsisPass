@@ -7,7 +7,7 @@
     ViewBag.ReporteMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
-    List<ReporteExcesoDeJornada> Reportes = ViewBag.Reportes; 
+    List<ReporteExcesosActual> Reportes = ViewBag.Reportes; 
 
 }
 
@@ -96,187 +96,195 @@
                          RUT: <strong> @reporte.RutEmpresa</strong>
                      </li>
                      <li class="list-group-item">
-                        Lugar Pretacion Servicio: @reporte.NombreSede
+                        Lugar Pretacion Servicio Asignado: @reporte.NombreSede
                          <br/>
                         Direccion: @reporte.DireccionDelaSede
                      </li>
                      <li class="list-group-item">
-                        Turno: @reporte.NombreHorario
+                        Turno Actual: @reporte.NombreHorario
                      </li>
                      <li class="list-group-item">
                         Periodo: @reporte.inicio.ToString("dd/MM/yyyy") al @reporte.fin.ToString("dd/MM/yyyy")
                      </li>
                      <li class="list-group-item">
-                        Tiempo Exceso Del Periodo: @reporte.Exceso.toStr()
+                        Tiempo Exceso Del Periodo: @reporte.ExcesoPeriodo.toStr()
                      </li>
                      <li class="list-group-item">
-                        Tiempo Atrazo Del Periodo: @reporte.Atrazos.toStr()
+                        Tiempo Atrazo Del Periodo: @reporte.AtrazosPeriodo.toStr()
                      </li>
                       @if (reporte.AfavorEmpresa)
                       {
                           <li class="list-group-item">
-                            Tiempo Que Debe Reponer El Empleado: @reporte.Diferencial.toStr()
+                            Tiempo Que Debe Reponer El Empleado: @reporte.DiferencialPeriodo.toStr()
                           </li>
                       }
                       else
                       {
                          <li class="list-group-item">
-                           Tiempo Que Debe Reponer El Empleador: @reporte.Diferencial.toStr()
+                           Tiempo Que Debe Reponer El Empleador: @reporte.DiferencialPeriodo.toStr()
                          </li>
                       }
                      
                  </ul>
              </div> 
-             <div class="mt-2">
-                 <h6 class="card-subtitle text-center">Periodos Semanales</h6>
-                 <div class="table-responsive pb-4 pr-4 pl-4">
-                    <table id="TableAlau" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    Inicia
-                                </th>
-                                <th scope="col">
-                                    finaliza
-                                </th>
-                                <th scope="col">
-                                    Atrazos
-                                </th>
-                                <th scope="col">
-                                    excesos
-                                </th>
-                                <th scope="col">
-                                    Conmpesacion
-                                </th>
-                                 <th scope="col">
-                                    <i class="la la-gears"></i>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(reporte.Semanales != null && reporte.Semanales.Count > 0)
-                                @foreach (var item in reporte.Semanales)
+             @if(reporte.Semanales != null && reporte.Semanales.Count > 0)
+             {
+                @foreach (var SEM in reporte.Semanales)
+                 {
+                    <div class="mt-2">
+                       
+                        <div class="pt-1 badge-danger text-white">
+                            <h5 class="card-subtitle text-white text-center">
+                                Semana del @SEM.inicio.ToString("dd/MM/yyyy") al @SEM.fin.ToString("dd/MM/yyyy")
+                            </h5>
+                        </div>
+                        <div class="table-responsive pb-4 pr-4 pl-4">
+                           <table id="TableAlau" class="table table-striped">
+                            <thead>
+                                 <tr>
+                                     <th scope="col">
+                                         
+                                     </th>
+                                     <th scope="col" colspan=2>
+                                         Jornada Pactada
+                                     </th>
+                                     <th scope="col" colspan=2>
+                                         Jornada Laborada
+                                     </th>
+                                     <th scope="col" colspan=2>
+                                         Atrazos y Excesos
+                                     </th>
+                                    
+                                 </tr>
+                                 <tr>
+                                    <th scope="col">
+                                        Fecha
+                                    </th>
+                                    <th scope="col">
+                                        Jornada
+                                    </th>
+                                    <th scope="col">
+                                        Descanso
+                                    </th>
+                                    <th scope="col">
+                                        Jornada
+                                    </th>
+                                    <th scope="col">
+                                        Descanso
+                                    </th>
+                                     <th scope="col">
+                                        Atrazos
+                                    </th>
+                                     <th scope="col">
+                                        Excesos
+                                    </th>
+                                 </tr>
+                            </thead>
+                            <tbody>
+                           
+                                @foreach (var item in SEM.Diarios)
                                 {
                                     <tr class="line--hover">
                                         <td scope="row">
-                                            @item.inicio.ToString("dd/MM/yyyy")
+                                            @item.fecha.ToString("dd/MM/yyyy")
                                         </td>
-                                        <td scope="row">
-                                            @item.fin.ToString("dd/MM/yyyy")
-                                        </td>
+                                          @if(item.Horario == null || item.Horario.InicioJornada == item.Horario.InicioDescanzo)
+                                          {
+                                              <td scope="row" colspan=2>
+                                                No Hay Horario para esta fecha
+                                             </td>
+                                           }
+                                           else
+                                           {
+                                                <td scope="row">
+                                                    @item.Horario.InicioJornada - @item.Horario.FinJornada                                                
+                                               </td>
+                                                <td scope="row">
+                                                    @item.Horario.InicioDescanzo - @item.Horario.FinDescazo
+                                                </td>
+                                                  
+                                           }
+
+                                            @if(item.Marcas == null || item.Marcas.InicioJornada == item.Marcas.InicioDescanzo)
+                                          {
+                                              <td scope="row" colspan=2>
+                                                No Hay Marcas Validas para esta fecha
+                                             </td>
+                                           }  
+                                           else
+                                           {
+                                                <td scope="row">
+                                                    @item.Marcas.InicioJornada - @item.Marcas.FinJornada                                                
+                                               </td>
+                                                <td scope="row">
+                                                    @item.Marcas.InicioDescanzo - @item.Marcas.FinDescazo
+                                                </td>
+                                           }
+
                                         <td scope="row">
                                             @item.Atrazos.toStr()
                                         </td>
                                         <td scope="row">
                                             @item.Exceso.toStr()
                                         </td>
-                                          @if (item.AfavorEmpresa)
-                                          {
-                                              <td scope="row">
-                                                El Empleado debe:  @item.Diferencial.toStr()
-                                              </td>
-                                          }else{
-                                              <td scope="row">
-                                                  El Empleador debe: @item.Diferencial.toStr()
-                                              </td>
-                                          }
-                                                
-                                                <td>
-                                        </td>
-                                    </tr>
-
-                                }
-                        </tbody>
-                    </table>
-                </div>
-
-             </div>
-             
-             <div class="mt-2">
-                 <h6 class="card-subtitle text-center">Estudio Diarios</h6>
-                 <div class="table-responsive pb-4 pr-4 pl-4">
-                    <table id="TableAlau" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    fecha
-                                </th>
-                                <th scope="col">
-                                    Horario Pactado
-                                </th>
-                                <th scope="col">
-                                    Descanso Pactado
-                                </th>
-                                <th scope="col">
-                                    Horario Laborado
-                                </th>
-                                <th scope="col">
-                                    Descanso Laborado
-                                </th>
-                                <th scope="col">
-                                    Retrazo
-                                </th>
-                                <th scope="col">
-                                    Exceso
-                                </th>
-                              
-                                 <th scope="col">
-                                    <i class="la la-gears"></i>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(reporte.Diarios != null && reporte.Diarios.Count > 0)
-                                @foreach (var item in reporte.Diarios)
-                                {
-                                    <tr class="line--hover">
-                                        <td scope="row">
-                                            @item.fecha.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td scope="row">
-                                            @item.Horario.InicioJornada - @item.Horario.FinJornada
-                                        </td>
-                                        <td scope="row">
-                                            @item.Horario.InicioDescanzo - @item.Horario.FinDescazo
-                                        </td>
-                                         @if (item.Marcas == null)
-                                         {
-                                              <td scope="row" colspan=2>
-                                                Marcas Incompletas
-                                             </td>
-                                        
-                                         }
-                                         else
-                                         {
-                                             <td scope="row">
-                                                 @item.Marcas.InicioJornada - @item.Marcas.FinJornada
-                                             </td>
-                                             <td scope="row">
-                                                 @item.Marcas.InicioDescanzo - @item.Marcas.FinDescazo
-                                             </td>
-                                         }
-                                        <td scope="row">
-                                          @item.Atrazos.toStr()
-                                        </td>
-                                        <td scope="row">
-                                            @item.Exceso.toStr()
-                                        </td>
                                        
-                                        <td>
-                                            @item.mensaje
-                                        </td>
                                     </tr>
-                                   
 
                                 }
                         </tbody>
-                    </table>
-                </div>
-            </div>
+                           </table>
+                       </div>
+                        
+
+                        <div class="table-responsive pb-4 pr-4 pl-4">
+                           <table id="TableAlau" class="table table-striped">
+                            <thead>
+                               
+                                 <tr>
+                                    <th scope="col">
+                                        Total Excesos
+                                    </th>
+                                    <th scope="col">
+                                        Total Atrazos
+                                    </th>
+                                    <th scope="col">
+                                        Compensacion
+                                    </th>
+                                    
+                                 </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td scope="row">
+                                    @SEM.Exceso.toStr()
+                                </td>
+                                <td scope="row">
+                                    @SEM.Atrazos.toStr()
+                                </td>
+                                 @if(SEM.AfavorEmpresa == true)
+                                 {
+                                     <td scope="row">
+                                        El Empleado debe Reponer @SEM.Compensacion.toStr()
+                                     </td>
+                                 }
+                                 else
+                                 {
+                                     <td scope="row">
+                                        El Empleador debe Reponer @SEM.Compensacion.toStr()
+                                     </td>
+                                 }
+                                </tr>
+                            </tbody>
+                           </table>
+                       </div>
+
+                    </div>
+                    }}
+           
+        </div>
             <div class="card-footer">
                 <h6 class="card-subtitle"> Fecha Solicitud Reporte: @reporte.FechaGenerado.ToString("dd/MM/yyyy") </h6>
             </div>
-        </div>
     </div>
 </div>
 </div>
