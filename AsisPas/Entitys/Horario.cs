@@ -182,6 +182,31 @@ namespace AsisPas.Entitys
             int min = Int32.Parse(split[1]);
             return new(1990, 22, 3, hor, min, 3);
         }
+        /// <summary>
+        /// para obtener la lista de dias, segun su inicial
+        /// </summary>
+        /// <returns></returns>
+        public string ListDiasLaborales()
+        {
+            string resp = "";
+
+            if (this.Lunes)
+                resp += "L ";
+            if (this.Martes)
+                resp += "M ";
+            if (this.Miercoles)
+                resp += "Mi ";
+            if (this.Jueves)
+                resp += "J ";
+            if (this.Viernes)
+                resp += "V ";
+            if (this.Sabado)
+                resp += "S ";
+            if (this.Domingo)
+                resp += "D ";
+
+            return resp;
+        }
 
         #endregion
 

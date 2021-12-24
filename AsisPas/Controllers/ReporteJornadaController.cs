@@ -98,10 +98,10 @@ namespace AsisPas.Controllers
                 ViewBag.fechai = ins.inicio.ToString("yyyy-MM-dd");
                 ViewBag.fechaf = ins.fin.ToString("yyyy-MM-dd");
 
-                List<ReportePorJornada> list = new();
+                List<ReportePorJornadaActual> list = new();
                 foreach (var id in ins.Empleadoids)
                 {
-                    ReportePorJornada flag = new();
+                    ReportePorJornadaActual flag = new();
                     await flag.Up(id, ins.inicio, ins.fin, context);
                     list.Add(flag);
                 }
@@ -172,9 +172,9 @@ namespace AsisPas.Controllers
                 if (ins == null || ins.Empleadoid < 1)
                     return File(new byte[0], "application/vnd.ms-excel", "AlMenosSeleccioneUnEmpleado.xlsx");
 
-                ReportePorJornada resp = new();
+                ReportePorJornadaActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
-                var buffer = ReportePorJornada.Excel(resp);
+                var buffer = ReportePorJornadaActual.Excel(resp);
                 return File(buffer, "pplication/vnd.ms-excel", "Reporte Por jornada" + "-" + ins.Finicio + "-al-" + ins.Ffin + ".xlsx");
 
             }
@@ -200,11 +200,11 @@ namespace AsisPas.Controllers
         {
             try
             {
-                ReportePorJornada resp = new();
+                ReportePorJornadaActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
 
 
-                var buffer = ReportePorJornada.Pdf(resp);
+                var buffer = ReportePorJornadaActual.Pdf(resp);
                 return File(buffer, "application/pdf", "Reporte Por Jornada" + "-" + ins.Finicio.ToString("dd/MM/yyyy") + "-al-" + ins.Ffin.ToString("dd/MM/yyyy") + ".PDF");
 
             }
@@ -231,11 +231,11 @@ namespace AsisPas.Controllers
         {
             try
             {
-                ReportePorJornada resp = new();
+                ReportePorJornadaActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
 
 
-                var buffer = ReportePorJornada.Word(resp);
+                var buffer = ReportePorJornadaActual.Word(resp);
                 return File(buffer, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "REPORTE POR JORNADA -" + ins.Finicio.ToString("dd/MM/yyyy") + " al " + ins.Ffin.ToString("dd/MM/yyyy") + ".Docx");
 
 

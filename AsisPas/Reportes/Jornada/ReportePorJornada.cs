@@ -190,16 +190,17 @@ namespace AsisPas.Reportes.Jornada
                             }
                     }
 
+                    //cierres
                         if ((int)i.DayOfWeek == 6 && i != fin)
                         {
                             var band = contSem;
-                            this.TotalesSemanales.Add(new(inicioSem, i, band));
+                            //this.TotalesSemanales.Add(new(inicioSem, i, band));
                             contSem = 0;
                             inicioSem = i.AddDays(1);
                         }
                         if (i == fin)
                         {
-                            this.TotalesSemanales.Add(new(inicioSem, i, contSem));
+                            //this.TotalesSemanales.Add(new(inicioSem, i, contSem));
                             RTime flag = new(contPer);
                             this.TotalPeriodo = flag.toStr();
                         }

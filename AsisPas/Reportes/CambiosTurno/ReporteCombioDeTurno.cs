@@ -180,11 +180,13 @@ namespace AsisPas.Reportes.CambiosTurno
                         ew.Cells[6, 6].Value = reporte.NombreHorario;
 
                         ew.Cells[8, 1].Value = "Fecha Asignacion turno anterior";
-                        ew.Cells[8, 2].Value = "Nombre Horario";
-                        ew.Cells[8, 3].Value = "Fecha Asignacion turno Nuevo";
-                        ew.Cells[8, 4].Value = "Nombre Horario";
-                        ew.Cells[8, 5].Value = "Solicitante de cambio";
-                        ew.Cells[8, 6].Value = "Observaciones";
+                        ew.Cells[8, 2].Value = "Dias laborales";
+                        ew.Cells[8, 3].Value = "Rango laboral";
+                        ew.Cells[8, 4].Value = "Fecha Asignacion turno Nuevo";
+                        ew.Cells[8, 5].Value = "Nombre Horario";
+                        ew.Cells[8, 6].Value = "Nombre Horario";
+                        ew.Cells[8, 7].Value = "Solicitante de cambio";
+                        ew.Cells[8, 8].Value = "Observaciones";
 
 
                         if (reporte.cambios != null && reporte.cambios.Count > 0)
@@ -196,16 +198,17 @@ namespace AsisPas.Reportes.CambiosTurno
                                 }
                                 else
                                 {
-                                    ew.Cells[fila, 1].Value = item.Anterior.Horario.Nombre;
-                                    ew.Cells[fila, 2].Value = item.Anterior.Modificacion.ToString("dd/MM/yyyy");
-
+                                    ew.Cells[fila, 1].Value = item.Anterior.Horario.ListDiasLaborales();
+                                    ew.Cells[fila, 2].Value = $"{item.Anterior.Horario.hi} - {item.Anterior.Horario.hf}" ;
+                                    ew.Cells[fila, 3].Value = item.Anterior.Modificacion.ToString("dd/MM/yyyy");
                                 }
 
-                                ew.Cells[fila, 3].Value = item.nuevo.Horario.Nombre;
-                                ew.Cells[fila, 4].Value = item.nuevo.Modificacion.ToString("dd/MM/yyyy");
+                                ew.Cells[fila, 4].Value = item.nuevo.Horario.ListDiasLaborales();
+                                ew.Cells[fila, 5].Value = $"{item.nuevo.Horario.hi} - {item.nuevo.Horario.hf}";
+                                ew.Cells[fila, 6].Value = item.nuevo.Modificacion.ToString("dd/MM/yyyy");
 
-                                ew.Cells[fila, 5].Value = item.SolicitanteCambio;
-                                ew.Cells[fila, 5].Value = item.Desc;
+                                ew.Cells[fila, 7].Value = item.SolicitanteCambio;
+                                ew.Cells[fila, 8].Value = item.Desc;
 
                                 fila++;
                             }
@@ -301,11 +304,13 @@ namespace AsisPas.Reportes.CambiosTurno
 
 
                         C01.Add(new Paragraph(" Fecha turno anterior"));
-                        C02.Add(new Paragraph(" nombre turno anterior"));
-                        C03.Add(new Paragraph(" Fecha turno nuevo"));
-                        C04.Add(new Paragraph(" nombre turno nuevo"));
-                        C05.Add(new Paragraph(" solicitante de cambio"));
-                        C06.Add(new Paragraph(" Observacion"));
+                        C02.Add(new Paragraph(" dias laborales anterior"));
+                        C03.Add(new Paragraph(" Rango laboral anterior"));
+                        C04.Add(new Paragraph(" Fecha turno nuevo"));
+                        C05.Add(new Paragraph(" dias laborales"));
+                        C06.Add(new Paragraph(" Rango laboral"));
+                        C07.Add(new Paragraph(" solicitante de cambio"));
+                        C08.Add(new Paragraph(" Observacion"));
 
 
 
@@ -316,6 +321,9 @@ namespace AsisPas.Reportes.CambiosTurno
                         Cell C3 = new();
                         Cell C4 = new();
                         Cell C5 = new();
+                        Cell C6 = new();
+                        Cell C7 = new();
+                        Cell C8 = new();
 
 
 
@@ -329,6 +337,8 @@ namespace AsisPas.Reportes.CambiosTurno
                         Tabla.AddHeaderCell(C04);
                         Tabla.AddHeaderCell(C05);
                         Tabla.AddHeaderCell(C06);
+                        Tabla.AddHeaderCell(C07);
+                        Tabla.AddHeaderCell(C08);
 
 
 
@@ -336,22 +346,25 @@ namespace AsisPas.Reportes.CambiosTurno
                         if (reporte.cambios != null && reporte.cambios.Count > 0)
                             foreach (var item in reporte.cambios)
                             {
-                                if(item.Anterior == null)
+                                if (item.Anterior == null)
                                 {
                                     C0.Add(new Paragraph("Primer Turno Asignado"));
                                     C1.Add(new Paragraph("Primer Turno Asignado"));
+                                    C2.Add(new Paragraph("Primer Turno Asignado"));
                                 }
                                 else
                                 {
-                                C0.Add(new Paragraph(item.Anterior.Modificacion.ToString("dd/MM/yyyy")));
-                                C1.Add(new Paragraph(item.Anterior.Horario.Nombre));
+                                    C0.Add(new Paragraph(item.Anterior.Modificacion.ToString("dd/MM/yyyy")));
+                                    C1.Add(new Paragraph(item.Anterior.Horario.ListDiasLaborales()));
+                                    C2.Add(new Paragraph($"{item.Anterior.Horario.hi} - {item.Anterior.Horario.hf}"));
 
                                 }
-                                C2.Add(new Paragraph(item.nuevo.Modificacion.ToString("dd/MM/yyyy")));
-                                C3.Add(new Paragraph(item.nuevo.Horario.Nombre));
+                                C3.Add(new Paragraph(item.nuevo.Modificacion.ToString("dd/MM/yyyy")));
+                                C4.Add(new Paragraph(item.nuevo.Horario.ListDiasLaborales()));
+                                C5.Add(new Paragraph($"{item.nuevo.Horario.hi} - { item.nuevo.Horario.hf}"));
 
-                                C4.Add(new Paragraph(item.SolicitanteCambio));
-                                C5.Add(new Paragraph(item.Desc));
+                                C6.Add(new Paragraph(item.SolicitanteCambio));
+                                C7.Add(new Paragraph(item.Desc));
                             }
                                 Tabla.AddCell(C0);
                                 Tabla.AddCell(C1);
@@ -359,6 +372,8 @@ namespace AsisPas.Reportes.CambiosTurno
                                 Tabla.AddCell(C3);
                                 Tabla.AddCell(C4);
                                 Tabla.AddCell(C5);
+                                Tabla.AddCell(C6);
+                                Tabla.AddCell(C7);
                         doc.Add(white);
                         doc.Add(Tabla);
 
@@ -460,15 +475,17 @@ namespace AsisPas.Reportes.CambiosTurno
 
                         IWTable tablas;
                         tablas = section.AddTable();
-                        tablas.ResetCells(reporte.cambios.Count + 3, 6);
+                        tablas.ResetCells(reporte.cambios.Count + 3, 8);
 
 
                         tablas[0, 0].AddParagraph().AppendText("fecha Asignacion anterior");
-                        tablas[0, 1].AddParagraph().AppendText("nombre Asignacion anterior");
-                        tablas[0, 2].AddParagraph().AppendText("fecha Asignacion anterior");
-                        tablas[0, 3].AddParagraph().AppendText("nombre Asignacion anterior");
-                        tablas[0, 4].AddParagraph().AppendText("solicitante cambio");
-                        tablas[0, 5].AddParagraph().AppendText("descripcion");
+                        tablas[0, 1].AddParagraph().AppendText("dias Asignacion anterior");
+                        tablas[0, 2].AddParagraph().AppendText("rango Asignacion anterior");
+                        tablas[0, 3].AddParagraph().AppendText("fecha Asignacion anterior");
+                        tablas[0, 4].AddParagraph().AppendText("dias Asignacion anterior");
+                        tablas[0, 5].AddParagraph().AppendText("rango Asignacion anterior");
+                        tablas[0, 6].AddParagraph().AppendText("solicitante cambio");
+                        tablas[0, 7].AddParagraph().AppendText("descripcion");
 
 
                         int i = 2;
@@ -479,16 +496,19 @@ namespace AsisPas.Reportes.CambiosTurno
                             {
                                 tablas[i, 0].AddParagraph().AppendText("Primer Horario Asignado");
                                 tablas[i, 1].AddParagraph().AppendText("--");
+                                tablas[i, 2].AddParagraph().AppendText("--");
                             }
                             else
                             {
                                 tablas[i, 0].AddParagraph().AppendText(item.Anterior.Modificacion.ToString("dd/MM/yyyy"));
-                                tablas[i, 1].AddParagraph().AppendText(item.Anterior.Horario.Nombre);
+                                tablas[i, 1].AddParagraph().AppendText(item.Anterior.Horario.ListDiasLaborales());
+                                tablas[i, 2].AddParagraph().AppendText($"{item.Anterior.Horario.hi} - {item.Anterior.Horario.hf}");
                             }
-                            tablas[i, 2].AddParagraph().AppendText(item.nuevo.Modificacion.ToString("dd/MM/yyyy"));
-                            tablas[i, 3].AddParagraph().AppendText(item.nuevo.Horario.Nombre);
-                            tablas[i, 4].AddParagraph().AppendText(item.SolicitanteCambio);
-                            tablas[i, 5].AddParagraph().AppendText(item.Desc);
+                            tablas[i, 3].AddParagraph().AppendText(item.nuevo.Modificacion.ToString("dd/MM/yyyy"));
+                            tablas[i, 4].AddParagraph().AppendText(item.nuevo.Horario.ListDiasLaborales());
+                            tablas[i, 5].AddParagraph().AppendText($"{item.nuevo.Horario.hi} - {item.nuevo.Horario.hf}");
+                            tablas[i, 6].AddParagraph().AppendText(item.SolicitanteCambio);
+                            tablas[i, 7].AddParagraph().AppendText(item.Desc);
 
                             i++;
                         }

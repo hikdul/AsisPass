@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Encabezado = ViewData["Title"] = "Reporte Cambios De Turno";
+    ViewBag.Encabezado = ViewData["Title"] = "Reporte de modificaciones o alteraciones de turno";
     ViewBag.CambioTActive = "active";
     ViewBag.ReporteMenu = "open";
     ViewBag.ActiveEncabezado = true;
@@ -117,14 +117,20 @@
                                     Asignacion Turno Anterior
                                 </th>
                                 <th scope="col">
-                                    Turno Anterior
+                                   Dias Turno Anterior
+                                </th>
+                                <th scope="col">
+                                   Horario Turno Anterior
                                 </th>
                                 <th scope="col">
                                     Asignacion Turno
                                 </th>
                                 
                                 <th scope="col">
-                                    Turno
+                                    Dias Turno
+                                </th>
+                                <th scope="col">
+                                    Horario
                                 </th>
                                 <th scope="col">
                                     Solicitante del cambio
@@ -141,28 +147,34 @@
                             @if(reporte.cambios != null && reporte.cambios.Count > 0)
                                 @foreach (var item in reporte.cambios)
                                 {
-                                            <tr class="line--hover">
-                                                @if (item.Anterior == null)
-                                                {
-                                                   <td scope="row" colspan="2">
-                                                       Primer Horario asignado
-                                                   </td>
-                                                 
-                                                }
-                                                else
-                                                {
-                                                    <td scope="row">
-                                                        @item.Anterior.Modificacion.ToString("dd/MM/yyyy")
-                                                    </td>
-                                                    <td scope="row">
-                                                        @Html.DisplayFor(modelItem => item.Anterior.Horario.Nombre)
-                                                    </td>
-                                                }
-                                                <td scope="row">
+                                    <tr class="line--hover">
+                                        @if (item.Anterior == null)
+                                        {
+                                           <td scope="row" colspan="3">
+                                               Primer Horario asignado
+                                           </td>
+                                         
+                                        }
+                                        else
+                                        {
+                                            <td scope="row">
+                                                @item.Anterior.Modificacion.ToString("dd/MM/yyyy")
+                                            </td>
+                                            <td scope="row">
+                                                @item.Anterior.Horario.ListDiasLaborales()
+                                            </td>
+                                             <td scope="row">
+                                                @item.Anterior.Horario.hi - @item.Anterior.Horario.hf 
+                                            </td>
+                                        }
+                                        <td scope="row">
                                             @item.nuevo.Modificacion.ToString("dd/MM/yyyy")
                                         </td>
                                         <td scope="row">
-                                            @Html.DisplayFor(modelItem => item.nuevo.Horario.Nombre)
+                                            @item.nuevo.Horario.ListDiasLaborales()
+                                        </td>
+                                        <td scope="row">
+                                            @item.nuevo.Horario.hi - @item.nuevo.Horario.hf 
                                         </td>
                                         
                                         <td scope="row">

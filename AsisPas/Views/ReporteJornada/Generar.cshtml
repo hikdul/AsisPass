@@ -9,7 +9,7 @@
     ViewBag.ReporteMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
-    List<ReportePorJornada> Reportes = ViewBag.Reportes; 
+    List<ReportePorJornadaActual> Reportes = ViewBag.Reportes; 
     
 
 
@@ -35,7 +35,7 @@
 
 @foreach(var reporte in Reportes)
 {
-    <div class="row">
+ <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header bg-danger text-white">
@@ -116,124 +116,107 @@
                  </ul>
              </div> 
              <div class="mt-2">
-                 <h6 class="card-card-subtitle text-center">Totales Semanales</h6>
-                 <div class="table-responsive pb-4 pr-4 pl-4">
-                    <table id="TableAlau" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    inicio
-                                </th>
-                                <th scope="col">
-                                    fin
-                                </th>
-                                <th scope="col">
-                                    tiempo
-                                </th>
-                                
-                            </tr>
-                        </thead>
+                  
+                      @foreach (var item in reporte.semanas)
+                      {
+                        <div class="badge-danger text-white pt-1">
+                            <h6 class="card-card-subtitle text-center text-white">Periodo del @item.inicio.ToString("dd/MM/yyyy") al @item.fin.ToString("dd/MM/yyyy")</h6>
+                            <p class="text-center text-white">tiempo Laborado en la semana: @item.tiempo.toStr()</p>  
+                        </div>
+                        <table id="TableAlau" class="table table-striped">
+                          <thead>
+                                <tr>
+                                    <th scope="col">
+                                    </th>
+                                    <th scope="col" colspan=2>
+                                        Jornada Pactada
+                                    </th>
+                                    <th scope="col" colspan=2>
+                                        Jornada Laborada
+                                    </th>
+                                    <th scope="col">
+                                    </th>
+                                     <th scope="col">
+                                        <i class="la la-gears"></i>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">
+                                        Fecha
+                                    </th>
+                                    <th scope="col">
+                                        jornada
+                                    </th>
+                                    <th scope="col">
+                                        Descanso 
+                                    </th>
+                                    <th scope="col">
+                                        jornada 
+                                    </th>
+                                    <th scope="col">
+                                        Descanso 
+                                    </th>
+                                    <th scope="col">
+                                        Tiempo Laborado
+                                    </th>
+                                     <th scope="col">
+                                    </th>
+                                </tr>
+                            </thead>
                         <tbody>
-                            @if(reporte.TotalesSemanales != null && reporte.TotalesSemanales.Count > 0)
-                                @foreach (var item in reporte.TotalesSemanales)
+                            @if(item.Dario!= null && item.Dario.Count > 0)
+                                @foreach (var dia in item.Dario)
                                 {
                                     <tr class="line--hover">
                                         <td scope="row">
-                                            @item.inicio.ToString("dd/MM/yyyy")
+                                            @dia.fecha.ToString("dd/MM/yyyy")
                                         </td>
-                                        <td scope="row">
-                                            @item.fin.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td scope="row">
-                                            @item.tiempo.toStr();
-                                        </td>
-                                        
-                                    </tr>
-
-                                }
-                        </tbody>
-                    </table>
-                </div>
-
-             </div>
-
-               <div class="mt-2">
-                 <h6 class="card-card-subtitle text-center">Estudios por dias</h6>
-                 <div class="table-responsive pb-4 pr-4 pl-4">
-                    <table id="TableAlau" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    Fecha
-                                </th>
-                                <th scope="col">
-                                    Marcas Pautadas
-
-                                </th>
-                                <th scope="col">
-                                    Descanso Pautado
-                                </th>
-                                <th scope="col">
-                                    Marcas 
-
-                                </th>
-                                <th scope="col">
-                                    Descanso 
-                                </th>
-                                
-                                <th scope="col">
-                                    Tiempo Laborado
-                                </th>
-                                 <th scope="col">
-                                    <i class="la la-gears"></i>
-                                </th>
-                            </tr>
-                            
-                        </thead>
-                        <tbody>
-                            @if(reporte.Dias != null && reporte.Dias.Count > 0)
-                                @foreach (var item in reporte.Dias)
-                                {
-                                    <tr class="line--hover">
-                                        <td scope="row">
-                                            @item.fecha.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td scope="row">
-                                             @item.horario.InicioJornada - @item.horario.FinJornada
-                                        </td>
-                                        <td scope="row">
-                                             @item.horario.InicioDescanzo - @item.horario.FinDescazo
-                                        </td>
-                                         @if (item.marcas == null)
+                                         @if (dia.horario != null && dia.horario.InicioJornada != dia.horario.FinDescazo)
                                          {
-                                              <td scope="row" colspan=2>
-                                                Marcas Incompletas
+                                             <td scope="row">
+                                                 @dia.horario.InicioJornada - @dia.horario.FinJornada
                                              </td>
-                                        
+                                             <td scope="row">
+                                                 @dia.horario.InicioDescanzo - @dia.horario.FinDescazo
+                                             </td>
+                                         }
+                                         else
+                                         {
+                                             <td scope="row" colspan=2>
+                                                 No Hay Horario para el dia asignado
+                                             </td>
+                                         }
+                                         @if (dia.marcas == null)
+                                         {
+                                                <td scope="row" colspan=2>
+                                                  Marcas Incompletas
+                                                </td>
                                          }
                                          else
                                          {
                                              <td scope="row">
-                                                 @item.marcas.InicioJornada - @item.marcas.FinJornada
+                                                 @dia.marcas.InicioJornada - @dia.marcas.FinJornada
                                              </td>
                                              <td scope="row">
-                                                 @item.marcas.InicioDescanzo - @item.marcas.FinDescazo
+                                                 @dia.marcas.InicioDescanzo - @dia.marcas.FinDescazo
                                              </td>
                                          }
                                         <td>
-                                            @item.tiempoLaborado
+                                            @dia.tiempoLaborado
                                         </td>
                                          <td>
                                             
                                         </td>
                                     </tr>
-
                                 }
-                        </tbody>
+                        </tbody>  
                     </table>
-                </div>
+                      }
+                    
 
              </div>
+
+           
              
             </div>
             <div class="card-footer">

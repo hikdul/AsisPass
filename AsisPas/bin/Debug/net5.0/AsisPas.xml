@@ -2894,6 +2894,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AsisPas.Entitys.Horario.ListDiasLaborales">
+            <summary>
+            para obtener la lista de dias, segun su inicial
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AsisPas.Entitys.Horario.ListadoPorUsuario(AsisPas.Data.ApplicationDbContext,System.Security.Claims.ClaimsPrincipal)">
             <summary>
             para obtener los horarios en base al tipo de usuario
@@ -3968,78 +3974,6 @@
             constructor
             </summary>
         </member>
-        <member name="T:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada">
-            <summary>
-            para obtener el reporte por exceso de jornada
-            </summary>
-        </member>
-        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Exceso">
-            <summary>
-            tiempo de exceso
-            </summary>
-        </member>
-        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Atrazos">
-            <summary>
-            tiempo de atrazos
-            </summary>
-        </member>
-        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Diferencial">
-            <summary>
-            diferencial
-            </summary>
-        </member>
-        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.AfavorEmpresa">
-            <summary>
-            true si es a favor de la empresa 
-            false si es a favor del empleado
-            </summary>
-        </member>
-        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Semanales">
-            <summary>
-            totales por semanas
-            </summary>
-        </member>
-        <member name="P:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Diarios">
-            <summary>
-            calculos diarios
-            </summary>
-        </member>
-        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.#ctor">
-            <summary>
-            empty ctor
-            </summary>
-        </member>
-        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
-            <summary>
-            para llenar los datos de mi reporte por asistencia
-            </summary>
-            <param name="idEmpleado"></param>
-            <param name="inicio"></param>
-            <param name="fin"></param>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Excel(AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada)">
-            <summary>
-            para exportar un reporte en excel
-            </summary>
-            <param name="reporte"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Pdf(AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada)">
-            <summary>
-            para exportar un reporte en pdf
-            </summary>
-            <param name="reporte"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada.Word(AsisPas.Reportes.Excesojornada.ReporteExcesoDeJornada)">
-            <summary>
-            para exportar un documento en word
-            </summary>
-            <param name="reporte"></param>
-            <returns></returns>
-        </member>
         <member name="T:AsisPas.Reportes.Excesojornada.ReporteExcesosActual">
             <summary>
             este es el reporte por excesos segun el formato indicado
@@ -4372,6 +4306,47 @@
             <param name="reporte"></param>
             <returns></returns>
         </member>
+        <member name="T:AsisPas.Reportes.Jornada.ReportePorJornadaActual">
+            <summary>
+            reporte de jornada segun complemento enviado
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.ReportePorJornadaActual.semanas">
+            <summary>
+            para almacenar los totales por semana
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Jornada.ReportePorJornadaActual.TotalPeriodo">
+            <summary>
+            verifica el total del periodo
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornadaActual.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornadaActual.Excel(AsisPas.Reportes.Jornada.ReportePorJornadaActual)">
+            <summary>
+            para exportar un reporte en excel
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornadaActual.Pdf(AsisPas.Reportes.Jornada.ReportePorJornadaActual)">
+            <summary>
+            para exportar un reporte en pdf
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.ReportePorJornadaActual.Word(AsisPas.Reportes.Jornada.ReportePorJornadaActual)">
+            <summary>
+            para exportar un documento en word
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsisPas.Reportes.Jornada.TotalesJornada">
             <summary>
             totales por jornada
@@ -4392,13 +4367,19 @@
             el total de tiempo acumulado
             </summary>
         </member>
-        <member name="M:AsisPas.Reportes.Jornada.TotalesJornada.#ctor(System.DateTime,System.DateTime,System.Double)">
+        <member name="P:AsisPas.Reportes.Jornada.TotalesJornada.Dario">
+            <summary>
+            indica los totales diarios
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Jornada.TotalesJornada.#ctor(System.DateTime,System.DateTime,System.Double,System.Collections.Generic.List{AsisPas.Reportes.Jornada.DiaJornada})">
             <summary>
             constructor
             </summary>
             <param name="inicio"></param>
             <param name="fin"></param>
             <param name="TiempoAcumuladoEnSegundos"></param>
+            <param name="dias"></param>
         </member>
         <member name="T:AsisPas.Reportes.RTime">
             <summary>

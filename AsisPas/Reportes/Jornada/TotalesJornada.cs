@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AsisPas.Reportes.Jornada
 {
@@ -20,6 +21,10 @@ namespace AsisPas.Reportes.Jornada
         /// el total de tiempo acumulado
         /// </summary>
         public RTime tiempo { get; set; }
+        /// <summary>
+        /// indica los totales diarios
+        /// </summary>
+        public List<DiaJornada> Dario { get; set; }
         #endregion
 
 
@@ -30,11 +35,18 @@ namespace AsisPas.Reportes.Jornada
         /// <param name="inicio"></param>
         /// <param name="fin"></param>
         /// <param name="TiempoAcumuladoEnSegundos"></param>
-        public TotalesJornada(DateTime inicio, DateTime fin, double TiempoAcumuladoEnSegundos)
+        /// <param name="dias"></param>
+        public TotalesJornada(DateTime inicio, DateTime fin, double TiempoAcumuladoEnSegundos, List<DiaJornada> dias)
         {
             this.inicio = inicio;
             this.fin = fin;
             this.tiempo = new(TiempoAcumuladoEnSegundos);
+            this.Dario = new();
+            if(dias != null && dias.Count > 0)  
+            foreach (var item in dias)
+                this.Dario.Add(item);
+
+
         }
 
         #endregion
