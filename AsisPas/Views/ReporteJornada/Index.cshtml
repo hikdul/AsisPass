@@ -8,6 +8,7 @@
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
     List<ElementosBusqueda> empleados = ViewBag.Empleados;
+    string fecha = DateTime.Now.ToString("yyyy-MM-dd");
 }
 <div class="row">
     <div class="col-12">
@@ -46,12 +47,12 @@
                      <div class="row">
                         <div class="form-group col-md-6">
                             <label asp-for="inicio" class="control-label"></label>
-                            <input type="date" asp-for="inicio" class="form-control text-to-upper-alau" />
+                            <input type="date" asp-for="inicio" max=@fecha value=@fecha  class="form-control text-to-upper-alau" />
                             <span asp-validation-for="inicio" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="fin" class="control-label"></label>
-                            <input type="date" asp-for="fin" class="form-control text-to-upper-alau" />
+                            <input type="date" asp-for="fin" max=@fecha value=@fecha  class="form-control text-to-upper-alau" />
                             <span asp-validation-for="fin" class="text-danger"></span>
                         </div>
                      </div>
@@ -93,7 +94,7 @@
                      </div>
                     <div class="text-center">
                     <select class="hidden" asp-for="Empleadoids" id="Empleadoids"></select>
-                        <input type="submit" value="Crear" class="btn btn-danger" />
+                        <input type="submit" value="Gererar Reporte Grupal" class="btn btn-danger" />
                     </div>
                  </form>
                 </div>
@@ -164,7 +165,7 @@
                                         </td>
                                         <td scope="row">
                                             <div class="btn-group">
-                                                <button onclick="RepInd(@item.id)" class="btn btn-primary" > <i class="la la-book"></i></button>
+                                                <button onclick="RepInd(@item.id)" class="btn btn-primary" > <i class="la la-book">Individual</i></button>
                                             </div> 
                                        </td>
                                     </tr>
