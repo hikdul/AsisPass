@@ -103,10 +103,10 @@ namespace AsisPas.Controllers
                 ViewBag.fechai = ins.inicio.ToString("yyyy-MM-dd");
                 ViewBag.fechaf = ins.fin.ToString("yyyy-MM-dd");
 
-                List<ReporteDomingosYFeriados> list = new();
+                List<ReporteDonFerActual> list = new();
                 foreach (var id in ins.Empleadoids)
                 {
-                    ReporteDomingosYFeriados flag = new();
+                    ReporteDonFerActual flag = new();
                     await flag.Up(id, ins.inicio, ins.fin, context);
                     list.Add(flag);
                 }
@@ -176,9 +176,9 @@ namespace AsisPas.Controllers
                 if (ins == null || ins.Empleadoid < 1)
                     return File(new byte[0], "application/vnd.ms-excel", "AlMenosSeleccioneUnEmpleado.xlsx");
 
-                ReporteDomingosYFeriados resp = new();
+                ReporteDonFerActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
-                var buffer = ReporteDomingosYFeriados.Excel(resp);
+                var buffer = ReporteDonFerActual.Excel(resp);
                 return File(buffer, "pplication/vnd.ms-excel", "Reporte Domingos Y Feriados" + "-" + ins.Finicio + "-al-" + ins.Ffin + ".xlsx");
 
             }
@@ -204,11 +204,11 @@ namespace AsisPas.Controllers
         {
             try
             {
-                ReporteDomingosYFeriados resp = new();
+                ReporteDonFerActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
 
 
-                var buffer = ReporteDomingosYFeriados.Pdf(resp);
+                var buffer = ReporteDonFerActual.Pdf(resp);
                 return File(buffer, "application/pdf", "Reporte Domingos y feriados" + "-" + ins.Finicio.ToString("dd/MM/yyyy") + "-al-" + ins.Ffin.ToString("dd/MM/yyyy") + ".PDF");
 
             }
@@ -234,13 +234,11 @@ namespace AsisPas.Controllers
         {
             try
             {
-                ReporteDomingosYFeriados resp = new();
+                ReporteDonFerActual resp = new();
                 await resp.Up(ins.Empleadoid, ins.Finicio, ins.Ffin, context);
 
-
-                var buffer = ReporteDomingosYFeriados.Word(resp);
+                var buffer =  ReporteDonFerActual.Word(resp);
                 return File(buffer, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "REPORTE POR DOMINGOS Y FERIADOS -" + ins.Finicio.ToString("dd/MM/yyyy") + " al " + ins.Ffin.ToString("dd/MM/yyyy") + ".Docx");
-
 
             }
             catch (Exception ex)

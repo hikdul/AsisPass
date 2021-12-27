@@ -7,6 +7,7 @@ namespace AsisPas.Reportes.Domingos
     /// </summary>
     public class RangoTotalesDomingo
     {
+        #region props
         /// <summary>
         /// inicio
         /// </summary>
@@ -31,5 +32,39 @@ namespace AsisPas.Reportes.Domingos
         /// total feriados en periodo
         /// </summary>
         public int totalFeriadosenPeriodo { get; set; } = 0;
+        #endregion
+
+
+        #region ctor
+        /// <summary>
+        /// empty
+        /// </summary>
+        public RangoTotalesDomingo()
+        {
+
+        }
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="inicio"></param>
+        /// <param name="fin"></param>
+        /// <param name="Dtrabajados"></param>
+        /// <param name="Ftrabajados"></param>
+        /// <param name="Dperiodo"></param>
+        /// <param name="Fperiodo"></param>
+        public RangoTotalesDomingo(DateTime inicio, DateTime fin, int Dtrabajados, int Ftrabajados, int Dperiodo, int Fperiodo)
+        {
+
+            this.inicio = inicio;
+            this.fin = fin; 
+            this.totalFeriadosenPeriodo = Fperiodo;
+            this.totalDomingosenPeriodo = Dperiodo;
+            this.totalDomingos = Dtrabajados;
+            this.totalFeriados = Ftrabajados;
+
+        }
+
+
+        #endregion
     }
 }

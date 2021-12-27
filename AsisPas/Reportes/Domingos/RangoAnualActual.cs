@@ -3,45 +3,46 @@
 namespace AsisPas.Reportes.Domingos
 {
     /// <summary>
-    /// datos por mes
+    /// estudio por ano
     /// </summary>
-    public class MensualDomingos : RangoTotalesDomingo
+    public class RangoAnualActual: RangoTotalesDomingo
     {
+
         #region props
         /// <summary>
-        /// listado de dias
+        /// es estudio mes a mes
         /// </summary>
-        public List<DiaDomingos> Diario { get; set; }
+        public List<MensualDomingos> Mensual { get; set; }
         #endregion
+
 
         #region ctor
         /// <summary>
-        /// empty
+        /// empty ctor
         /// </summary>
-        public MensualDomingos()
+        public RangoAnualActual()
         {
-            this.Diario = new();
+            this.Mensual = new();
         }
-
         /// <summary>
-        /// constructor
+        /// para llenar los datos una ves se tengan por ano
         /// </summary>
         /// <param name="totales"></param>
-        /// <param name="days"></param>
-        public MensualDomingos(RangoTotalesDomingo totales ,List<DiaDomingos> days)
+        /// <param name="mensuals"></param>
+        public RangoAnualActual(RangoTotalesDomingo totales, List<MensualDomingos> mensuals)
         {
-            this.Diario=new();
+            this.Mensual = new();
             this.inicio = totales.inicio;
             this.fin = totales.fin;
             this.totalDomingosenPeriodo = totales.totalDomingosenPeriodo;
             this.totalFeriadosenPeriodo = totales.totalFeriadosenPeriodo;
             this.totalDomingos = totales.totalDomingos;
             this.totalFeriados = totales.totalFeriados;
-            foreach (var item in days)
-                this.Diario.Add(item);
+            foreach (var item in mensuals)
+                this.Mensual.Add(item);
         }
 
-
         #endregion
+
     }
 }

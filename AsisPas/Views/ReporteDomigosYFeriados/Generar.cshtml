@@ -6,7 +6,7 @@
     ViewBag.ReporteMenu = "open";
     ViewBag.ActiveEncabezado = true;
     string mensaje = ViewBag.Err;
-    List<ReporteDomingosYFeriados> Reportes = ViewBag.Reportes; 
+    List<ReporteDonFerActual> Reportes = ViewBag.Reportes; 
     
 
 
@@ -108,160 +108,163 @@
                      </li>
                      
                      <li class="list-group-item">
-                        Domingos Del Periodo: @reporte.TotalDomingosPeriodo
+                        Domingos Del Periodo: @reporte.totalDomingosenPeriodo
                         <br/>
-                        Domingos Laborados: @reporte.TotalDomingos
+                        Domingos Laborados: @reporte.totalDomingos
                      </li>
                      <li class="list-group-item">
-                        feraiados Del Periodo: @reporte.TotalFeriadosPeriodo
+                        feraiados Del Periodo: @reporte.totalFeriadosenPeriodo
                         <br/>
-                        Feriados Laborados: @reporte.TotalFeriadosLaborados
+                        Feriados Laborados: @reporte.totalFeriados
                      </li>
                  </ul>
              </div> 
-
-
               <div class="mt-2">
+                   @if(reporte.Anual != null && reporte.Anual.Count > 0)
+                            @foreach (var item in reporte.Anual)
+                            {
+                                
                  <div class="table-responsive pb-4 pr-4 pl-4">
-                     <div class="mt-1 card-subtitle text-center">
-                         <h5>Totales Anuales</h5>
+                     <div class="mt-1 pt-1 card-subtitle text-center badge-danger">
+                         <h3 class="text-white">Periodo anual del @item.inicio.ToString("dd/MM/yyyy") al  @item.fin.ToString("dd/MM/yyyy")</h3>
                      </div>
-                    <table id="TableAlau" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    Inicio
-                                </th>
-                                <th scope="col">
-                                    fin
-                                </th>
-                                <th scope="col">
-                                    Domingos en periodo
-                                </th>
-                                <th scope="col">
-                                    Domingos Laborados
-                                </th>
-                                <th scope="col">
-                                    Feriados en periodo
-                                </th>
-                                <th scope="col">
-                                    Feriados Laborados
-                                </th>
-                                 <th scope="col">
-                                    <i class="la la-gears"></i>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(reporte.totalesPorAno != null && reporte.totalesPorAno.Count > 0)
-                                @foreach (var item in reporte.totalesPorAno)
-                                {
-                                    <tr class="line--hover">
-                                        <td scope="row">
-                                           @item.inicio.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td scope="row">
-                                           @item.fin.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td scope="row">
-                                           @item.totalDomingosenPeriodo
-                                        </td>
-                                        <td scope="row">
-                                           @item.totalDomingos
-                                        </td>
-                                        <td scope="row">
-                                           @item.totalFeriadosenPeriodo
-                                        </td>
-                                        <td scope="row">
-                                           @item.totalFeriados
-                                        </td>
-                                        <td>
-                                             <a asp-action="verObs"  alt="verPermiso" class="la la-see text-success">  </a>
-                                        </td>
-                                    </tr>
+                                    @foreach(var mount in item.Mensual)
+                                    {
+                                        <div class="mt-1 card-subtitle text-center">
+                                             <h3>Periodo mensual del @mount.inicio.ToString("dd/MM/yyyy") al  @mount.fin.ToString("dd/MM/yyyy")</h3>
+                                             
+                                        </div>
+
+                                        <table id="TableAlau" class="table table-striped">
+                                         <thead>
+                                             <tr>
+                                                 <th scope="col">
+                                                     fecha
+                                                 </th>
+                                                 <th scope="col">
+                                                     Asistio
+                                                 </th>
+                                                 <th scope="col">
+                                                     Observacion
+                                                 </th>
+                                                  <th scope="col">
+                                                     <i class="la la-gears"></i>
+                                                 </th>
+                                             </tr>
+                                         </thead>
+                                        <tbody>
+                                        @foreach(var dia in mount.Diario)
+                                          {
+                                              <tr class="line--hover">
+                                                  <td scope="row">
+                                                     @dia.fecha.ToString("dd/MM/yyyy")
+                                                  </td>
+                                                  <td scope="row">
+                                                     @dia.Asistio
+                                                  </td>
+                                                  <td scope="row">
+                                                     @dia.Observacion
+                                                  </td>
+                                                  <td scope="row">
+                                                     
+                                                  </td>
+                                                 
+                                              </tr>
+                                          }
+                                     </tbody>
+                                    </table>
+                                    
+
+                                     <table  class="table table-striped">
+                             <thead>
+                                 <tr>
+                                     <th>
+                                         Domingos del mes
+                                     </th>
+                                     
+                                     <th>
+                                         Domingos Laborados
+                                     </th>
+                                     <th>
+                                         Feriados del mes
+                                     </th>
+                                     <th>
+                                         Feriados Laborados
+                                     </th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <tr>
+                                     <td>
+                                          @mount.totalDomingosenPeriodo
+                                     </td>
+                                     <td>
+                                          @mount.totalDomingos
+                                     </td>
+                                     <td>
+                                          @mount.totalFeriadosenPeriodo
+                                     </td>
+                                     <td>
+                                         @mount.totalFeriados
+                                     </td>
+                                 </tr>
+                                 
+                             </tbody>
+                         </table>
+
+
+
+                                
                                 }
-                       </tbody>
-                   </table>
+
+
+                                  <table  class="table table-striped">
+                             <thead>
+                                 <tr>
+                                     <th>
+                                         Domingos del año
+                                     </th>
+                                     
+                                     <th>
+                                         Domingos Laborados
+                                     </th>
+                                     <th>
+                                         Feriados del año
+                                     </th>
+                                     <th>
+                                         Feriados Laborados
+                                     </th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <tr>
+                                     <td>
+                                          @item.totalDomingosenPeriodo
+                                     </td>
+                                     <td>
+                                          @item.totalDomingos
+                                     </td>
+                                     <td>
+                                          @item.totalFeriadosenPeriodo
+                                     </td>
+                                     <td>
+                                         @item.totalFeriados
+                                     </td>
+                                 </tr>
+                                 
+                             </tbody>
+                         </table>
+
+                             </div>
+                            }
                 </div>
             </div>
-            
-                <div class="mt-2">
-                 <div class="table-responsive pb-4 pr-4 pl-4">
-                     <div class="mt-1 card-subtitle text-center">
-                         <h5>Totales Mensuales</h5>
-                     </div>
-
-                      @if(reporte.RegitroMensual != null && reporte.RegitroMensual.Count > 0)
-                        @foreach (var mes in reporte.RegitroMensual)
-                        {
-                           <ul class="list-group list-group-flush">
-                             <li class="list-group-item">
-                             Inicio Periodo: <strong> @mes.inicio.ToString("dd/MM/yyyy")</strong>
-                             <br/>
-                             Fin Periodo: <strong> @mes.fin.ToString("dd/MM/yyyy")</strong>
-                             </li>
-                             <li class="list-group-item">
-                                Domingos Del Periodo: @mes.totalDomingosenPeriodo
-                                <br/>
-                                Domingos Laborados: @mes.totalDomingos
-                             </li>
-                             <li class="list-group-item">
-                                feraiados Del Periodo: @mes.totalFeriadosenPeriodo
-                                <br/>
-                                Feriados Laborados: @mes.totalFeriados
-                             </li>
-                            </ul>
-
-                 <div class="table-responsive pb-4 pr-4 pl-4">
-                    <table id="TableAlau" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    Fecha
-                                </th>
-                                <th scope="col">
-                                    Asistio
-                                </th>
-                                <th scope="col">
-                                    Observacion
-                                </th>
-                                 <th scope="col">
-                                    <i class="la la-gears"></i>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (mes.Diario != null && mes.Diario.Count > 0)
-                                @foreach (var diario in mes.Diario) 
-                                {
-                                    <tr class="line--hover">
-                                        <td scope="row">
-                                           @diario.fecha.ToString("dd/MM/yyyy")
-                                        </td>
-                                        <td scope="row">
-                                           @diario.Asistio
-                                        </td>
-                                        <td scope="row">
-                                           @diario.Observacion
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                }
-                       </tbody>
-                   </table>
-                </div>
-
-                        }
-            </div>
-            </div>
-           
-        </div>
+                        
             <div class="card-footer">
                 <h6 class="card-subtitle"> Fecha Solicitud Reporte: @reporte.FechaGenerado.ToString("dd/MM/yyyy") </h6>
             </div>
-    </div>
-    </div>
-    </div>
+            </div>
+            </div>
+        </div>
 
-}
+        }

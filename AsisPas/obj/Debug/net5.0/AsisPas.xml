@@ -3761,8 +3761,37 @@
         </member>
         <member name="M:AsisPas.Reportes.Domingos.MensualDomingos.#ctor">
             <summary>
-            conltructor
+            empty
             </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.MensualDomingos.#ctor(AsisPas.Reportes.Domingos.RangoTotalesDomingo,System.Collections.Generic.List{AsisPas.Reportes.Domingos.DiaDomingos})">
+            <summary>
+            constructor
+            </summary>
+            <param name="totales"></param>
+            <param name="days"></param>
+        </member>
+        <member name="T:AsisPas.Reportes.Domingos.RangoAnualActual">
+            <summary>
+            estudio por ano
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.RangoAnualActual.Mensual">
+            <summary>
+            es estudio mes a mes
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.RangoAnualActual.#ctor">
+            <summary>
+            empty ctor
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.RangoAnualActual.#ctor(AsisPas.Reportes.Domingos.RangoTotalesDomingo,System.Collections.Generic.List{AsisPas.Reportes.Domingos.MensualDomingos})">
+            <summary>
+            para llenar los datos una ves se tengan por ano
+            </summary>
+            <param name="totales"></param>
+            <param name="mensuals"></param>
         </member>
         <member name="T:AsisPas.Reportes.Domingos.RangoTotalesDomingo">
             <summary>
@@ -3798,6 +3827,22 @@
             <summary>
             total feriados en periodo
             </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.RangoTotalesDomingo.#ctor">
+            <summary>
+            empty
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.RangoTotalesDomingo.#ctor(System.DateTime,System.DateTime,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            ctor
+            </summary>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="Dtrabajados"></param>
+            <param name="Ftrabajados"></param>
+            <param name="Dperiodo"></param>
+            <param name="Fperiodo"></param>
         </member>
         <member name="T:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados">
             <summary>
@@ -3865,6 +3910,72 @@
             <returns></returns>
         </member>
         <member name="M:AsisPas.Reportes.Domingos.ReporteDomingosYFeriados.Word(AsisPas.Reportes.Domingos.ReporteDomingosYFeriados)">
+            <summary>
+            para exportar un documento en word
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsisPas.Reportes.Domingos.ReporteDonFerActual">
+            <summary>
+            el reporte que estara en uso actualmente
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDonFerActual.totalDomingos">
+            <summary>
+            la cantidad de dias demingos laborados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDonFerActual.totalFeriados">
+            <summary>
+            el total de feriados laborados
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDonFerActual.totalDomingosenPeriodo">
+            <summary>
+            total domingos en periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDonFerActual.totalFeriadosenPeriodo">
+            <summary>
+            total feriados en periodo
+            </summary>
+        </member>
+        <member name="P:AsisPas.Reportes.Domingos.ReporteDonFerActual.Anual">
+            <summary>
+            Estudio Anual
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.ReporteDonFerActual.#ctor">
+            <summary>
+            empty ctor
+            </summary>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.ReporteDonFerActual.Up(System.Int32,System.DateTime,System.DateTime,AsisPas.Data.ApplicationDbContext)">
+            <summary>
+            para llenar los datos del reporte
+            </summary>
+            <param name="idEmpleado"></param>
+            <param name="inicio"></param>
+            <param name="fin"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.ReporteDonFerActual.Excel(AsisPas.Reportes.Domingos.ReporteDonFerActual)">
+            <summary>
+            para exportar un reporte en excel
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.ReporteDonFerActual.Pdf(AsisPas.Reportes.Domingos.ReporteDonFerActual)">
+            <summary>
+            para exportar un reporte en pdf
+            </summary>
+            <param name="reporte"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsisPas.Reportes.Domingos.ReporteDonFerActual.Word(AsisPas.Reportes.Domingos.ReporteDonFerActual)">
             <summary>
             para exportar un documento en word
             </summary>
